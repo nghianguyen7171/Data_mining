@@ -1,0 +1,15 @@
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="footer-course">{{course.title}}</p>
+      <p class="footer-meta">{{course.code}} · {{course.semester}} · {{course.credits}} credits</p>
+    </div>
+    <div>
+      <p class="footer-meta">{{course.department}}</p>
+      <p class="footer-meta">{{course.college}}</p>
+      {{#if course.links.github}}
+      <p class="footer-meta"><a href="{{course.links.github}}">Source on GitHub</a></p>
+      {{/if}}
+    </div>
+  </div>
+</footer>

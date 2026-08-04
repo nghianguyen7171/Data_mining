@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Mining</title>
+  <meta name="description" content="Data Mining — Faculty of Data Science and Artificial Intelligence, National Economics University.">
+  <link rel="stylesheet" href="/Data_mining/assets/css/main.css">
+  <link rel="icon" href="/Data_mining/assets/images/fda-logo.png">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/Data_mining">
+        <img src="/Data_mining/assets/images/neu-logo.png" alt="" class="brand-logo">
+        <img src="/Data_mining/assets/images/fda-logo.png" alt="" class="brand-logo">
+        <span class="brand-text">
+          <span class="brand-course">Data Mining</span>
+          <span class="brand-dept">Faculty of Data Science and Artificial Intelligence</span>
+        </span>
+      </a>
+  
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/Data_mining" class="is-active" aria-current="page">Home</a>
+        <a href="/Data_mining/syllabus.html" >Syllabus</a>
+        <a href="/Data_mining/assignments/" >Assignments</a>
+        <a href="/Data_mining/resources.html" >Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+  <div class="wrap">
+    <p class="hero-eyebrow">IST 4520 · Fall 2026</p>
+    <h1 class="hero-title">Data Mining</h1>
+    <dl class="hero-facts">
+      <div><dt>Credits</dt><dd>3</dd></div>
+      <div><dt>Lecture</dt><dd>18 h</dd></div>
+      <div><dt>Lab</dt><dd>12 h</dd></div>
+      <div><dt>Self-study</dt><dd>90 h</dd></div>
+      <div><dt>Type</dt><dd>Elective</dd></div>
+    </dl>
+  </div>
+</section>
+<section class="this-week" aria-labelledby="this-week-heading">
+  <div class="wrap">
+    <p class="this-week-kicker">This week</p>
+    <h2 id="this-week-heading" class="this-week-title">
+      <span class="this-week-num">Week 1</span>
+      Introduction to Data Mining &amp; CRISP-DM
+    </h2>
+      <div class="this-week-summary"><p>Welcome to IST 4520 — Data Mining. This session introduces the course
+structure, the four types of data mining problems, and the CRISP-DM
+process that frames every project we will build this term.</p>
+</div>
+    <ul class="todo">
+      <li>
+        Read North (2012), Chapter 1 — Introduction to Data Mining and CRISP-DM
+        
+      </li>
+      <li>
+        <a href="/Data_mining/assignments/lab0-setup.html">Install Orange Data Mining before Week 2 (instructions in Lab 0)</a>
+        <span class="due">due Before Week 2</span>
+      </li>
+      <li>
+        Join the course channel and register on Kaggle
+        
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="prose prose-narrow">
+      <p>A hands-on introduction to data mining for business decision-making. The
+course equips students with business-analytic thinking: framing the right
+question, selecting the right technique, and interpreting results in
+actionable business language — not writing algorithms from scratch.</p>
+<p>Students work through the full CRISP-DM lifecycle using Orange Data Mining
+(a no-code, drag-and-drop platform) supplemented by light Python/pandas
+scripts. Core techniques covered include data exploration and visualization,
+association rules, k-Means clustering, KNN and Naïve Bayes classification,
+and linear and logistic regression. Midterm assessments include a practical
+exam on Orange and a group project presentation; the final is a written exam.</p>
+
+    </div>
+    <p class="cta-row">
+      <a class="btn" href="/Data_mining/syllabus.html">Full syllabus</a>
+      <a class="btn btn-quiet" href="/Data_mining/assignments/">Labs & assignments</a>
+      <a class="btn btn-quiet" href="/Data_mining/resources.html">Resources</a>
+    </p>
+  </div>
+</section>
+
+<section id="schedule" class="section">
+  <div class="wrap">
+    <h2 class="section-title">Schedule</h2>
+    <p class="section-note">
+      Fifteen weeks alternating lecture and lab. Lab weeks include a business
+      memo and, where noted, a group progress milestone. Weeks marked
+      <span class="pill pill-tbd">TBD</span> are not yet finalised and their
+      materials are not yet published.
+    </p>
+
+    <div class="table-scroll">
+      <table class="schedule">
+        <thead>
+          <tr>
+            <th scope="col" class="col-week">Week</th>
+            <th scope="col" class="col-type">Type</th>
+            <th scope="col">Topic</th>
+            <th scope="col" class="col-materials">Materials</th>
+            <th scope="col" class="col-due">Assessment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-Lecture ">
+            <td class="col-week">1</td>
+            <td class="col-type"><span class="pill pill-Lecture">Lecture</span></td>
+            <td>
+              <span class="lec-title">Introduction to Data Mining &amp; CRISP-DM</span>
+              <ul class="lec-topics">
+                <li>What is data mining and why it matters for business decisions</li><li>Four problem types: Describe, Relate, Group, Predict</li><li>Data concepts: rows, columns, variable types, structured vs unstructured</li><li>The CRISP-DM six-stage process — the backbone of the course</li><li>Orange Data Mining overview and live demo</li><li>Quick pandas review: DataFrames, filtering, and descriptive statistics</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <a class="mat" href="/Data_mining/assets/materials/1.Intro_CRISP-DM.pdf">Slides</a>
+                
+                
+            </td>
+            <td class="col-due">
+                —
+            </td>
+          </tr>
+          <tr class="row-Lab ">
+            <td class="col-week">2</td>
+            <td class="col-type"><span class="pill pill-Lab">Lab</span></td>
+            <td>
+              <span class="lec-title">Lab 0 — Environment Setup &amp; First Orange Project</span>
+              <ul class="lec-topics">
+                <li>Install VS Code + Python (or set up Google Colab)</li><li>Install Orange Data Mining</li><li>First Orange workflow: exploring the HDI economic dataset</li><li>Mini-memo: turning scatter plot findings into a business insight</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                
+                
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                <a href="/Data_mining/assignments/lab0-setup.html">Lab 0 submission</a>
+            </td>
+          </tr>
+          <tr class="row-Lecture row-unreleased">
+            <td class="col-week">3</td>
+            <td class="col-type"><span class="pill pill-Lecture">Lecture</span></td>
+            <td>
+              <span class="lec-title">Understanding &amp; Preparing Data</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>Variable types and roles (target, feature, meta)</li><li>Data warehouse, data mart, and data lake concepts</li><li>Data quality: missing values, outliers, duplicates</li><li>Normalisation, standardisation, and creating new variables</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                —
+            </td>
+          </tr>
+          <tr class="row-Lab row-unreleased">
+            <td class="col-week">4</td>
+            <td class="col-type"><span class="pill pill-Lab">Lab</span></td>
+            <td>
+              <span class="lec-title">Lab 1 — pandas Introduction &amp; Data Cleaning</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>pandas: reading data, selecting and filtering, descriptive stats, handling missing values</li><li>Data cleaning in Orange: Impute, Distributions, Scatter Plot, Box Plot</li><li>Business memo: documenting data quality findings</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                Lab 1 + Excel exercise
+            </td>
+          </tr>
+          <tr class="row-Lecture row-unreleased">
+            <td class="col-week">5</td>
+            <td class="col-type"><span class="pill pill-Lecture">Lecture</span></td>
+            <td>
+              <span class="lec-title">Finding Relationships — Correlation &amp; Association Rules</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>Pearson correlation coefficient and the correlation matrix</li><li>Association rules: support, confidence, and lift</li><li>Market-basket analysis and product recommendation applications</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                —
+            </td>
+          </tr>
+          <tr class="row-Lab row-unreleased">
+            <td class="col-week">6</td>
+            <td class="col-type"><span class="pill pill-Lab">Lab</span></td>
+            <td>
+              <span class="lec-title">Lab 2 — Correlation &amp; Market-Basket Analysis</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>Correlation matrix and scatter plots in Orange</li><li>Association rules with the Orange Frequent Itemsets widget</li><li>Business memo: interpreting association rules for a retail context</li><li>Current-event Presentation #1</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                Lab 2 + Presentation #1
+            </td>
+          </tr>
+          <tr class="row-Lecture row-unreleased">
+            <td class="col-week">7</td>
+            <td class="col-type"><span class="pill pill-Lecture">Lecture</span></td>
+            <td>
+              <span class="lec-title">Clustering — k-Means &amp; Customer Segmentation</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>k-Means clustering: intuition and algorithm</li><li>Choosing the number of clusters k (Silhouette score)</li><li>Customer segmentation application</li><li>Midterm Exam 1 review: CRISP-DM, data preparation, association, clustering</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                —
+            </td>
+          </tr>
+          <tr class="row-Assessment ">
+            <td class="col-week">8</td>
+            <td class="col-type"><span class="pill pill-Assessment">Assessment</span></td>
+            <td>
+              <span class="lec-title">Midterm Exam 1 — Practical Exam on Orange</span>
+              <ul class="lec-topics">
+                <li>90-minute individual practical exam</li><li>Tasks: load a provided dataset → preprocess → build a model → write a business interpretation</li><li>Covers Weeks 1–7: CRISP-DM, data preparation, exploration, association, clustering</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                
+                
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                Midterm Exam — Part 1 (20%)
+            </td>
+          </tr>
+          <tr class="row-Lecture row-unreleased">
+            <td class="col-week">9</td>
+            <td class="col-type"><span class="pill pill-Lecture">Lecture</span></td>
+            <td>
+              <span class="lec-title">Classification I — KNN &amp; Naïve Bayes</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>Classification problem setup: train/test split, the confusion matrix</li><li>k-Nearest Neighbours (KNN)</li><li>Naïve Bayes classifier</li><li>Evaluation metrics: accuracy, precision, recall, F1-score</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                —
+            </td>
+          </tr>
+          <tr class="row-Lab row-unreleased">
+            <td class="col-week">10</td>
+            <td class="col-type"><span class="pill pill-Lab">Lab</span></td>
+            <td>
+              <span class="lec-title">Lab 3 — Classification in Orange</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>Test &amp; Score and Confusion Matrix widgets in Orange</li><li>ROC curves and model comparison</li><li>Business memo: which model works best and why it matters</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                Lab 3
+            </td>
+          </tr>
+          <tr class="row-Lecture row-unreleased">
+            <td class="col-week">11</td>
+            <td class="col-type"><span class="pill pill-Lecture">Lecture</span></td>
+            <td>
+              <span class="lec-title">Prediction — Linear &amp; Logistic Regression</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>Linear regression: fitting a line, R², and residuals</li><li>Logistic regression for yes/no business outcomes</li><li>Interpreting coefficients in business language</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                —
+            </td>
+          </tr>
+          <tr class="row-Lab row-unreleased">
+            <td class="col-week">12</td>
+            <td class="col-type"><span class="pill pill-Lab">Lab</span></td>
+            <td>
+              <span class="lec-title">Lab 4 — Regression &amp; Group Project Launch</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>Regression in Orange and with Python pandas</li><li>Reading and adapting a Python regression script</li><li>Group project: confirm team, topic, and dataset</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                Lab 4 + Confirm group project topic
+            </td>
+          </tr>
+          <tr class="row-Lecture row-unreleased">
+            <td class="col-week">13</td>
+            <td class="col-type"><span class="pill pill-Lecture">Lecture</span></td>
+            <td>
+              <span class="lec-title">Advanced Topics — Decision Trees, Neural Networks &amp; Text Mining</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>Decision Trees and the Orange Tree Viewer</li><li>Neural networks: intuition and business applications</li><li>Text mining and NLP overview</li><li>Cross-validation and trustworthy model evaluation</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                —
+            </td>
+          </tr>
+          <tr class="row-Assessment row-unreleased">
+            <td class="col-week">14</td>
+            <td class="col-type"><span class="pill pill-Assessment">Assessment</span></td>
+            <td>
+              <span class="lec-title">Midterm Exam 2 — Group Project Presentations</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>Group presentations: 10–12 minutes per team + Q&amp;A</li><li>Current-event Presentation #2</li><li>Course review and final exam preparation</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                Midterm Exam — Part 2 (20%) + Presentation #2
+            </td>
+          </tr>
+          <tr class="row-Assessment row-unreleased">
+            <td class="col-week">15</td>
+            <td class="col-type"><span class="pill pill-Assessment">Assessment</span></td>
+            <td>
+              <span class="lec-title">Final Exam</span>
+                <span class="pill pill-tbd">TBD</span>
+              <ul class="lec-topics">
+                <li>90-minute written exam</li><li>Covers the full course: CRISP-DM, all techniques, model selection and interpretation</li><li>Question types: scenario-based technique selection, reading model output, short essays</li>
+              </ul>
+            </td>
+            <td class="col-materials">
+                <span class="dash">—</span>
+            </td>
+            <td class="col-due">
+                Final Exam — 50%
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<section id="staff" class="section section-alt">
+  <div class="wrap">
+    <h2 class="section-title">Teaching staff</h2>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <h3 class="staff-name">Dr. Trong-Nghia Nguyen</h3>
+        <p class="staff-role">Course Instructor</p>
+        <p class="staff-line"><a href="mailto:nghiant@neu.edu.vn">nghiant@neu.edu.vn</a></p>
+        <p class="staff-line">Room 1613, Building A1</p>
+        <p class="staff-line">Office hours: By appointment</p>
+        <p class="staff-line"><a href="https://nghianguyen7171.github.io/">Personal website</a></p>
+      </div>
+
+      <div class="staff-card">
+        <h3 class="staff-name">MSc. Le Duy Khanh</h3>
+        <p class="staff-role">Teaching Assistant</p>
+        <p class="staff-line"><a href="mailto:khanhld@neu.edu.vn">khanhld@neu.edu.vn</a></p>
+        <p class="staff-line">Lab troubleshooting and homework help</p>
+        <p class="staff-line"><a href="https://fda.neu.edu.vn/fda-members/ths-le-duy-khanh/">Faculty profile</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-course">Data Mining</p>
+        <p class="footer-meta">IST 4520 · Fall 2026 · 3 credits</p>
+      </div>
+      <div>
+        <p class="footer-meta">Faculty of Data Science and Artificial Intelligence</p>
+        <p class="footer-meta">College of Technology, National Economics University</p>
+        <p class="footer-meta"><a href="https://github.com/nghianguyen7171/Data_mining">Source on GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

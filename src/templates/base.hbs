@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{#if page.title}}{{page.title}} · {{/if}}{{course.title}}</title>
+  <meta name="description" content="{{course.title}} — {{course.department}}, National Economics University.">
+  <link rel="stylesheet" href="{{url 'assets/css/main.css'}}">
+  <link rel="icon" href="{{url 'assets/images/fda-logo.png'}}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {{> navbar}}
+
+  <main id="main">
+    {{{content}}}
+  </main>
+
+  {{> footer}}
+</body>
+</html>

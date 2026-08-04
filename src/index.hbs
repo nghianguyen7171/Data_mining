@@ -1,0 +1,18 @@
+{{> hero}}
+{{> sections/this-week}}
+
+<section class="section">
+  <div class="wrap">
+    <div class="prose prose-narrow">
+      {{{md course.description}}}
+    </div>
+    <p class="cta-row">
+      <a class="btn" href="{{url 'syllabus.html'}}">Full syllabus</a>
+      <a class="btn btn-quiet" href="{{url 'assignments/'}}">Labs & assignments</a>
+      <a class="btn btn-quiet" href="{{url 'resources.html'}}">Resources</a>
+    </p>
+  </div>
+</section>
+
+{{> sections/schedule}}
+{{> sections/staff}}

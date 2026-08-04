@@ -1,0 +1,27 @@
+<section id="staff" class="section section-alt">
+  <div class="wrap">
+    <h2 class="section-title">Teaching staff</h2>
+    <div class="staff-grid">
+      {{#each staff.instructors}}
+      <div class="staff-card">
+        <h3 class="staff-name">{{this.name}}</h3>
+        <p class="staff-role">{{this.role}}</p>
+        <p class="staff-line"><a href="mailto:{{this.email}}">{{this.email}}</a></p>
+        {{#if this.office}}<p class="staff-line">{{this.office}}</p>{{/if}}
+        {{#if this.office_hours}}<p class="staff-line">Office hours: {{this.office_hours}}</p>{{/if}}
+        {{#if this.website}}<p class="staff-line"><a href="{{this.website}}">Personal website</a></p>{{/if}}
+      </div>
+      {{/each}}
+
+      {{#each staff.teaching_assistants}}
+      <div class="staff-card">
+        <h3 class="staff-name">{{this.name}}</h3>
+        <p class="staff-role">{{this.role}}</p>
+        <p class="staff-line"><a href="mailto:{{this.email}}">{{this.email}}</a></p>
+        {{#if this.responsibility}}<p class="staff-line">{{this.responsibility}}</p>{{/if}}
+        {{#if this.website}}<p class="staff-line"><a href="{{this.website}}">Faculty profile</a></p>{{/if}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

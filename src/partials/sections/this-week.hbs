@@ -1,0 +1,24 @@
+{{#if thisWeek.current}}
+<section class="this-week" aria-labelledby="this-week-heading">
+  <div class="wrap">
+    <p class="this-week-kicker">This week</p>
+    <h2 id="this-week-heading" class="this-week-title">
+      <span class="this-week-num">Week {{thisWeek.current.week}}</span>
+      {{thisWeek.current.title}}
+    </h2>
+    {{#if thisWeek.current.summary}}
+      <div class="this-week-summary">{{{md thisWeek.current.summary}}}</div>
+    {{/if}}
+    {{#if thisWeek.current.todo}}
+    <ul class="todo">
+      {{#each thisWeek.current.todo}}
+      <li>
+        {{#if this.link}}<a href="{{url this.link}}">{{this.text}}</a>{{else}}{{this.text}}{{/if}}
+        {{#if this.due}}<span class="due">due {{this.due}}</span>{{/if}}
+      </li>
+      {{/each}}
+    </ul>
+    {{/if}}
+  </div>
+</section>
+{{/if}}

@@ -1,0 +1,199 @@
+# Course schedule — 15 weeks, alternating Lecture and Lab.
+#
+#   id     stable and permanent. Permalinks key off it. Never renumber.
+#   week   may shift when the term moves. Renumber freely.
+#   status released | draft | tbd
+#            Only `released` emits links. A `tbd` week shows the title greyed
+#            out with no dead links to last year's materials.
+
+lectures:
+  - id: 1
+    week: 1
+    type: "Lecture"
+    title: "Introduction to Data Mining & CRISP-DM"
+    status: released
+    topics:
+      - "What is data mining and why it matters for business decisions"
+      - "Four problem types: Describe, Relate, Group, Predict"
+      - "Data concepts: rows, columns, variable types, structured vs unstructured"
+      - "The CRISP-DM six-stage process — the backbone of the course"
+      - "Orange Data Mining overview and live demo"
+      - "Quick pandas review: DataFrames, filtering, and descriptive statistics"
+    clos: "1, 2"
+    slides: "assets/materials/1.Intro_CRISP-DM.pdf"
+    assessment: "—"
+
+  - id: 2
+    week: 2
+    type: "Lab"
+    title: "Lab 0 — Environment Setup & First Orange Project"
+    status: released
+    topics:
+      - "Install VS Code + Python (or set up Google Colab)"
+      - "Install Orange Data Mining"
+      - "First Orange workflow: exploring the HDI economic dataset"
+      - "Mini-memo: turning scatter plot findings into a business insight"
+    clos: "2, 5, 6"
+    assignment: "lab0-setup"
+    assessment: "Lab 0 submission"
+
+  - id: 3
+    week: 3
+    type: "Lecture"
+    title: "Understanding & Preparing Data"
+    status: tbd
+    topics:
+      - "Variable types and roles (target, feature, meta)"
+      - "Data warehouse, data mart, and data lake concepts"
+      - "Data quality: missing values, outliers, duplicates"
+      - "Normalisation, standardisation, and creating new variables"
+    clos: "1, 2, 5"
+    assessment: "—"
+
+  - id: 4
+    week: 4
+    type: "Lab"
+    title: "Lab 1 — pandas Introduction & Data Cleaning"
+    status: tbd
+    topics:
+      - "pandas: reading data, selecting and filtering, descriptive stats, handling missing values"
+      - "Data cleaning in Orange: Impute, Distributions, Scatter Plot, Box Plot"
+      - "Business memo: documenting data quality findings"
+    clos: "2, 5, 6"
+    assessment: "Lab 1 + Excel exercise"
+
+  - id: 5
+    week: 5
+    type: "Lecture"
+    title: "Finding Relationships — Correlation & Association Rules"
+    status: tbd
+    topics:
+      - "Pearson correlation coefficient and the correlation matrix"
+      - "Association rules: support, confidence, and lift"
+      - "Market-basket analysis and product recommendation applications"
+    clos: "2, 3"
+    assessment: "—"
+
+  - id: 6
+    week: 6
+    type: "Lab"
+    title: "Lab 2 — Correlation & Market-Basket Analysis"
+    status: tbd
+    topics:
+      - "Correlation matrix and scatter plots in Orange"
+      - "Association rules with the Orange Frequent Itemsets widget"
+      - "Business memo: interpreting association rules for a retail context"
+      - "Current-event Presentation #1"
+    clos: "3, 5, 6"
+    assessment: "Lab 2 + Presentation #1"
+
+  - id: 7
+    week: 7
+    type: "Lecture"
+    title: "Clustering — k-Means & Customer Segmentation"
+    status: tbd
+    topics:
+      - "k-Means clustering: intuition and algorithm"
+      - "Choosing the number of clusters k (Silhouette score)"
+      - "Customer segmentation application"
+      - "Midterm Exam 1 review: CRISP-DM, data preparation, association, clustering"
+    clos: "3"
+    assessment: "—"
+
+  - id: 8
+    week: 8
+    type: "Assessment"
+    title: "Midterm Exam 1 — Practical Exam on Orange"
+    status: released
+    topics:
+      - "90-minute individual practical exam"
+      - "Tasks: load a provided dataset → preprocess → build a model → write a business interpretation"
+      - "Covers Weeks 1–7: CRISP-DM, data preparation, exploration, association, clustering"
+    clos: "1, 2, 3, 5"
+    assessment: "Midterm Exam — Part 1 (20%)"
+
+  - id: 9
+    week: 9
+    type: "Lecture"
+    title: "Classification I — KNN & Naïve Bayes"
+    status: tbd
+    topics:
+      - "Classification problem setup: train/test split, the confusion matrix"
+      - "k-Nearest Neighbours (KNN)"
+      - "Naïve Bayes classifier"
+      - "Evaluation metrics: accuracy, precision, recall, F1-score"
+    clos: "4"
+    assessment: "—"
+
+  - id: 10
+    week: 10
+    type: "Lab"
+    title: "Lab 3 — Classification in Orange"
+    status: tbd
+    topics:
+      - "Test & Score and Confusion Matrix widgets in Orange"
+      - "ROC curves and model comparison"
+      - "Business memo: which model works best and why it matters"
+    clos: "4, 5, 6"
+    assessment: "Lab 3"
+
+  - id: 11
+    week: 11
+    type: "Lecture"
+    title: "Prediction — Linear & Logistic Regression"
+    status: tbd
+    topics:
+      - "Linear regression: fitting a line, R², and residuals"
+      - "Logistic regression for yes/no business outcomes"
+      - "Interpreting coefficients in business language"
+    clos: "4"
+    assessment: "—"
+
+  - id: 12
+    week: 12
+    type: "Lab"
+    title: "Lab 4 — Regression & Group Project Launch"
+    status: tbd
+    topics:
+      - "Regression in Orange and with Python pandas"
+      - "Reading and adapting a Python regression script"
+      - "Group project: confirm team, topic, and dataset"
+    clos: "4, 5, 6"
+    assessment: "Lab 4 + Confirm group project topic"
+
+  - id: 13
+    week: 13
+    type: "Lecture"
+    title: "Advanced Topics — Decision Trees, Neural Networks & Text Mining"
+    status: tbd
+    topics:
+      - "Decision Trees and the Orange Tree Viewer"
+      - "Neural networks: intuition and business applications"
+      - "Text mining and NLP overview"
+      - "Cross-validation and trustworthy model evaluation"
+    clos: "3, 4"
+    assessment: "—"
+
+  - id: 14
+    week: 14
+    type: "Assessment"
+    title: "Midterm Exam 2 — Group Project Presentations"
+    status: tbd
+    topics:
+      - "Group presentations: 10–12 minutes per team + Q&A"
+      - "Current-event Presentation #2"
+      - "Course review and final exam preparation"
+    clos: "1, 2, 3, 4, 5, 6"
+    assessment: "Midterm Exam — Part 2 (20%) + Presentation #2"
+
+  - id: 15
+    week: 15
+    type: "Assessment"
+    title: "Final Exam"
+    status: tbd
+    topics:
+      - "90-minute written exam"
+      - "Covers the full course: CRISP-DM, all techniques, model selection and interpretation"
+      - "Question types: scenario-based technique selection, reading model output, short essays"
+    clos: "1, 2, 3, 4, 5, 6"
+    assessment: "Final Exam — 50%"

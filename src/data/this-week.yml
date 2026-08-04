@@ -1,0 +1,18 @@
+# The pinned banner at the top of the homepage. Update each week.
+#
+# If this block is stale, DELETE the `current:` block — the banner disappears
+# rather than showing wrong information to students.
+
+current:
+  week: 1
+  title: "Introduction to Data Mining & CRISP-DM"
+  summary: |
+    Welcome to IST 4520 — Data Mining. This session introduces the course
+    structure, the four types of data mining problems, and the CRISP-DM
+    process that frames every project we will build this term.
+  todo:
+    - text: "Read North (2012), Chapter 1 — Introduction to Data Mining and CRISP-DM"
+    - text: "Install Orange Data Mining before Week 2 (instructions in Lab 0)"
+      link: "assignments/lab0-setup.html"
+      due: "Before Week 2"
+    - text: "Join the course channel and register on Kaggle"

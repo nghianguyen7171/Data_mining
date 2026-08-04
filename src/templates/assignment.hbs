@@ -1,0 +1,11 @@
+<article class="wrap prose prose-narrow assignment">
+  <p class="crumb"><a href="{{url 'assignments/'}}">Assignments</a></p>
+  <h1>{{assignment.title}}</h1>
+  <dl class="assignment-meta">
+    {{#if assignment.due}}<div><dt>Due</dt><dd>{{assignment.due}}</dd></div>{{/if}}
+    {{#if assignment.due_week}}<div><dt>Released</dt><dd>Week {{assignment.due_week}}</dd></div>{{/if}}
+    {{#if assignment.weight}}<div><dt>Weight</dt><dd>{{assignment.weight}}</dd></div>{{/if}}
+    {{#if assignment.clos}}<div><dt>CLOs</dt><dd>{{assignment.clos}}</dd></div>{{/if}}
+  </dl>
+  {{{bodyHtml}}}
+</article>

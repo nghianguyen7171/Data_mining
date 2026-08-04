@@ -1,0 +1,21 @@
+<div class="wrap section">
+  <h1 class="section-title">Labs & Assignments</h1>
+  <p class="section-note">
+    Lab assignments are part of the Attendance &amp; Participation component (10% of the final grade).
+    Assignments are due by the end of the week following the lab session.
+    A two-week grace period applies; each late week incurs a 25% penalty.
+  </p>
+
+  <ul class="assignment-list">
+    {{#each assignments}}
+    <li>
+      <a class="assignment-link" href="{{url (concat 'assignments/' this.slug '.html')}}">{{this.title}}</a>
+      <span class="assignment-sub">
+        {{#if this.due_week}}Week {{this.due_week}}{{/if}}
+        {{#if this.due}} · due {{this.due}}{{/if}}
+      </span>
+      {{#if this.summary}}<p class="assignment-summary">{{this.summary}}</p>{{/if}}
+    </li>
+    {{/each}}
+  </ul>
+</div>

@@ -1,0 +1,60 @@
+<section id="schedule" class="section">
+  <div class="wrap">
+    <h2 class="section-title">Schedule</h2>
+    <p class="section-note">
+      Fifteen weeks alternating lecture and lab. Lab weeks include a business
+      memo and, where noted, a group progress milestone. Weeks marked
+      <span class="pill pill-tbd">TBD</span> are not yet finalised and their
+      materials are not yet published.
+    </p>
+
+    <div class="table-scroll">
+      <table class="schedule">
+        <thead>
+          <tr>
+            <th scope="col" class="col-week">Week</th>
+            <th scope="col" class="col-type">Type</th>
+            <th scope="col">Topic</th>
+            <th scope="col" class="col-materials">Materials</th>
+            <th scope="col" class="col-due">Assessment</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each lectures.lectures}}
+          <tr class="row-{{this.type}} {{#unless (isReleased this.status)}}row-unreleased{{/unless}}">
+            <td class="col-week">{{this.week}}</td>
+            <td class="col-type"><span class="pill pill-{{this.type}}">{{this.type}}</span></td>
+            <td>
+              <span class="lec-title">{{this.title}}</span>
+              {{#unless (isReleased this.status)}}
+                <span class="pill pill-{{this.status}}">{{statusLabel this.status}}</span>
+              {{/unless}}
+              {{#if this.topics}}
+              <ul class="lec-topics">
+                {{#each this.topics}}<li>{{this}}</li>{{/each}}
+              </ul>
+              {{/if}}
+            </td>
+            <td class="col-materials">
+              {{#if (isReleased this.status)}}
+                {{#if this.slides}}<a class="mat" href="{{url this.slides}}">Slides</a>{{/if}}
+                {{#if this.notebook}}<a class="mat" href="{{url this.notebook}}">Notebook</a>{{/if}}
+                {{#unless this.slides}}{{#unless this.notebook}}<span class="dash">—</span>{{/unless}}{{/unless}}
+              {{else}}
+                <span class="dash">—</span>
+              {{/if}}
+            </td>
+            <td class="col-due">
+              {{#if this.assignment}}
+                <a href="{{url (concat 'assignments/' this.assignment '.html')}}">{{this.assessment}}</a>
+              {{else}}
+                {{#if this.assessment}}{{this.assessment}}{{else}}<span class="dash">—</span>{{/if}}
+              {{/if}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

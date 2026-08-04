@@ -1,0 +1,22 @@
+{
+  "name": "data-mining-course",
+  "version": "1.0.0",
+  "description": "Data Mining — course site for the Faculty of Data Science and Artificial Intelligence, National Economics University",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "build:keys": "SOLUTIONS=1 node build.js",
+    "clean": "rm -rf docs docs-keys",
+    "serve": "node -e \"require('http').createServer((q,s)=>{const p=require('path').join('docs',q.url==='/'?'index.html':q.url);require('fs').readFile(p,(e,d)=>{if(e){s.writeHead(404);return s.end('404')}s.writeHead(200,{'Content-Type':{'.html':'text/html','.css':'text/css','.js':'text/javascript','.png':'image/png','.jpg':'image/jpeg','.pdf':'application/pdf','.svg':'image/svg+xml'}[require('path').extname(p)]||'application/octet-stream'});s.end(d)})}).listen(4000,()=>console.log('http://localhost:4000'))\""
+  },
+  "author": "Dr. Trong-Nghia Nguyen <nghiant@neu.edu.vn>",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "glob": "^10.3.10",
+    "handlebars": "^4.7.8",
+    "js-yaml": "^4.1.0",
+    "marked": "^11.1.1",
+    "sass": "^1.69.5"
+  }
+}

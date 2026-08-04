@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 0 — Environment Setup &amp; First Orange Project · Data Mining</title>
+  <meta name="description" content="Data Mining — Faculty of Data Science and Artificial Intelligence, National Economics University.">
+  <link rel="stylesheet" href="/Data_mining/assets/css/main.css">
+  <link rel="icon" href="/Data_mining/assets/images/fda-logo.png">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/Data_mining">
+        <img src="/Data_mining/assets/images/neu-logo.png" alt="" class="brand-logo">
+        <img src="/Data_mining/assets/images/fda-logo.png" alt="" class="brand-logo">
+        <span class="brand-text">
+          <span class="brand-course">Data Mining</span>
+          <span class="brand-dept">Faculty of Data Science and Artificial Intelligence</span>
+        </span>
+      </a>
+  
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/Data_mining" >Home</a>
+        <a href="/Data_mining/syllabus.html" >Syllabus</a>
+        <a href="/Data_mining/assignments/" class="is-active" aria-current="page">Assignments</a>
+        <a href="/Data_mining/resources.html" >Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="wrap prose prose-narrow assignment">
+  <p class="crumb"><a href="/Data_mining/assignments/">Assignments</a></p>
+  <h1>Lab 0 — Environment Setup &amp; First Orange Project</h1>
+  <dl class="assignment-meta">
+    <div><dt>Due</dt><dd>End of Week 2</dd></div>
+    <div><dt>Released</dt><dd>Week 2</dd></div>
+    <div><dt>Weight</dt><dd>Part of 10% Attendance &amp; Participation</dd></div>
+    <div><dt>CLOs</dt><dd>2, 5, 6</dd></div>
+  </dl>
+  <h2>Goal</h2>
+<p>By the end of this lab you will have a working development environment and a completed Orange workflow that explores economic development data across countries. This is the foundation for every lab session that follows.</p>
+<h2>What to submit</h2>
+<p>Four items, submitted to the LMS before the end of Week 2:</p>
+<ol>
+<li><strong>Screenshot</strong> of your Python environment running successfully: either VS Code Terminal showing the pandas version, or a Google Colab cell printing &quot;pandas ready&quot;.</li>
+<li><strong>Orange workflow file</strong> <code>lab0_HDI.ows</code> — saved from your Orange session.</li>
+<li><strong>Screenshot</strong> of your completed Scatter Plot (GDP per capita vs. life expectancy, coloured by HDI).</li>
+<li><strong>Business memo</strong> — 4–5 sentences answering the question posed in Part D below.</li>
+</ol>
+<hr>
+<h2>Part A — Python environment (VS Code, ~20 min)</h2>
+<p><strong>VS Code</strong> is a free, cross-platform code editor. We use it to read and adapt Python/pandas scripts throughout the course.</p>
+<h3>A1. Install Python</h3>
+<p><strong>Windows:</strong></p>
+<ol>
+<li>Go to python.org/downloads → click <strong>Download Python</strong>.</li>
+<li>Open the <code>.exe</code> installer. <strong>Tick &quot;Add Python to PATH&quot;</strong> at the bottom of the first screen before clicking Install.</li>
+</ol>
+<p><strong>macOS:</strong></p>
+<ol>
+<li>Go to python.org/downloads → download the macOS package.</li>
+<li>Open the <code>.pkg</code> file and follow the prompts.</li>
+</ol>
+<p><strong>Verify:</strong> open Terminal (macOS) or Command Prompt (Windows) and run:</p>
+<pre><code>python --version
+</code></pre>
+<p>You should see <code>Python 3.x.x</code>. On macOS you may need <code>python3 --version</code>.</p>
+<h3>A2. Install VS Code</h3>
+<ol>
+<li>Download from code.visualstudio.com (the page auto-detects your OS).</li>
+<li>Install, ticking <strong>&quot;Add to PATH&quot;</strong> when offered.</li>
+<li>Open VS Code → click the <strong>Extensions</strong> icon (left sidebar) → search <strong>Python</strong> → install the Microsoft Python extension.</li>
+<li>Also install the <strong>Jupyter</strong> extension.</li>
+</ol>
+<h3>A3. Install pandas</h3>
+<p>Open the VS Code integrated terminal (<code>Terminal → New Terminal</code>) and run:</p>
+<pre><code>pip install pandas
+</code></pre>
+<p>(macOS: try <code>pip3 install pandas</code> if the above fails.)</p>
+<h3>A4. Verify</h3>
+<p>Create a file <code>test.py</code>, paste the code below, and run it (click ▶ or right-click → <em>Run Python File in Terminal</em>):</p>
+<pre><code class="language-python">import pandas as pd
+print(&quot;pandas ready&quot;)
+print(pd.__version__)
+</code></pre>
+<p>If the terminal prints &quot;pandas ready&quot; and a version number → <strong>Part A complete.</strong></p>
+<blockquote>
+<p><strong>If installation fails on your machine, skip to Part B (Google Colab)</strong> — you can complete the entire course without a local Python install.</p>
+</blockquote>
+<hr>
+<h2>Part B — Alternative: Google Colab (~15 min)</h2>
+<p>Google Colab runs Python in your browser — no installation needed.</p>
+<ol>
+<li>Go to colab.research.google.com (sign in with a Google account).</li>
+<li>Click <strong>File → New notebook</strong>.</li>
+<li>In the first cell, type and run (<code>Shift + Enter</code>):</li>
+</ol>
+<pre><code class="language-python">import pandas as pd
+print(&quot;pandas ready&quot;)
+print(pd.__version__)
+</code></pre>
+<p>pandas is pre-installed in Colab; it will print immediately.</p>
+<blockquote>
+<p>One of Part A or Part B is sufficient. If VS Code works, use it — it is the better long-term tool. Colab is the backup when local setup fails.</p>
+</blockquote>
+<hr>
+<h2>Part C — Install Orange Data Mining (~10 min)</h2>
+<p>Orange is the <strong>primary tool</strong> for this course.</p>
+<ol>
+<li>Go to <a href="https://orangedatamining.com/download">orangedatamining.com/download</a>.</li>
+<li>Download the standalone installer for your OS:<ul>
+<li><strong>Windows:</strong> <code>Orange3-...-x86_64.exe</code></li>
+<li><strong>macOS:</strong> choose <strong>Apple Silicon</strong> or <strong>Intel</strong> (check  → About This Mac → Chip).</li>
+<li><strong>Linux:</strong> use the Anaconda path (instructions on the download page).</li>
+</ul>
+</li>
+<li>Install:<ul>
+<li><strong>Windows:</strong> open the <code>.exe</code>. If Windows SmartScreen blocks it, click <em>More info → Run anyway</em>, then Next → Install.</li>
+<li><strong>macOS:</strong> open the <code>.dmg</code>, drag Orange to <strong>Applications</strong>. First launch: right-click → <strong>Open</strong> (macOS security restriction).</li>
+</ul>
+</li>
+<li>Open Orange → you see the Welcome screen → <strong>installation successful.</strong></li>
+</ol>
+<p>Orange bundles its own Python. It is independent of the Python you installed in Part A.</p>
+<hr>
+<h2>Part D — First Orange project: HDI dataset (~40 min)</h2>
+<p>We will build a workflow to explore the <strong>Human Development Index (HDI)</strong> — a dataset of economic and social indicators for countries worldwide (GDP per capita, life expectancy, education). This maps directly to CRISP-DM&#39;s <em>Business Understanding</em> and <em>Data Understanding</em> phases from the Week 1 lecture.</p>
+<p><strong>Business question:</strong> <em>As an analyst at an international investment fund, how do countries differ in economic development, and what factors travel together with higher income?</em></p>
+<h3>D1. Open Orange and create a new workflow</h3>
+<p>Open Orange → Welcome screen → <strong>New</strong> (or File → New). You see a blank canvas and a widget panel on the left.</p>
+<h3>D2. Load the HDI dataset</h3>
+<ol>
+<li>In the widget panel under <strong>Data</strong>, drag <strong>Datasets</strong> onto the canvas.</li>
+<li>Double-click the widget → search for <strong>HDI</strong> → select it → Orange downloads the data.</li>
+<li>Close the widget window. The widget now has data flowing from its output.</li>
+</ol>
+<blockquote>
+<p><em>If HDI does not appear:</em> use the <strong>File</strong> widget instead and open the file downloaded from <code>https://datasets.biolab.si/core/HDI.tab</code>.</p>
+</blockquote>
+<h3>D3. View the data table</h3>
+<ol>
+<li>Drag a <strong>Data Table</strong> widget onto the canvas.</li>
+<li>Connect <strong>Datasets → Data Table</strong> by dragging from the right edge of Datasets to the left edge of Data Table.</li>
+<li>Double-click Data Table to open it.</li>
+</ol>
+<p><strong>Record:</strong> How many rows (countries) and columns (indicators) does the dataset have? Click a column header to sort. Which country has the highest HDI? Which has the lowest?</p>
+<h3>D4. Descriptive statistics</h3>
+<ol>
+<li>Drag <strong>Feature Statistics</strong> onto the canvas.</li>
+<li>Connect <strong>Datasets → Feature Statistics</strong>.</li>
+<li>Open it: for each numeric column, note the mean, min/max, and any missing values.</li>
+</ol>
+<p><strong>Question:</strong> Which columns have missing values? What does the gap between min and max GDP per capita tell you about global inequality?</p>
+<h3>D5. Distribution of one variable</h3>
+<ol>
+<li>Drag <strong>Distributions</strong> onto the canvas.</li>
+<li>Connect <strong>Datasets → Distributions</strong>.</li>
+<li>Select <strong>HDI</strong> as the variable. Observe the shape. Then switch to <strong>life expectancy</strong>.</li>
+</ol>
+<h3>D6. Scatter plot — the &quot;aha&quot; step</h3>
+<ol>
+<li>Drag <strong>Scatter Plot</strong> onto the canvas (under <strong>Visualize</strong>).</li>
+<li>Connect <strong>Datasets → Scatter Plot</strong>.</li>
+<li>Set <strong>Axis X</strong> to GDP/GNI per capita and <strong>Axis Y</strong> to life expectancy. Set <strong>Color</strong> to HDI if available.</li>
+</ol>
+<p><strong>Observe:</strong> Do points trend upward? This is correlation (Week 5). Click a point to identify the country.</p>
+<h3>D7. Save the workflow</h3>
+<p><strong>File → Save As</strong> → name it <code>lab0_HDI.ows</code>.</p>
+<h3>D8. Business memo</h3>
+<p>Write 4–5 sentences answering the original question:</p>
+<blockquote>
+<p><em>&quot;The HDI dataset contains [number] countries. Development levels vary widely: HDI ranges from [min] to [max]. The scatter plot reveals that GDP per capita and life expectancy move together — wealthier countries tend to live longer. [Your observation about an outlier or interesting cluster.] For an investment fund, these findings suggest focusing on [your recommendation].&quot;</em></p>
+</blockquote>
+<p>This is the core skill graded throughout the course: <strong>turning a chart into a business sentence.</strong></p>
+<hr>
+<h2>Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th align="left">Problem</th>
+<th align="left">Fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">VS Code: <code>python</code> command not found</td>
+<td align="left">Re-install Python with &quot;Add to PATH&quot; ticked; restart VS Code</td>
+</tr>
+<tr>
+<td align="left"><code>pip install pandas</code> fails on Mac</td>
+<td align="left">Use <code>pip3 install pandas</code></td>
+</tr>
+<tr>
+<td align="left">Cannot install anything on this machine</td>
+<td align="left">Use Google Colab (Part B) for the whole course</td>
+</tr>
+<tr>
+<td align="left">macOS: &quot;Orange can&#39;t be opened&quot;</td>
+<td align="left">Right-click Orange → <strong>Open</strong>; or System Settings → Privacy &amp; Security → <em>Open Anyway</em></td>
+</tr>
+<tr>
+<td align="left">HDI not in Datasets widget</td>
+<td align="left">Download from <code>datasets.biolab.si/core/HDI.tab</code> and open with the <strong>File</strong> widget</td>
+</tr>
+<tr>
+<td align="left">Widgets won&#39;t connect</td>
+<td align="left">Drag from the <strong>right edge</strong> of the source widget to the <strong>left edge</strong> of the destination</td>
+</tr>
+</tbody></table>
+
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-course">Data Mining</p>
+        <p class="footer-meta">IST 4520 · Fall 2026 · 3 credits</p>
+      </div>
+      <div>
+        <p class="footer-meta">Faculty of Data Science and Artificial Intelligence</p>
+        <p class="footer-meta">College of Technology, National Economics University</p>
+        <p class="footer-meta"><a href="https://github.com/nghianguyen7171/Data_mining">Source on GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

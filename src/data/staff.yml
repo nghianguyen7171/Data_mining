@@ -1,0 +1,15 @@
+instructors:
+  - name: "Dr. Trong-Nghia Nguyen"
+    role: "Course Instructor"
+    email: "nghiant@neu.edu.vn"
+    website: "https://nghianguyen7171.github.io/"
+    office: "Room 1613, Building A1"
+    office_hours: "By appointment"
+    photo: "assets/images/instructor.png"
+
+teaching_assistants:
+  - name: "MSc. Le Duy Khanh"
+    role: "Teaching Assistant"
+    email: "khanhld@neu.edu.vn"
+    website: "https://fda.neu.edu.vn/fda-members/ths-le-duy-khanh/"
+    responsibility: "Lab troubleshooting and homework help"

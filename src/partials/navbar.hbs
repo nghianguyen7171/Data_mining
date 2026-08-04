@@ -1,0 +1,22 @@
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{url ''}}">
+      <img src="{{url 'assets/images/neu-logo.png'}}" alt="" class="brand-logo">
+      <img src="{{url 'assets/images/fda-logo.png'}}" alt="" class="brand-logo">
+      <span class="brand-text">
+        <span class="brand-course">{{course.short_name}}</span>
+        <span class="brand-dept">{{course.department}}</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a href="{{url ''}}" {{#if (eq page.nav 'home')}}class="is-active" aria-current="page"{{/if}}>Home</a>
+      <a href="{{url 'syllabus.html'}}" {{#if (eq page.nav 'syllabus')}}class="is-active" aria-current="page"{{/if}}>Syllabus</a>
+      <a href="{{url 'assignments/'}}" {{#if (eq page.nav 'assignments')}}class="is-active" aria-current="page"{{/if}}>Assignments</a>
+      <a href="{{url 'resources.html'}}" {{#if (eq page.nav 'resources')}}class="is-active" aria-current="page"{{/if}}>Resources</a>
+    </nav>
+  </div>
+  {{#if withSolutions}}
+  <div class="keys-banner">Instructor build — contains solutions. Do not publish.</div>
+  {{/if}}
+</header>

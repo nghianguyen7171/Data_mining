@@ -1,0 +1,140 @@
+# Single source of truth for the course. The build fails if assessment weights
+# do not sum to 100%, or if a CLO maps to an undeclared objective.
+
+title: "Data Mining"
+code: "IST 4520"
+short_name: "Data Mining"
+semester: "Fall 2026"
+type: "Elective"
+credits: 3
+
+baseurl: "/Data_mining"
+
+hours:
+  lecture: 18
+  lab: 12
+  self_study: 90
+
+department: "Faculty of Data Science and Artificial Intelligence"
+college: "College of Technology, National Economics University"
+office: "Room 1613, Building A1, National Economics University"
+
+prerequisites:
+  - "Basic Computer Skills"
+  - "Introduction to Statistics (recommended)"
+  - "Basic Python programming (recommended)"
+
+description: |
+  A hands-on introduction to data mining for business decision-making. The
+  course equips students with business-analytic thinking: framing the right
+  question, selecting the right technique, and interpreting results in
+  actionable business language — not writing algorithms from scratch.
+
+  Students work through the full CRISP-DM lifecycle using Orange Data Mining
+  (a no-code, drag-and-drop platform) supplemented by light Python/pandas
+  scripts. Core techniques covered include data exploration and visualization,
+  association rules, k-Means clustering, KNN and Naïve Bayes classification,
+  and linear and logistic regression. Midterm assessments include a practical
+  exam on Orange and a group project presentation; the final is a written exam.
+
+links:
+  github: "https://github.com/nghianguyen7171/Data_mining"
+
+objectives:
+  - id: "G1"
+    description: "Describe and explore business data through descriptive statistics and visualization."
+  - id: "G2"
+    description: "Structure data mining projects using the CRISP-DM process from business understanding to deployment."
+  - id: "G3"
+    description: "Apply core data mining techniques — association rules, clustering, classification, and regression — to business datasets."
+  - id: "G4"
+    description: "Use Orange Data Mining and Python for practical, end-to-end data mining workflows."
+  - id: "G5"
+    description: "Communicate analytical findings as clear, actionable business recommendations."
+
+learning_outcomes:
+  - id: "CLO 1"
+    objective: "G2"
+    description: "Frame a business problem as a data mining task and plan a project using the CRISP-DM process."
+  - id: "CLO 2"
+    objective: "G1"
+    description: "Explore and describe datasets using descriptive statistics, distributions, scatter plots, and correlation."
+  - id: "CLO 3"
+    objective: "G3"
+    description: "Apply association rules and k-Means clustering to discover patterns and segment customers."
+  - id: "CLO 4"
+    objective: "G3"
+    description: "Build classification and regression models; evaluate performance with standard metrics; interpret results in business terms."
+  - id: "CLO 5"
+    objective: "G4"
+    description: "Build Orange workflows for complete data mining pipelines; read and adapt Python/pandas scripts for data tasks."
+  - id: "CLO 6"
+    objective: "G5"
+    description: "Produce business memos that translate analytical results into specific, evidence-based recommendations."
+
+# 10 + 40 + 50 = 100. The build enforces this.
+assessment:
+  items:
+    - name: "Attendance & Participation"
+      content: "Attendance, weekly lab submissions with business memos, class participation, and two current-event presentations"
+      week: "Weekly"
+      weight: "10%"
+      clos: "1, 2, 3, 4, 5, 6"
+      criteria: "Base score of 8.0/10 for full attendance without active participation. Each active participation adds +0.25 pts. More than 4 absences → score of 0 and ineligibility for the Final Exam. Surplus above 10.0 is halved and added to the Midterm grade."
+    - name: "Midterm Exam"
+      content: "Part 1 (Week 8): 90-min practical exam on Orange. Part 2 (Week 14): group project presentation."
+      week: "Weeks 8 & 14"
+      weight: "40%"
+      clos: "1, 2, 3, 4, 5"
+      criteria: "Part 1 — load a dataset, preprocess, model, and interpret results in Orange (covers Weeks 1–7). Part 2 — group project on a self-selected dataset; present findings to the class (covers full course)."
+    - name: "Final Exam"
+      content: "Written exam covering the full course"
+      week: "Week 15"
+      weight: "50%"
+      clos: "1, 2, 3, 4, 5, 6"
+      criteria: "90-minute written exam. Questions test technique selection for business scenarios, interpretation of model outputs, and understanding of CRISP-DM. Covers all 15 weeks."
+
+  notes:
+    - "Group project: teams of 3–4 students; topic and dataset confirmed by Week 12."
+    - "Two current-event presentations required (one before and one after the midterm exam)."
+    - "Each lab week includes a business memo (4–5 sentences interpreting analytical results in business language) — submitted alongside the Orange workflow."
+
+policies:
+  attendance: "Random attendance checks. More than 4 absences removes eligibility for the Final Exam and sets the participation grade to zero."
+  submission: "Lab assignments are due by the end of the week following the lab session. A two-week grace period applies; each late week incurs a 25% penalty. No submission accepted after the grace period."
+  electronics: "Laptops are required for all lab sessions. During lectures, phones must be silent and non-educational device use is prohibited unless otherwise instructed."
+  conduct:
+    - "Read the assigned chapter before each lecture session."
+    - "Bring a fully charged laptop to every lab session."
+    - "Submit lab assignments together with a business memo on time."
+    - "Group project contributions are individually assessed. Free-riding is penalised."
+    - "No plagiarism or unauthorised AI-generated content. Violations result in a zero for that component."
+
+software:
+  - "Orange Data Mining (orangedatamining.com) — primary tool; free, open-source, drag-and-drop; standalone installer bundles Python and all required libraries. No separate Python installation needed."
+  - "Python 3 with pandas — accessed via VS Code (local) or Google Colab (browser-based, no install required); used for reading and adapting data scripts."
+  - "Microsoft Excel or Google Sheets — used for early-stage descriptive statistics and the Excel data mining exercise."
+
+textbooks:
+  - ref: "[1]"
+    title: "Data Mining for the Masses"
+    authors: "Matthew North"
+    year: 2012
+    publisher: "Global Text Project / Textbook Equity (Creative Commons)"
+    url: "https://www.betterevaluation.org/sites/default/files/2023-05/DataMiningForTheMasses.pdf"
+    primary: true
+    description: "Main textbook — free and legal PDF. Chapter structure maps 1-to-1 with the course schedule. Students skip RapidMiner screenshots and use the equivalent Orange workflow provided in class."
+  - ref: "[2]"
+    title: "Data Mining for Business Analytics: Concepts, Techniques and Applications in Python"
+    authors: "Shmueli, Bruce, Gedeck & Patel"
+    year: 2019
+    publisher: "Wiley"
+    url: "https://www.dataminingbook.com"
+    description: "Advanced reference for students who want deeper Python and modelling coverage. Usually available through the university library."
+  - ref: "[3]"
+    title: "An Introduction to Statistical Learning (2nd ed.)"
+    authors: "James, Witten, Hastie & Tibshirani"
+    year: 2023
+    publisher: "Springer (free PDF from authors)"
+    url: "https://www.statlearning.com"
+    description: "Conceptual foundation for machine learning methods. Free PDF provided by the authors at statlearning.com."

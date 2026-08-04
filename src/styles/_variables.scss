@@ -1,0 +1,39 @@
+// Theme tokens. Edit this file to retheme the entire site.
+
+// ---------------------------------------------------------------- palette
+
+// Deep ocean blue — academic and data-science adjacent.
+// Contrast on white: ~7.7:1 (WCAG AAA).
+$accent:        #1a5c7e;
+$accent-dark:   #134760;
+$accent-tint:   #eef5f9;
+
+// Light
+$l-bg:          #ffffff;
+$l-bg-alt:      #f9fafb;
+$l-bg-tint:     #f3f4f6;
+$l-text:        #111827;
+$l-text-soft:   #57606a;
+$l-border:      #e2e5e9;
+
+// Dark
+$d-bg:          #14171c;
+$d-bg-alt:      #1b1f26;
+$d-bg-tint:     #232830;
+$d-text:        #e8eaed;
+$d-text-soft:   #a5adba;
+$d-border:      #333a45;
+$d-accent:      #7ccbdc;   // lightened for legibility on dark backgrounds
+$d-accent-tint: #0c2530;
+
+// ---------------------------------------------------------------- type
+
+$font-head: Georgia, 'Times New Roman', serif;
+$font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-mono: 'SF Mono', Monaco, 'Cascadia Code', Consolas, monospace;
+
+$measure:   72ch;
+$wrap:      1080px;
+$wrap-wide: 1200px;
+
+$radius: 3px;
