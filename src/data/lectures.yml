@@ -21,7 +21,8 @@ lectures:
       - "Quick pandas review: DataFrames, filtering, and descriptive statistics"
     clos: "1, 2"
     slides: "assets/materials/1.Intro_CRISP-DM.pdf"
-    assessment: "—"
+    assignment: "lab0-setup"
+    assessment: "Lab 0 submission"
 
   - id: 2
     week: 2
@@ -34,8 +35,7 @@ lectures:
       - "First Orange workflow: exploring the HDI economic dataset"
       - "Mini-memo: turning scatter plot findings into a business insight"
     clos: "2, 5, 6"
-    assignment: "lab0-setup"
-    assessment: "Lab 0 submission"
+    assessment: "—"
 
   - id: 3
     week: 3
