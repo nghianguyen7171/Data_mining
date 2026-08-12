@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trắc nghiệm Khai phá Dữ liệu (Ứng dụng thực tế)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #111827;
+            line-height: 1.6;
+        }
+        .question-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .options-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 1.5rem;
+            flex-grow: 1;
+        }
+        .option-item {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            padding: 0.75rem 0.5rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.2s, opacity 0.2s;
+            border: 1px solid transparent;
+        }
+        .option-item:hover:not(.disabled) {
+            background-color: #f3f4f6;
+            cursor: pointer;
+        }
+        .option-item.disabled {
+            opacity: 0.7;
+        }
+        .option-input {
+            margin-top: 0.3rem;
+            margin-right: 0.75rem;
+            cursor: inherit;
+        }
+        .correct-answer-box {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.95rem;
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10 flex items-center justify-center min-h-screen">
+    <div class="max-w-3xl w-full mx-auto">
+        <header class="mb-8 text-center">
+            <h1 class="text-2xl font-bold text-gray-900 mb-1">Bài tập Trắc nghiệm Thực tế</h1>
+            <h2 class="text-lg text-gray-600">Môn: Khai phá Dữ liệu (Data Mining)</h2>
+        </header>
+
+        <!-- Container chứa nội dung câu hỏi -->
+        <main id="quiz-container">
+            <!-- Nội dung sẽ được render bằng JS -->
+        </main>
+
+        <!-- Bảng tổng kết (ẩn mặc định) -->
+        <div id="summary-container" class="hidden text-center bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Hoàn thành bài thi!</h3>
+            <p class="text-lg mb-6">Điểm số của bạn: <span id="final-score" class="font-bold text-blue-600 text-3xl">0/16</span></p>
+            <div class="flex justify-center space-x-4">
+                <button id="review-btn" class="px-6 py-2 bg-gray-200 text-gray-800 font-semibold rounded hover:bg-gray-300 transition duration-150">Xem lại đáp án</button>
+                <button id="reset-btn" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition duration-150">Làm lại từ đầu</button>
+            </div>
+        </div>
+
+        <!-- Điều hướng -->
+        <div id="navigation-controls" class="mt-6 flex justify-between items-center">
+            <button id="prev-btn" class="px-4 py-2 bg-gray-200 text-gray-700 font-medium rounded hover:bg-gray-300 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
+                &larr; Câu trước
+            </button>
+            
+            <span id="progress-text" class="text-sm font-medium text-gray-500">1 / 16</span>
+            
+            <button id="next-btn" class="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
+                Câu tiếp &rarr;
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const rawQuizData = [
+            {
+                section: "Phần 1: Tổng quan về Khai phá Dữ liệu",
+                questions: [
+                    { 
+                        question: "Một chuỗi siêu thị thu thập hàng triệu giao dịch từ thẻ khách hàng thân thiết mỗi ngày. Đâu là mục tiêu cuối cùng của việc áp dụng Data Mining vào khối dữ liệu này?", 
+                        options: [
+                            "Xây dựng kho lưu trữ dữ liệu khổng lồ (Data Warehouse).", 
+                            "Chuyển hóa thói quen mua sắm thành quyết định kinh doanh.", 
+                            "Thay thế hoàn toàn con người trong việc ra quyết định.", 
+                            "Vẽ các biểu đồ đẹp mắt để báo cáo nội bộ."
+                        ], 
+                        correctAnswer: 1 
+                    },
+                    { 
+                        question: "Nhóm marketing xem lại dashboard và thấy 'Tháng trước có 500 khách hàng hủy dịch vụ'. Sau đó, họ dùng Data Mining để tìm ra 'Những ai có khả năng hủy dịch vụ vào tháng sau'. Sự khác biệt này thể hiện điều gì?", 
+                        options: [
+                            "Báo cáo nhanh hơn, Data Mining chậm hơn.", 
+                            "Báo cáo dùng dữ liệu có cấu trúc, Data Mining dùng dữ liệu phi cấu trúc.", 
+                            "Báo cáo trả lời 'Điều gì đã xảy ra', Data Mining trả lời 'Điều gì sẽ xảy ra'.", 
+                            "Báo cáo là công việc của IT, Data Mining là của Business Analyst."
+                        ], 
+                        correctAnswer: 2 
+                    },
+                    { 
+                        question: "Ứng dụng nghe nhạc Spotify muốn tự động phân chia hàng triệu người dùng thành các tập khách hàng có gu âm nhạc giống nhau mà không cần gán nhãn trước. Bài toán này thuộc nhóm nào?", 
+                        options: [
+                            "Nhóm mô tả (Describe).", 
+                            "Nhóm dự đoán (Predict).", 
+                            "Nhóm liên kết (Relate).", 
+                            "Nhóm phân nhóm đối tượng (Group)."
+                        ], 
+                        correctAnswer: 3 
+                    },
+                    { 
+                        question: "Thuật toán gợi ý của Netflix hoạt động bằng cách tìm những người có sở thích xem phim giống bạn, sau đó dự đoán bạn sẽ thích bộ phim nào tiếp theo. Đây là sự kết hợp của hai nhóm bài toán nào?", 
+                        options: [
+                            "Nhóm kết hợp Describe và Relate.", 
+                            "Nhóm kết hợp Group và Predict.", 
+                            "Nhóm kết hợp Describe và Predict.", 
+                            "Nhóm kết hợp Relate và Group."
+                        ], 
+                        correctAnswer: 1 
+                    }
+                ]
+            },
+            {
+                section: "Phần 2: Tổ chức Dữ liệu",
+                questions: [
+                    { 
+                        question: "Một ngân hàng xây dựng mô hình AI rất phức tạp để dự đoán nợ xấu, nhưng lại sử dụng dữ liệu lịch sử chứa nhiều lỗi sai và thiếu sót. Kết quả là mô hình dự đoán hoàn toàn sai lệch. Tình huống này minh họa nguyên lý nào?", 
+                        options: [
+                            "Nguyên lý 'Rác đầu vào, Rác đầu ra' (Garbage In, Garbage Out).", 
+                            "Nguyên lý 'Khai phá dữ liệu tự động sửa lỗi'.", 
+                            "Định lý Không có bữa trưa miễn phí (No Free Lunch).", 
+                            "Vấn đề bùng nổ tổ hợp dữ liệu."
+                        ], 
+                        correctAnswer: 0 
+                    },
+                    { 
+                        question: "Bệnh viện muốn phân tích ghi chú viết tay của bác sĩ và ảnh chụp X-quang của bệnh nhân. So với việc phân tích tuổi và nhóm máu trong file Excel, thách thức lớn nhất của loại dữ liệu này là gì?", 
+                        options: [
+                            "Đây là dữ liệu có cấu trúc nên rất dễ xử lý.", 
+                            "Đây là dữ liệu phi cấu trúc, đòi hỏi tiền xử lý rất phức tạp.", 
+                            "Chúng không thể lưu trữ được trên máy tính.", 
+                            "Thuật toán học máy không thể chạy trên ảnh X-quang."
+                        ], 
+                        correctAnswer: 1 
+                    },
+                    { 
+                        question: "Công ty thương mại điện tử xây dựng bảng dữ liệu để lọc email. Bảng có các cột: Người gửi, Tiêu đề, Độ dài, và cột 'Có phải Spam không' (Có/Không). Trong quá trình huấn luyện mô hình, cột 'Có phải Spam không' đóng vai trò gì?", 
+                        options: [
+                            "Đóng vai trò là Biến mục tiêu (Target / Label).", 
+                            "Đóng vai trò là Biến phân loại độc lập (Categorical Attribute).", 
+                            "Đóng vai trò là Dữ liệu phi cấu trúc (Unstructured Data).", 
+                            "Đóng vai trò là Biến định lượng (Numeric Feature)."
+                        ], 
+                        correctAnswer: 0 
+                    },
+                    { 
+                        question: "Ứng dụng gọi xe công nghệ yêu cầu khách hàng đánh giá chuyến đi bằng 'Số sao' (từ 1 đến 5 sao). Mặc dù là các con số, thuật toán sẽ xem xét biến này thuộc loại hình dữ liệu nào là hợp lý nhất?", 
+                        options: [
+                            "Biến định lượng (Numeric) vì nó có thể cộng trừ.", 
+                            "Biến thời gian (Datetime).", 
+                            "Biến phân loại định danh (Categorical Nominal).", 
+                            "Biến phân loại có thứ bậc (Categorical Ordinal)."
+                        ], 
+                        correctAnswer: 3 
+                    }
+                ]
+            },
+            {
+                section: "Phần 3: Quy trình CRISP-DM",
+                questions: [
+                    { 
+                        question: "Giám đốc viễn thông yêu cầu: 'Dùng AI để giữ chân khách hàng'. Đội phân tích dữ liệu đã chuyển đổi yêu cầu này thành: 'Dự đoán những khách hàng nạp trên 500k/tháng sẽ rời rạng mạng trong 30 ngày tới'. Việc chuyển đổi này thuộc giai đoạn nào của CRISP-DM?", 
+                        options: [
+                            "Giai đoạn Hiểu biết dữ liệu (Data Understanding).", 
+                            "Giai đoạn Chuẩn bị dữ liệu (Data Preparation).", 
+                            "Giai đoạn Hiểu biết kinh doanh (Business Understanding).", 
+                            "Giai đoạn Mô hình hóa (Modeling)."
+                        ], 
+                        correctAnswer: 2 
+                    },
+                    { 
+                        question: "Một chuyên viên phân tích mất 3 tuần để nối các bảng dữ liệu từ 5 phòng ban khác nhau, xử lý các ô bị trống và tạo thêm cột 'Ngày trong tuần'. Theo quy trình CRISP-DM, giai đoạn này thường tiêu tốn bao nhiêu % nỗ lực của toàn dự án?", 
+                        options: [
+                            "Khoảng 10-20% tổng nỗ lực dự án.", 
+                            "Khoảng 30-40% tổng nỗ lực dự án.", 
+                            "Khoảng 50-60% tổng nỗ lực dự án.", 
+                            "Khoảng 70-80% tổng nỗ lực dự án."
+                        ], 
+                        correctAnswer: 3 
+                    },
+                    { 
+                        question: "Thuật toán dự đoán giá nhà của công ty đạt độ chính xác toán học 99% trên tập dữ liệu cũ. Tuy nhiên, khi báo cáo với Giám đốc, mô hình bị loại bỏ vì nó không thể chạy theo thời gian thực như yêu cầu kinh doanh ban đầu. Câu chuyện này nhấn mạnh tầm quan trọng của giai đoạn nào trong CRISP-DM?", 
+                        options: [
+                            "Giai đoạn Hiểu biết kinh doanh (Business Understanding).", 
+                            "Giai đoạn Đánh giá (Evaluation).", 
+                            "Giai đoạn Mô hình hóa (Modeling).", 
+                            "Giai đoạn Triển khai (Deployment)."
+                        ], 
+                        correctAnswer: 1 
+                    },
+                    { 
+                        question: "Năm 1952, máy tính UNIVAC dự đoán chính xác kết quả bầu cử Tổng thống Mỹ, nhưng các đài truyền hình không dám công bố vì con người hoài nghi kết quả của cỗ máy. Đối với một dự án Data Mining hiện đại, sự kiện này là bài học cảnh tỉnh cho giai đoạn nào?", 
+                        options: [
+                            "Giai đoạn Chuẩn bị dữ liệu (Data Preparation).", 
+                            "Giai đoạn Đánh giá (Evaluation).", 
+                            "Giai đoạn Triển khai (Deployment).", 
+                            "Giai đoạn Hiểu biết kinh doanh (Business Understanding)."
+                        ], 
+                        correctAnswer: 2 
+                    }
+                ]
+            },
+            {
+                section: "Phần 4: Công cụ Orange Data Mining",
+                questions: [
+                    { 
+                        question: "Một sinh viên ngành Quản trị Kinh doanh không có nền tảng về lập trình muốn xây dựng mô hình dự đoán rủi ro tín dụng. Đâu là lý do lớn nhất khiến sinh viên này nên sử dụng phần mềm Orange Data Mining?", 
+                        options: [
+                            "Vì nó có thể chạy trực tiếp trên trình duyệt web.", 
+                            "Vì nó chuyên dùng để vẽ biểu đồ kế toán tài chính.", 
+                            "Vì nó chỉ hỗ trợ phân tích dữ liệu hình ảnh.", 
+                            "Vì nó cung cấp giao diện kéo thả trực quan không cần viết mã (No-Code)."
+                        ], 
+                        correctAnswer: 3 
+                    },
+                    { 
+                        question: "Trong quá trình sử dụng Orange để phân tích dữ liệu bán hàng, bạn kéo thả biểu tượng 'File', sau đó nối nó với biểu tượng 'Data Table', rồi tiếp tục nối sang biểu tượng 'Scatter Plot'. Chuỗi liên kết từ trái sang phải này được gọi là gì?", 
+                        options: [
+                            "Được gọi là một Hàm (Function).", 
+                            "Được gọi là một Cơ sở dữ liệu (Database).", 
+                            "Được gọi là một Luồng công việc (Workflow).", 
+                            "Được gọi là một Thuật toán (Algorithm)."
+                        ], 
+                        correctAnswer: 2 
+                    },
+                    { 
+                        question: "Sau khi xây dựng xong mô hình phân loại khách hàng trong Orange, bạn cần dùng các Widget như 'Predictions' hoặc 'Test and Score' để kiểm tra xem mô hình có đáng tin cậy hay không. Hành động này tương ứng với giai đoạn nào trong vòng đời CRISP-DM?", 
+                        options: [
+                            "Giai đoạn Chuẩn bị dữ liệu (Data Preparation).", 
+                            "Giai đoạn Mô hình hóa (Modeling).", 
+                            "Giai đoạn Đánh giá (Evaluation).", 
+                            "Giai đoạn Triển khai (Deployment)."
+                        ], 
+                        correctAnswer: 2 
+                    },
+                    { 
+                        question: "Bộ phận Data Engineer gửi cho bạn một đoạn mã Python xử lý dữ liệu rất phức tạp và yêu cầu chạy nó trong Widget 'Python Script' của Orange. Với tư cách là một Business Analyst, mục tiêu chính của bạn khi làm việc với Widget này là gì?", 
+                        options: [
+                            "Chỉ dừng ở mức độ đọc hiểu và tinh chỉnh một vài tham số đầu vào.", 
+                            "Viết lại toàn bộ đoạn mã đó sang ngôn ngữ khác.", 
+                            "Tìm kiếm các lỗi cú pháp (syntax error) trong hệ thống code.", 
+                            "Học cách viết các hàm học máy phức tạp từ con số không."
+                        ], 
+                        correctAnswer: 0 
+                    }
+                ]
+            }
+        ];
+
+        let flatQuestions = [];
+        rawQuizData.forEach((sectionData) => {
+            sectionData.questions.forEach((q) => {
+                flatQuestions.push({
+                    sectionTitle: sectionData.section,
+                    question: q.question,
+                    options: q.options,
+                    correctAnswer: q.correctAnswer,
+                    userAnswer: null
+                });
+            });
+        });
+
+        const totalQuestions = flatQuestions.length;
+        let currentIndex = 0;
+        let isReviewMode = false;
+
+        // DOM Elements
+        const container = document.getElementById('quiz-container');
+        const summaryContainer = document.getElementById('summary-container');
+        const navControls = document.getElementById('navigation-controls');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressText = document.getElementById('progress-text');
+        const reviewBtn = document.getElementById('review-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const finalScoreSpan = document.getElementById('final-score');
+
+        function renderQuestion(index) {
+            container.innerHTML = '';
+            
+            const q = flatQuestions[index];
+            const card = document.createElement('div');
+            card.className = 'question-card';
+
+            // Section Title
+            const sectionEl = document.createElement('h3');
+            sectionEl.className = 'section-title';
+            sectionEl.textContent = q.sectionTitle;
+            card.appendChild(sectionEl);
+
+            // Question Text
+            const questionText = document.createElement('p');
+            questionText.className = 'font-semibold text-gray-800 text-lg mb-2';
+            questionText.textContent = `Câu ${index + 1}: ${q.question}`;
+            card.appendChild(questionText);
+
+            // Options List
+            const optionsList = document.createElement('ul');
+            optionsList.className = 'options-list';
+            
+            const hasAnswered = q.userAnswer !== null;
+            const shouldShowResult = hasAnswered || isReviewMode;
+
+            q.options.forEach((opt, optIndex) => {
+                const li = document.createElement('li');
+                li.className = `option-item ${shouldShowResult ? 'disabled' : ''}`;
+                
+                const inputId = `opt-${optIndex}`;
+                
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = `question-radio`;
+                input.id = inputId;
+                input.value = optIndex;
+                input.className = 'option-input';
+                
+                if (q.userAnswer === optIndex) {
+                    input.checked = true;
+                }
+
+                if (shouldShowResult) {
+                    input.disabled = true;
+                } else {
+                    // Handle immediate selection
+                    li.addEventListener('click', () => {
+                        if (q.userAnswer === null && !isReviewMode) {
+                            q.userAnswer = optIndex;
+                            renderQuestion(currentIndex); // Re-render to show immediate feedback
+                        }
+                    });
+                }
+
+                const label = document.createElement('label');
+                label.htmlFor = inputId;
+                label.className = `text-gray-700 w-full ${shouldShowResult ? 'cursor-default' : 'cursor-pointer'}`;
+                label.textContent = opt;
+
+                // Apply styling based on correctness
+                if (shouldShowResult) {
+                    if (optIndex === q.correctAnswer) {
+                        li.classList.add('bg-green-50', 'border-green-200');
+                        label.classList.add('text-green-800', 'font-bold');
+                    } else if (q.userAnswer === optIndex && optIndex !== q.correctAnswer) {
+                        li.classList.add('bg-red-50', 'border-red-200');
+                        label.classList.add('text-red-700', 'line-through');
+                    }
+                }
+
+                li.appendChild(input);
+                li.appendChild(label);
+                optionsList.appendChild(li);
+            });
+
+            card.appendChild(optionsList);
+
+            if (shouldShowResult) {
+                const answerBox = document.createElement('div');
+                answerBox.className = 'correct-answer-box';
+                answerBox.style.display = 'block';
+                
+                if (hasAnswered && q.userAnswer === q.correctAnswer) {
+                    answerBox.classList.add('bg-green-100', 'border', 'border-green-300', 'text-green-800');
+                    answerBox.innerHTML = `<strong>Chính xác!</strong> Bạn đã chọn đúng.`;
+                } else if (hasAnswered && q.userAnswer !== q.correctAnswer) {
+                    answerBox.classList.add('bg-red-100', 'border', 'border-red-300', 'text-red-800');
+                    answerBox.innerHTML = `<strong>Chưa chính xác.</strong> Đáp án đúng là: <br/><span class="font-semibold text-gray-900 mt-1 inline-block">${q.options[q.correctAnswer]}</span>`;
+                } else {
+                    answerBox.classList.add('bg-yellow-100', 'border', 'border-yellow-300', 'text-yellow-800');
+                    answerBox.innerHTML = `<strong>Chưa trả lời.</strong> Đáp án đúng là: <br/><span class="font-semibold text-gray-900 mt-1 inline-block">${q.options[q.correctAnswer]}</span>`;
+                }
+                card.appendChild(answerBox);
+            }
+
+            container.appendChild(card);
+            updateNavigation();
+        }
+
+        function updateNavigation() {
+            progressText.textContent = `${currentIndex + 1} / ${totalQuestions}`;
+            
+            prevBtn.disabled = currentIndex === 0;
+
+            const q = flatQuestions[currentIndex];
+            const hasAnswered = q.userAnswer !== null;
+
+            if (currentIndex === totalQuestions - 1) {
+                if (!isReviewMode) {
+                    nextBtn.textContent = 'Nộp bài';
+                    nextBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    nextBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                    // Chỉ cho nộp khi đã trả lời xong câu cuối
+                    nextBtn.disabled = !hasAnswered; 
+                } else {
+                    nextBtn.textContent = 'Kết thúc';
+                    nextBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    nextBtn.classList.add('bg-gray-600', 'hover:bg-gray-700');
+                    nextBtn.disabled = false;
+                }
+            } else {
+                nextBtn.innerHTML = 'Câu tiếp &rarr;';
+                nextBtn.classList.remove('bg-green-600', 'hover:bg-green-700', 'bg-gray-600', 'hover:bg-gray-700');
+                nextBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                // Nếu chưa trả lời, không cho sang câu tiếp (bắt buộc hoàn thành)
+                nextBtn.disabled = (!isReviewMode && !hasAnswered);
+            }
+        }
+
+        function calculateScore() {
+            let score = 0;
+            flatQuestions.forEach(q => {
+                if (q.userAnswer === q.correctAnswer) score++;
+            });
+            return score;
+        }
+
+        function showSummary() {
+            const score = calculateScore();
+            container.style.display = 'none';
+            navControls.style.display = 'none';
+            summaryContainer.style.display = 'block';
+            finalScoreSpan.textContent = `${score}/${totalQuestions}`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion(currentIndex);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < totalQuestions - 1) {
+                currentIndex++;
+                renderQuestion(currentIndex);
+            } else if (currentIndex === totalQuestions - 1) {
+                showSummary();
+            }
+        });
+
+        reviewBtn.addEventListener('click', () => {
+            isReviewMode = true;
+            summaryContainer.style.display = 'none';
+            container.style.display = 'block';
+            navControls.style.display = 'flex';
+            currentIndex = 0;
+            renderQuestion(currentIndex);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            isReviewMode = false;
+            currentIndex = 0;
+            flatQuestions.forEach(q => q.userAnswer = null);
+            
+            summaryContainer.style.display = 'none';
+            container.style.display = 'block';
+            navControls.style.display = 'flex';
+            
+            renderQuestion(currentIndex);
+        });
+
+        // Initialize the first question
+        renderQuestion(currentIndex);
+
+    </script>
+</body>
+</html>

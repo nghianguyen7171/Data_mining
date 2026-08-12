@@ -301,7 +301,8 @@ Data Mining/
 │   │   └── lab0-setup.md         # Lab 0 assignment (more labs added per week)
 │   ├── assets/
 │   │   └── materials/
-│   │       └── 1.Intro_CRISP-DM.pdf   # Week 1 slide (only released slide as of 2026-08-04)
+│   │       ├── 1.Intro_CRISP-DM.pdf          # Week 1 slides
+│   │       └── 1.Quiz_Intro_CRISP-DM.html    # Week 1 quiz
 │   └── styles/
 │       ├── _variables.scss       # Theme tokens (accent colour, fonts)
 │       └── main.scss             # Template stylesheet
@@ -373,6 +374,8 @@ deliberately opting in.
 - `src/pages/syllabus.md` and `src/pages/resources.md`
 - `src/assignments/lab0-setup.md` — full Lab 0 (environment setup + first Orange HDI workflow)
 - `src/assets/materials/1.Intro_CRISP-DM.pdf` — Week 1 slide
+- `src/assets/materials/1.Quiz_Intro_CRISP-DM.html` — Week 1 quiz (from `quizz/quizz1_Mining.html`)
+- Schedule Materials column supports `slides`, `notebook`, and `quiz` links
 - `README.md` — setup, contribution guide, common tasks, deploy flow, collaborator instructions
 - Live site deployed at https://nghianguyen7171.github.io/Data_mining/
 
@@ -385,8 +388,8 @@ deliberately opting in.
 - **Lab assignments:** Labs 1–4 (Weeks 4, 6, 10, 12) not yet written — add per week as taught
 - **This-week banner:** Update `src/data/this-week.yml` each week (or delete `current:` block
   when content is stale — the banner disappears rather than showing wrong information)
-- **Draft folders** (`lec/`, `lab/`, `quizz/`, `refs/`) exist locally as authoring material; not
-  yet fully wired into the published `src/` → `docs/` pipeline
+- **Draft folders** (`lec/`, `lab/`, `quizz/`, `refs/`) exist locally as authoring material;
+  Week 1 quiz is published from materials (source draft remains in `quizz/`)
 
 ---
 
@@ -395,10 +398,13 @@ deliberately opting in.
 ### Weekly content workflow
 
 1. Add slide PDF to `src/assets/materials/N.Slide_Name.pdf`
-2. Set `status: released` for that week in `src/data/lectures.yml` and add `slides:` path
-3. Update `src/data/this-week.yml` with the new week's banner
-4. Run `npm run build`
-5. Push `docs/` changes to GitHub (Pages auto-updates within minutes)
+2. Optionally add a quiz HTML to `src/assets/materials/N.Quiz_....html` and set `quiz:` in
+   `lectures.yml`
+3. Set `status: released` for that week in `src/data/lectures.yml` and add `slides:` / `quiz:`
+   paths
+4. Update `src/data/this-week.yml` with the new week's banner
+5. Run `npm run build`
+6. Push `docs/` changes to GitHub (Pages auto-updates within minutes)
 
 ### Lab assignment workflow
 
@@ -431,6 +437,12 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-08-12 — Publish Week 1 quiz
+
+- Copied `quizz/quizz1_Mining.html` → `src/assets/materials/1.Quiz_Intro_CRISP-DM.html`
+- Added `quiz:` field support in `src/partials/sections/schedule.hbs` (Materials column)
+- Linked quiz on Week 1 in `src/data/lectures.yml`; rebuilt and deployed
+
 ### 2026-08-12 — Schedule: Lab 0 assessment on Week 1
 
 - Moved `assignment: lab0-setup` / `assessment: Lab 0 submission` from Week 2 to Week 1 in
@@ -450,7 +462,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-08-12 (Lab 0 assessment moved to Week 1; site redeployed)
+**Last Updated:** 2026-08-12 (Week 1 quiz published as schedule material)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
