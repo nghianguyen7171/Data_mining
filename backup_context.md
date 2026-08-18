@@ -302,7 +302,8 @@ Data Mining/
 │   ├── assets/
 │   │   └── materials/
 │   │       ├── 1.Intro_CRISP-DM.pdf          # Week 1 slides
-│   │       └── 1.Quiz_Intro_CRISP-DM.html    # Week 1 quiz
+│   │       ├── 1.Quiz_Intro_CRISP-DM.html    # Week 1 quiz
+│   │       └── 2.Basic_Py.pdf               # Week 2 slides (Python basics)
 │   └── styles/
 │       ├── _variables.scss       # Theme tokens (accent colour, fonts)
 │       └── main.scss             # Template stylesheet
@@ -359,7 +360,7 @@ deliberately opting in.
 
 ---
 
-## Current Status (as of 2026-08-12)
+## Current Status (as of 2026-08-18)
 
 ### ✅ Completed
 
@@ -375,6 +376,7 @@ deliberately opting in.
 - `src/assignments/lab0-setup.md` — full Lab 0 (environment setup + first Orange HDI workflow)
 - `src/assets/materials/1.Intro_CRISP-DM.pdf` — Week 1 slide
 - `src/assets/materials/1.Quiz_Intro_CRISP-DM.html` — Week 1 quiz (from `quizz/quizz1_Mining.html`)
+- `src/assets/materials/2.Basic_Py.pdf` — Week 2 slides (Python basics)
 - Schedule Materials column supports `slides`, `notebook`, and `quiz` links
 - `README.md` — setup, contribution guide, common tasks, deploy flow, collaborator instructions
 - Live site deployed at https://nghianguyen7171.github.io/Data_mining/
@@ -388,8 +390,8 @@ deliberately opting in.
 - **Lab assignments:** Labs 1–4 (Weeks 4, 6, 10, 12) not yet written — add per week as taught
 - **This-week banner:** Update `src/data/this-week.yml` each week (or delete `current:` block
   when content is stale — the banner disappears rather than showing wrong information)
-- **Draft folders** (`lec/`, `lab/`, `quizz/`, `refs/`) exist locally as authoring material;
-  Week 1 quiz is published from materials (source draft remains in `quizz/`)
+- **Draft folders** (`lec/`, `lab/`, `quizz/`, `refs/`, `slides/`) exist locally as authoring
+  material; published copies live under `src/assets/materials/`
 
 ---
 
@@ -437,6 +439,11 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-08-18 — Publish Week 2 slides
+
+- Copied `slides/2.Basic_Py.pdf` → `src/assets/materials/2.Basic_Py.pdf`
+- Linked slides on Week 2 in `src/data/lectures.yml`; rebuilt and deployed
+
 ### 2026-08-12 — Publish Week 1 quiz
 
 - Copied `quizz/quizz1_Mining.html` → `src/assets/materials/1.Quiz_Intro_CRISP-DM.html`
@@ -462,7 +469,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-08-12 (Week 1 quiz published as schedule material)
+**Last Updated:** 2026-08-18 (Week 2 slides `2.Basic_Py.pdf` published)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
