@@ -145,7 +145,7 @@ practical exam on Orange and a group project presentation; the final is a writte
 | Week | Type       | Title                                                            | Status             | CLOs       | Assessment                                 |
 | :--- | :--------- | :--------------------------------------------------------------- | :----------------- | :--------- | :----------------------------------------- |
 | 1    | Lecture    | Introduction to Data Mining & CRISP-DM                           | **Released** | 1, 2       | Lab 0 submission                           |
-| 2    | Lab        | Lab 0 — Environment Setup & First Orange Project                | **Released** | 2, 5, 6    | —                                         |
+| 2    | Lab        | Lab 2 — Python Basics & Minimal NumPy                           | **Released** | 2, 5, 6    | Lab 2 submission                           |
 | 3    | Lecture    | Understanding & Preparing Data                                   | TBD                | 1, 2, 5    | —                                         |
 | 4    | Lab        | Lab 1 — pandas Introduction & Data Cleaning                     | TBD                | 2, 5, 6    | Lab 1 + Excel exercise                     |
 | 5    | Lecture    | Finding Relationships — Correlation & Association Rules         | TBD                | 2, 3       | —                                         |
@@ -183,10 +183,21 @@ emits links; `status: tbd` shows the title greyed out with no links. Source: `sr
 - **Four deliverables:** screenshot of working Python env, `lab0_HDI.ows` Orange workflow,
   scatter plot screenshot, and a 4–5-sentence business memo.
 
+### Lab 2 — Python Basics & Minimal NumPy
+
+- **File:** `src/assignments/lab2-python-basics.md` (English; source draft `lab/lab2.md`)
+- **Due:** End of Week 2
+- **Weight:** Part of 10% Attendance & Participation
+- **CLOs:** 2, 5, 6
+- **Parts:** A environment check → B variables/list/dict → C indexing & slicing → D NumPy
+- **Deliverable:** notebook `lab2_YourName.ipynb` uploaded to
+  https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing
+- Answer keys use `::: solution` fences (stripped on public build)
+
 ### Future Labs (not yet written)
 
 - Lab 1 (Week 4): pandas + data cleaning in Orange
-- Lab 2 (Week 6): correlation + market-basket analysis
+- Correlation / market-basket lab (later week in schedule)
 - Lab 3 (Week 10): classification in Orange (Test & Score, Confusion Matrix, ROC)
 - Lab 4 (Week 12): regression + group project launch
 
@@ -298,7 +309,8 @@ Data Mining/
 │   │   ├── syllabus.md           # Syllabus page (Handlebars + Markdown)
 │   │   └── resources.md          # Resources page
 │   ├── assignments/
-│   │   └── lab0-setup.md         # Lab 0 assignment (more labs added per week)
+│   │   ├── lab0-setup.md         # Lab 0 assignment
+│   │   └── lab2-python-basics.md # Lab 2 — Python basics (Week 2)
 │   ├── assets/
 │   │   └── materials/
 │   │       ├── 1.Intro_CRISP-DM.pdf          # Week 1 slides
@@ -375,6 +387,8 @@ deliberately opting in.
 - `src/data/this-week.yml` — Week 1 banner active
 - `src/pages/syllabus.md` and `src/pages/resources.md`
 - `src/assignments/lab0-setup.md` — full Lab 0 (environment setup + first Orange HDI workflow)
+- `src/assignments/lab2-python-basics.md` — Lab 2 English assignment (Python + NumPy); Week 2
+  Assessment links to it; students upload `lab2_YourName.ipynb` to the course Drive folder
 - `src/assets/materials/1.Intro_CRISP-DM.pdf` — Week 1 slide
 - `src/assets/materials/1.Quiz_Intro_CRISP-DM.html` — Week 1 quiz (from `quizz/quizz1_Mining.html`)
 - `src/assets/materials/2.Basic_Py.pdf` — Week 2 slides (Python basics)
@@ -391,11 +405,12 @@ deliberately opting in.
   (Write access on personal repo)
 - **Remaining weeks:** Slides for Weeks 3–15 added to `src/assets/materials/` and
   `status: released` set in `lectures.yml` as content is ready
-- **Lab assignments:** Labs 1–4 (Weeks 4, 6, 10, 12) not yet written — add per week as taught
+- **Lab assignments:** Lab 1 (Week 4) and later labs not yet written — add per week as taught
 - **This-week banner:** Update `src/data/this-week.yml` each week (or delete `current:` block
   when content is stale — the banner disappears rather than showing wrong information)
 - **Draft folders** (`lec/`, `lab/`, `quizz/`, `refs/`, `slides/`) exist locally as authoring
-  material; published copies live under `src/assets/materials/`
+  material; published copies live under `src/assets/materials/` / `src/assignments/`
+- **Re-enable Week 2 quiz** when ready: uncomment `quiz:` in `lectures.yml`
 
 ---
 
@@ -442,6 +457,14 @@ deliberately opting in.
 ---
 
 ## Change Log
+
+### 2026-08-18 — Publish Lab 2 as Week 2 assessment
+
+- Added English assignment `src/assignments/lab2-python-basics.md` from `lab/lab2.md`
+- Students submit `lab2_YourName.ipynb` to Google Drive folder
+  https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing
+- Week 2 schedule title/topics updated to Lab 2; Assessment links to the assignment page
+- Solution fences stripped from public `docs/`; rebuilt and deployed
 
 ### 2026-08-18 — Temporarily hide Week 2 quiz on the live site
 
@@ -493,7 +516,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-08-18 (Week 2 quiz temporarily hidden from schedule)
+**Last Updated:** 2026-08-18 (Lab 2 published as Week 2 assessment)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course

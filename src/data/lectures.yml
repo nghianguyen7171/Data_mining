@@ -28,17 +28,18 @@ lectures:
   - id: 2
     week: 2
     type: "Lab"
-    title: "Lab 0 — Environment Setup & First Orange Project"
+    title: "Lab 2 — Python Basics & Minimal NumPy"
     status: released
     topics:
-      - "Install VS Code + Python (or set up Google Colab)"
-      - "Install Orange Data Mining"
-      - "First Orange workflow: exploring the HDI economic dataset"
-      - "Mini-memo: turning scatter plot findings into a business insight"
+      - "Variables, lists, dicts, and None"
+      - "Indexing & slicing on lists, strings, and NumPy arrays"
+      - "Minimal NumPy: arrays, vectorization, np.nan"
+      - "Submit notebook lab2_YourName.ipynb to the course Drive folder"
     clos: "2, 5, 6"
     slides: "assets/materials/2.Basic_Py.pdf"
     # quiz: "assets/materials/2.Quiz_Basic_Py.html"  # temporarily hidden
-    assessment: "—"
+    assignment: "lab2-python-basics"
+    assessment: "Lab 2 submission"
 
   - id: 3
     week: 3

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 2 — Python Basics &amp; Minimal NumPy · Data Mining</title>
+  <meta name="description" content="Data Mining — Faculty of Data Science and Artificial Intelligence, National Economics University.">
+  <link rel="stylesheet" href="/Data_mining/assets/css/main.css">
+  <link rel="icon" href="/Data_mining/assets/images/fda-logo.png">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/Data_mining">
+        <img src="/Data_mining/assets/images/neu-logo.png" alt="" class="brand-logo">
+        <img src="/Data_mining/assets/images/fda-logo.png" alt="" class="brand-logo">
+        <span class="brand-text">
+          <span class="brand-course">Data Mining</span>
+          <span class="brand-dept">Faculty of Data Science and Artificial Intelligence</span>
+        </span>
+      </a>
+  
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/Data_mining" >Home</a>
+        <a href="/Data_mining/syllabus.html" >Syllabus</a>
+        <a href="/Data_mining/assignments/" class="is-active" aria-current="page">Assignments</a>
+        <a href="/Data_mining/resources.html" >Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="wrap prose prose-narrow assignment">
+  <p class="crumb"><a href="/Data_mining/assignments/">Assignments</a></p>
+  <h1>Lab 2 — Python Basics &amp; Minimal NumPy</h1>
+  <dl class="assignment-meta">
+    <div><dt>Due</dt><dd>End of Week 2</dd></div>
+    <div><dt>Released</dt><dd>Week 2</dd></div>
+    <div><dt>Weight</dt><dd>Part of 10% Attendance &amp; Participation</dd></div>
+    <div><dt>CLOs</dt><dd>2, 5, 6</dd></div>
+  </dl>
+  <h2>Goal</h2>
+<p>By the end of this lab you will practise the Python concepts from the Week 2 session — variables, data structures, and especially <strong>indexing &amp; slicing</strong> — then apply three core NumPy ideas (arrays, vectorization, <code>np.nan</code>). Everything runs in pure Python / NumPy on list and array data (no CSV yet).</p>
+<p><strong>How to work:</strong> each part has <strong>[Follow along]</strong> cells (type and run with the instructor) and <strong>[Try yourself]</strong> exercises. Type by hand — do not copy-paste. Typing helps you remember.</p>
+<p><strong>Prepare:</strong> open a new Colab notebook <strong>or</strong> a VS Code <code>.ipynb</code> file. Name it <code>lab2_YourName.ipynb</code> (replace <code>YourName</code> with your full name, no spaces — e.g. <code>lab2_NguyenVanAn.ipynb</code>).</p>
+<hr>
+<h2>What to submit</h2>
+<p>Upload <strong>one notebook file</strong> to the course Google Drive folder before the end of Week 2:</p>
+<p><strong><a href="https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing">Submission folder (Google Drive)</a></strong></p>
+<p>Your notebook must include:</p>
+<ol>
+<li>All <strong>[Follow along]</strong> cells from Parts A–D, executed successfully.</li>
+<li>Your own solutions to <strong>[Try yourself]</strong> sets <strong>B, C, and D</strong> (write them yourself — do not paste answer keys).</li>
+<li>A final cell with <strong>two short answers</strong> (2–3 sentences each):<ul>
+<li><em>How is slicing different from indexing?</em></li>
+<li><em>What is <code>np.nan</code> used for?</em></li>
+</ul>
+</li>
+</ol>
+<h3>How to export and upload your <code>.ipynb</code></h3>
+<p><strong>From Google Colab</strong></p>
+<ol>
+<li><strong>File → Download → Download .ipynb</strong></li>
+<li>Open the <a href="https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing">submission folder</a> (sign in with your Google account).</li>
+<li>Click <strong>New → File upload</strong> (or drag the file into the folder).</li>
+<li>Confirm the filename is <code>lab2_YourName.ipynb</code>.</li>
+</ol>
+<p><strong>From VS Code</strong></p>
+<ol>
+<li>Save the notebook (<code>lab2_YourName.ipynb</code>) on your computer.</li>
+<li>Open the same <a href="https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing">submission folder</a>.</li>
+<li>Upload the <code>.ipynb</code> file as above.</li>
+</ol>
+<blockquote>
+<p>Only <code>.ipynb</code> files are accepted. Do not submit screenshots of code or <code>.py</code> files unless the instructor says otherwise.</p>
+</blockquote>
+<hr>
+<h2>Lab overview</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Content</th>
+<th align="right">Time</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>Start your environment</td>
+<td align="right">10′</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Foundations: variables, list, dict</td>
+<td align="right">20′</td>
+</tr>
+<tr>
+<td>C</td>
+<td><strong>Indexing &amp; slicing (focus)</strong></td>
+<td align="right">30′</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Minimal NumPy</td>
+<td align="right">20′</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Wrap-up &amp; submit</td>
+<td align="right">10′</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Part A — Start your environment (10′)</h2>
+<p>Choose <strong>one</strong> environment below and open a new notebook.</p>
+<h3>Option 1 — Visual Studio Code</h3>
+<ol>
+<li>Open <strong>VS Code</strong>.</li>
+<li><strong>File → New File</strong> → save as <code>lab2_YourName.ipynb</code>. VS Code opens Jupyter notebook mode.<ul>
+<li>If asked for a <strong>Kernel</strong>, select the Python you installed in Lab 0.</li>
+</ul>
+</li>
+<li>Click <strong>+ Code</strong>, paste the check cell below, run with ▶ or <code>Shift + Enter</code>.</li>
+<li>If NumPy is missing: open Terminal (<code>Ctrl+`</code>) and run <code>pip install numpy</code> (or <code>pip3 install numpy</code> on macOS).</li>
+</ol>
+<h3>Option 2 — Google Colab</h3>
+<ol>
+<li>Go to <a href="https://colab.research.google.com">colab.research.google.com</a> (sign in with Google).</li>
+<li><strong>File → New notebook</strong>.</li>
+<li>Rename the notebook to <code>lab2_YourName</code> (click the title at the top left).</li>
+<li>Run the check cell below. Colab already includes NumPy.</li>
+</ol>
+<h3>Check cell (both environments)</h3>
+<pre><code class="language-python">print(&quot;Lab 2 ready!&quot;)
+import numpy as np
+print(&quot;NumPy version:&quot;, np.__version__)
+</code></pre>
+<p>If you see the message and a version number → go to Part B.</p>
+<blockquote>
+<p><strong>Tip:</strong> in VS Code and Colab, each <strong>cell</strong> runs on its own; the last expression in a cell displays its result without <code>print()</code>.</p>
+</blockquote>
+<hr>
+<h2>Part B — Foundations: variables, list, dict (20′)</h2>
+<h3>B1. Variables &amp; types — [Follow along]</h3>
+<pre><code class="language-python">price = 25000          # int
+tax_rate = 0.1         # float
+item_name = &quot;Milk tea&quot; # str
+in_stock = True        # bool
+
+print(type(price), type(tax_rate), type(item_name), type(in_stock))
+</code></pre>
+<p>Price after tax:</p>
+<pre><code class="language-python">price_after_tax = price * (1 + tax_rate)
+print(price_after_tax)   # 27500.0
+</code></pre>
+<h3>B2. List — [Follow along]</h3>
+<pre><code class="language-python">revenue = [120, 150, 90, 200, 175]   # daily revenue, 5 days (million VND)
+len(revenue)           # 5
+revenue.append(210)    # add day 6
+sum(revenue)           # total
+max(revenue)           # best day
+</code></pre>
+<h3>B3. Dict — [Follow along]</h3>
+<pre><code class="language-python">product = {&#39;name&#39;: &#39;Latte&#39;, &#39;price&#39;: 45000, &#39;stock&#39;: 30}
+product[&#39;price&#39;]              # 45000
+product[&#39;discount&#39;] = 0.15    # add a new key–value pair
+print(product)
+</code></pre>
+<h3>B4. None — [Follow along]</h3>
+<pre><code class="language-python">rating = None    # no rating yet
+print(rating is None)   # True
+</code></pre>
+<blockquote>
+<p>Remember: empty cells in real datasets often show up as <code>None</code> or <code>np.nan</code> — we handle missing values in Weeks 3–4.</p>
+</blockquote>
+<h3>✅ [Try yourself] — Exercises B</h3>
+<p><strong>Scenario:</strong> you manage data for a café.</p>
+<ol>
+<li>Create <code>cost = [30, 45, 25, 60]</code> (million VND, 4 months) and compute the sum and the maximum.</li>
+<li>Create <code>customer = {&#39;name&#39;: &#39;An&#39;, &#39;age&#39;: 28}</code>, then add <code>&#39;city&#39;</code> with value <code>&#39;Hanoi&#39;</code>.</li>
+<li>Create <code>promo_code = None</code> (customer has not entered a code) and check whether it is <code>None</code>.</li>
+<li>Menu: <code>menu = {&#39;Latte&#39;: 45000, &#39;Espresso&#39;: 35000, &#39;Mocha&#39;: 50000}</code>. Print the price of <code>&#39;Mocha&#39;</code>, then add <code>&#39;Tea&#39;</code> at <code>30000</code>.</li>
+<li>Today’s orders: <code>orders = [&#39;Latte&#39;, &#39;Mocha&#39;, &#39;Latte&#39;, &#39;Tea&#39;, &#39;Latte&#39;]</code>. Count total cups sold, and how many <code>&#39;Latte&#39;</code> (use <code>.count()</code>).</li>
+<li>Using <code>menu</code> from (4), compute <strong>total revenue</strong> if each item in <code>orders</code> is sold once (hint: add <code>menu[item]</code> for each item — a <code>for</code> loop is fine).</li>
+</ol>
+<hr>
+<h2>Part C — Indexing &amp; slicing (30′) — FOCUS</h2>
+<p>This is the most important skill in today’s lab. Master it and reading pandas <code>loc</code> / <code>iloc</code> in Week 4 becomes much easier.</p>
+<h3>C1. Indexing — one element — [Follow along]</h3>
+<p>Remember: <strong>indices start at 0.</strong></p>
+<pre><code class="language-python">drinks = [&#39;Espresso&#39;, &#39;Latte&#39;, &#39;Cappuccino&#39;, &#39;Mocha&#39;, &#39;Americano&#39;]
+
+drinks[0]     # &#39;Espresso&#39;    — first
+drinks[2]     # &#39;Cappuccino&#39;
+drinks[-1]    # &#39;Americano&#39;   — last (negative index)
+drinks[-2]    # &#39;Mocha&#39;
+</code></pre>
+<p>Indexing also works on strings:</p>
+<pre><code class="language-python">code = &quot;SP2025&quot;
+code[0]     # &#39;S&#39;
+code[-1]    # &#39;5&#39;
+</code></pre>
+<h3>C2. Slicing — a segment — [Follow along]</h3>
+<p>Syntax <strong><code>x[start:stop:step]</code></strong> — take from <code>start</code> up to <strong>but not including</strong> <code>stop</code>.</p>
+<pre><code class="language-python">prices = [20, 35, 45, 60, 80, 95]
+
+prices[1:4]     # [35, 45, 60]   — positions 1,2,3 (NOT 4)
+prices[:3]      # [20, 35, 45]   — from start up to before 3
+prices[3:]      # [60, 80, 95]   — from 3 to the end
+prices[::2]     # [20, 45, 80]   — every 2nd element
+prices[::-1]    # [95, 80, 60, 45, 35, 20]  — reverse
+</code></pre>
+<blockquote>
+<p><strong>Common trap:</strong> <code>prices[1:4]</code> returns <strong>3</strong> elements, not 4 — because <code>stop</code> is exclusive. Watch for this.</p>
+</blockquote>
+<h3>C3. Small application — [Follow along]</h3>
+<pre><code class="language-python">week_rev = [120, 150, 90, 200, 175, 210, 160]  # Mon → Sun
+
+# Weekday revenue (Mon–Fri)
+weekdays = week_rev[:5]
+print(weekdays)          # [120, 150, 90, 200, 175]
+
+# Weekend (Sat, Sun)
+weekend = week_rev[-2:]
+print(weekend)           # [210, 160]
+</code></pre>
+<h3>✅ [Try yourself] — Exercises C</h3>
+<p><strong>Set 1.</strong> Given <code>temps = [28, 30, 33, 35, 31, 29, 27]</code> (7 days):</p>
+<ol>
+<li>First-day and last-day temperatures (use a negative index for the last day).</li>
+<li>First three days.</li>
+<li>From day 4 to the end.</li>
+<li>Reverse the list.</li>
+<li>Given <code>word = &quot;PYTHON&quot;</code>, take the first 3 characters and the last character.</li>
+</ol>
+<p><strong>Set 2 — business scenario.</strong> Monthly revenue (billion VND):<br><code>rev = [50, 55, 48, 60, 65, 70, 72, 68, 75, 80, 90, 120]</code></p>
+<ol start="6">
+<li>Use slicing for <strong>Q1</strong> (first 3 months) and <strong>Q4</strong> (last 3 months).</li>
+<li>Take the <strong>last 6 months</strong> and compute their sum.</li>
+<li>Take <strong>odd-numbered months</strong> (Jan, Mar, May, … — hint: <code>rev[::2]</code>).</li>
+<li>Contract code <code>code = &quot;VN-2025-0917&quot;</code>. Slice the country code <code>&quot;VN&quot;</code> (first 2 chars) and the trailing number <code>&quot;0917&quot;</code> (last 4 chars).</li>
+</ol>
+<hr>
+<h2>Part D — Minimal NumPy (20′)</h2>
+<p>NumPy is the array-computing library; <strong>pandas is built on NumPy</strong>. You only need three ideas for this course.</p>
+<h3>D1. Arrays &amp; indexing/slicing — [Follow along]</h3>
+<pre><code class="language-python">import numpy as np
+
+a = np.array([10, 20, 30, 40, 50])
+a[0]        # 10
+a[1:3]      # array([20, 30])   — same slicing idea as list
+a[-1]       # 50
+</code></pre>
+<p><strong>2D arrays</strong> use <code>[row, column]</code> — a preview of a data table:</p>
+<pre><code class="language-python">m = np.array([[1, 2, 3],
+              [4, 5, 6]])
+m[0, 1]     # 2              — row 0, column 1
+m[:, 0]     # array([1, 4])  — all rows, column 0
+m[1, :]     # array([4, 5, 6]) — row 1, all columns
+</code></pre>
+<h3>D2. Vectorization — compute on the whole array — [Follow along]</h3>
+<pre><code class="language-python">revenue = np.array([120, 150, 90, 200])
+
+revenue * 1.1     # +10% everywhere — no loop
+revenue - 50      # subtract fixed cost 50 per day
+revenue.mean()    # average
+revenue.sum()     # total
+</code></pre>
+<blockquote>
+<p>This is why NumPy (and pandas) is fast: one operation applies to the whole array at once.</p>
+</blockquote>
+<h3>D3. <code>np.nan</code> — missing values — [Follow along]</h3>
+<pre><code class="language-python">b = np.array([100, 120, np.nan, 95])
+print(b)                 # [100. 120.  nan  95.]
+np.isnan(b)              # [False False  True False] — find missing cells
+</code></pre>
+<h3>✅ [Try yourself] — Exercises D</h3>
+<p><strong>Scenario:</strong> you analyse quarterly sales for a store chain.</p>
+<ol>
+<li>Create <code>sales = np.array([200, 240, 180, 300])</code> (4 quarters), increase all values by 15%, then compute the mean.</li>
+<li>From the 3-store × 2-quarter table <code>np.array([[10,20],[30,40],[50,60]])</code>, get: store 3 / quarter 2 (row 2, column 1); and the entire <strong>column 0</strong> (quarter 1 for every store).</li>
+<li>Create <code>[5, np.nan, 8, np.nan]</code> and use <code>np.isnan()</code> to locate missing values.</li>
+<li>On <code>sales</code> from (1), apply <strong>10% VAT</strong> (<code>* 1.1</code>), compute the mean, then find <strong>quarters above the mean</strong> (hint: <code>sales &gt; sales.mean()</code> returns a True/False array).</li>
+<li>Satisfaction scores with blanks: <code>scores = np.array([8, np.nan, 7, 9, np.nan, 6])</code>. Count <strong>how many missing cells</strong> (hint: <code>np.isnan(scores).sum()</code>).</li>
+</ol>
+<hr>
+<h2>Integrated business mini-case (optional)</h2>
+<p>Combine today’s skills in one scenario. Do this if time remains, or as optional homework.</p>
+<p><strong>Context:</strong> you analyse a retail store for one week:</p>
+<pre><code class="language-python">import numpy as np
+
+days     = [&#39;Mon&#39;, &#39;Tue&#39;, &#39;Wed&#39;, &#39;Thu&#39;, &#39;Fri&#39;, &#39;Sat&#39;, &#39;Sun&#39;]
+revenue  = np.array([120, 150, 90, 200, 175, 210, 160])   # million VND
+cost     = np.array([80, 95, 70, 110, 100, 120, 90])        # million VND
+store    = {&#39;name&#39;: &#39;Store A&#39;, &#39;region&#39;: &#39;Hanoi&#39;, &#39;staff&#39;: 8}
+</code></pre>
+<p>Tasks:</p>
+<ol>
+<li>Print store name and region (dict access).</li>
+<li>What is <strong>weekday</strong> revenue (Mon–Fri)? Slice, then sum.</li>
+<li>What is <strong>weekend</strong> revenue (Sat, Sun)? Use negative indices.</li>
+<li>Compute <strong>daily profit</strong> = revenue − cost (vectorization); store in <code>profit</code>.</li>
+<li>What is <strong>average</strong> daily profit?</li>
+<li>Which days are <strong>above</strong> average profit? (<code>profit &gt; profit.mean()</code>)</li>
+<li>Which day has the highest revenue? (hint: <code>revenue.max()</code>, then find its position)</li>
+</ol>
+<hr>
+<h2>Wrap-up</h2>
+<p>Today you practised: variables &amp; data structures; <strong>indexing &amp; slicing</strong> on lists, strings, and arrays; and three NumPy ideas (array, vectorization, <code>np.nan</code>).</p>
+<p><strong>Before you leave:</strong> export <code>lab2_YourName.ipynb</code> and upload it to the <a href="https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing">Lab 2 Drive folder</a>.</p>
+<hr>
+<h2>Optional stretch</h2>
+<ol>
+<li>Given <code>months = [1,2,3,4,5,6,7,8,9,10,11,12]</code>, slice Q1, Q4, and even months.</li>
+<li>Create any 12-month revenue array; compute yearly total and monthly mean with NumPy.</li>
+<li>Optional reading (NEU textbook Ch. 4): sets, <code>while</code> loops, list comprehensions.</li>
+</ol>
+<hr>
+<h2>Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>NameError: name &#39;np&#39; is not defined</code></td>
+<td>Run <code>import numpy as np</code> first</td>
+</tr>
+<tr>
+<td>Slicing returns too few / too many items</td>
+<td>Remember: <code>stop</code> is <strong>exclusive</strong></td>
+</tr>
+<tr>
+<td><code>IndexError: list index out of range</code></td>
+<td>Index past the end; counting starts at 0</td>
+</tr>
+<tr>
+<td>VS Code missing NumPy</td>
+<td><code>pip install numpy</code> (or <code>pip3</code>) in Terminal</td>
+</tr>
+<tr>
+<td>Prefer no local install</td>
+<td>Use Google Colab</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>References</h2>
+<ul>
+<li>Week 2 slides: <code>2.Basic_Py.pdf</code> (Materials on the course site)</li>
+<li>NEU. <em>Data Science for Economics and Business (Python)</em> — Chapter 4: Python basics</li>
+<li>Continues into pandas in <strong>Week 4</strong> (<code>loc</code> / <code>iloc</code> build on today’s slicing)</li>
+</ul>
+
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-course">Data Mining</p>
+        <p class="footer-meta">IST 4520 · Fall 2026 · 3 credits</p>
+      </div>
+      <div>
+        <p class="footer-meta">Faculty of Data Science and Artificial Intelligence</p>
+        <p class="footer-meta">College of Technology, National Economics University</p>
+        <p class="footer-meta"><a href="https://github.com/nghianguyen7171/Data_mining">Source on GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
