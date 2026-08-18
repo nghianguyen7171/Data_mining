@@ -27,7 +27,8 @@ Your notebook must include:
 
 1. All **[Follow along]** cells from Parts A–D, executed successfully.
 2. Your own solutions to **[Try yourself]** sets **B, C, and D** (write them yourself — do not paste answer keys).
-3. A final cell with **two short answers** (2–3 sentences each):
+3. The **Integrated business mini-case** (all tasks completed in your notebook).
+4. A final cell with **two short answers** (2–3 sentences each):
    - *How is slicing different from indexing?*
    - *What is `np.nan` used for?*
 
@@ -54,8 +55,9 @@ Your notebook must include:
 |------|---------|-----:|
 | A | Start your environment | 10′ |
 | B | Foundations: variables, list, dict | 20′ |
-| C | **Indexing & slicing (focus)** | 30′ |
-| D | Minimal NumPy | 20′ |
+| C | **Indexing & slicing (focus)** | 25′ |
+| D | Minimal NumPy | 15′ |
+| E | Integrated business mini-case | 10′ |
 | — | Wrap-up & submit | 10′ |
 
 ---
@@ -365,9 +367,9 @@ np.isnan(scores).sum()       # 2
 
 ---
 
-## Integrated business mini-case (optional)
+## Integrated business mini-case (required)
 
-Combine today’s skills in one scenario. Do this if time remains, or as optional homework.
+Combine today’s skills in one business scenario. Complete **all** tasks in your notebook before submitting.
 
 **Context:** you analyse a retail store for one week:
 
@@ -423,7 +425,7 @@ revenue.max()           # 210 → Saturday (index 5)
 
 ## Wrap-up
 
-Today you practised: variables & data structures; **indexing & slicing** on lists, strings, and arrays; and three NumPy ideas (array, vectorization, `np.nan`).
+Today you practised: variables & data structures; **indexing & slicing** on lists, strings, and arrays; three NumPy ideas (array, vectorization, `np.nan`); and an integrated retail mini-case.
 
 **Before you leave:** export `lab2_YourName.ipynb` and upload it to the [Lab 2 Drive folder](https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing).
 

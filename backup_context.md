@@ -458,6 +458,11 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-08-18 — Lab 2 mini-case marked required
+
+- Integrated business mini-case is required (not optional); added to submission checklist
+- Rebuilt and deployed
+
 ### 2026-08-18 — Publish Lab 2 as Week 2 assessment
 
 - Added English assignment `src/assignments/lab2-python-basics.md` from `lab/lab2.md`
@@ -516,7 +521,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-08-18 (Lab 2 published as Week 2 assessment)
+**Last Updated:** 2026-08-18 (Lab 2 mini-case required)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
