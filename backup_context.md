@@ -442,6 +442,12 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-08-18 — Week 2 quiz: explanations + replace string example
+
+- Added per-question `explanation` shown when the answer is revealed
+- Replaced `'ANALYTICS'[:4]` with `'PYTHON'[:3]` (result `'PYT'`)
+- Synced `src/assets/materials/2.Quiz_Basic_Py.html`, rebuilt and deployed
+
 ### 2026-08-18 — Publish Week 2 in-class quiz
 
 - Created `quizz/quizz2_Basic_Py.html` (18 MCQs: one code line → choose result; no Overview)
@@ -481,7 +487,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-08-18 (Week 2 quiz `2.Quiz_Basic_Py.html` published)
+**Last Updated:** 2026-08-18 (Week 2 quiz: explanations + `'PYTHON'[:3]` example)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
