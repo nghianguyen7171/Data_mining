@@ -379,7 +379,8 @@ deliberately opting in.
 - `src/assets/materials/1.Quiz_Intro_CRISP-DM.html` — Week 1 quiz (from `quizz/quizz1_Mining.html`)
 - `src/assets/materials/2.Basic_Py.pdf` — Week 2 slides (Python basics)
 - `src/assets/materials/2.Quiz_Basic_Py.html` — Week 2 in-class quiz (18 one-liner
-  code→result MCQs; source `quizz/quizz2_Basic_Py.html`)
+  code→result MCQs; source `quizz/quizz2_Basic_Py.html`); **temporarily hidden** from
+  the Schedule Materials column (commented out in `lectures.yml`)
 - Schedule Materials column supports `slides`, `notebook`, and `quiz` links
 - `README.md` — setup, contribution guide, common tasks, deploy flow, collaborator instructions
 - Live site deployed at https://nghianguyen7171.github.io/Data_mining/
@@ -442,6 +443,11 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-08-18 — Temporarily hide Week 2 quiz on the live site
+
+- Commented out `quiz:` for Week 2 in `src/data/lectures.yml` (file kept in materials)
+- Rebuilt and deployed; re-enable by uncommenting the `quiz:` line
+
 ### 2026-08-18 — Week 2 quiz: explanations + replace string example
 
 - Added per-question `explanation` shown when the answer is revealed
@@ -487,7 +493,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-08-18 (Week 2 quiz: explanations + `'PYTHON'[:3]` example)
+**Last Updated:** 2026-08-18 (Week 2 quiz temporarily hidden from schedule)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course

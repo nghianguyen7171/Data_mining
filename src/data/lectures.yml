@@ -37,7 +37,7 @@ lectures:
       - "Mini-memo: turning scatter plot findings into a business insight"
     clos: "2, 5, 6"
     slides: "assets/materials/2.Basic_Py.pdf"
-    quiz: "assets/materials/2.Quiz_Basic_Py.html"
+    # quiz: "assets/materials/2.Quiz_Basic_Py.html"  # temporarily hidden
     assessment: "—"
 
   - id: 3
