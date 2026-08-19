@@ -393,8 +393,7 @@ deliberately opting in.
 - `src/assets/materials/1.Quiz_Intro_CRISP-DM.html` — Week 1 quiz (from `quizz/quizz1_Mining.html`)
 - `src/assets/materials/2.Basic_Py.pdf` — Week 2 slides (Python basics)
 - `src/assets/materials/2.Quiz_Basic_Py.html` — Week 2 in-class quiz (18 one-liner
-  code→result MCQs; source `quizz/quizz2_Basic_Py.html`); **temporarily hidden** from
-  the Schedule Materials column (commented out in `lectures.yml`)
+  code→result MCQs; source `quizz/quizz2_Basic_Py.html`); linked on Week 2 Materials
 - Schedule Materials column supports `slides`, `notebook`, and `quiz` links
 - `README.md` — setup, contribution guide, common tasks, deploy flow, collaborator instructions
 - Live site deployed at https://nghianguyen7171.github.io/Data_mining/
@@ -410,7 +409,8 @@ deliberately opting in.
   when content is stale — the banner disappears rather than showing wrong information)
 - **Draft folders** (`lec/`, `lab/`, `quizz/`, `refs/`, `slides/`) exist locally as authoring
   material; published copies live under `src/assets/materials/` / `src/assignments/`
-- **Re-enable Week 2 quiz** when ready: uncomment `quiz:` in `lectures.yml`
+- **Re-enable Lab 2 schedule link** when ready: restore `assignment:` + `Lab 2 submission`
+  in `lectures.yml`
 
 ---
 
@@ -457,6 +457,11 @@ deliberately opting in.
 ---
 
 ## Change Log
+
+### 2026-08-19 — Re-enable Week 2 quiz on the live site
+
+- Uncommented `quiz:` for Week 2 in `src/data/lectures.yml`; rebuilt and deployed
+- Lab 2 assignment link remains temporarily hidden
 
 ### 2026-08-19 — Temporarily hide Lab 2 link on the live site
 
@@ -527,7 +532,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-08-19 (Lab 2 schedule link temporarily hidden)
+**Last Updated:** 2026-08-19 (Week 2 quiz re-enabled on schedule)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
