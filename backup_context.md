@@ -145,7 +145,7 @@ practical exam on Orange and a group project presentation; the final is a writte
 | Week | Type       | Title                                                            | Status             | CLOs       | Assessment                                 |
 | :--- | :--------- | :--------------------------------------------------------------- | :----------------- | :--------- | :----------------------------------------- |
 | 1    | Lecture    | Introduction to Data Mining & CRISP-DM                           | **Released** | 1, 2       | Lab 0 submission                           |
-| 2    | Lab        | Lab 2 — Python Basics & Minimal NumPy                           | **Released** | 2, 5, 6    | Lab 2 submission                           |
+| 2    | Lab        | Lab 2 — Python Basics & Minimal NumPy                           | **Released** | 2, 5, 6    | — (Lab 2 link temporarily hidden)          |
 | 3    | Lecture    | Understanding & Preparing Data                                   | TBD                | 1, 2, 5    | —                                         |
 | 4    | Lab        | Lab 1 — pandas Introduction & Data Cleaning                     | TBD                | 2, 5, 6    | Lab 1 + Excel exercise                     |
 | 5    | Lecture    | Finding Relationships — Correlation & Association Rules         | TBD                | 2, 3       | —                                         |
@@ -458,6 +458,12 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-08-19 — Temporarily hide Lab 2 link on the live site
+
+- Commented out `assignment:` for Week 2 in `src/data/lectures.yml` (assignment page kept)
+- Assessment column shows `—`; re-enable by restoring `assignment` + `Lab 2 submission`
+- Rebuilt and deployed
+
 ### 2026-08-18 — Lab 2 mini-case marked required
 
 - Integrated business mini-case is required (not optional); added to submission checklist
@@ -521,7 +527,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-08-18 (Lab 2 mini-case required)
+**Last Updated:** 2026-08-19 (Lab 2 schedule link temporarily hidden)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
