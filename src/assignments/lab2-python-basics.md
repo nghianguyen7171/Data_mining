@@ -11,6 +11,8 @@ summary: "Practice Python variables, lists, dicts, indexing & slicing, and minim
 
 By the end of this lab you will practise the Python concepts from the Week 2 session — variables, data structures, and especially **indexing & slicing** — then apply three core NumPy ideas (arrays, vectorization, `np.nan`). Everything runs in pure Python / NumPy on list and array data (no CSV yet).
 
+**Expected effort:** plan **about 2–2.5 hours** (in-class follow-along + take-home completion). The **[Try yourself]** blocks and the mini-case are longer on purpose — they combine several skills in one business scenario.
+
 **How to work:** each part has **[Follow along]** cells (type and run with the instructor) and **[Try yourself]** exercises. Type by hand — do not copy-paste. Typing helps you remember.
 
 **Prepare:** open a new Colab notebook **or** a VS Code `.ipynb` file. Name it `lab2_YourName.ipynb` (replace `YourName` with your full name, no spaces — e.g. `lab2_NguyenVanAn.ipynb`).
@@ -26,11 +28,12 @@ Upload **one notebook file** to the course Google Drive folder before the end of
 Your notebook must include:
 
 1. All **[Follow along]** cells from Parts A–D, executed successfully.
-2. Your own solutions to **[Try yourself]** sets **B, C, and D** (write them yourself — do not paste answer keys).
+2. Your own solutions to **[Try yourself]** sets **B, C, and D** — including every **Challenge** item (write them yourself — do not paste answer keys).
 3. The **Integrated business mini-case** (all tasks completed in your notebook).
-4. A final cell with **two short answers** (2–3 sentences each):
+4. A final cell with **three short answers** (2–3 sentences each):
    - *How is slicing different from indexing?*
    - *What is `np.nan` used for?*
+   - *In one sentence: why does filling a missing revenue day with the mean change the “best profit day” result in the mini-case?*
 
 ### How to export and upload your `.ipynb`
 
@@ -51,14 +54,14 @@ Your notebook must include:
 
 ## Lab overview
 
-| Part | Content | Time |
-|------|---------|-----:|
+| Part | Content | Time (guide) |
+|------|---------|-------------:|
 | A | Start your environment | 10′ |
-| B | Foundations: variables, list, dict | 20′ |
-| C | **Indexing & slicing (focus)** | 25′ |
-| D | Minimal NumPy | 15′ |
-| E | Integrated business mini-case | 10′ |
-| — | Wrap-up & submit | 10′ |
+| B | Foundations: variables, list, dict (+ challenge) | 30′ |
+| C | **Indexing & slicing (focus)** (+ challenge) | 40′ |
+| D | Minimal NumPy (+ missing-data challenge) | 30′ |
+| E | Integrated business mini-case (required) | 30′ |
+| — | Reflection & submit | 10′ |
 
 ---
 
@@ -95,7 +98,7 @@ If you see the message and a version number → go to Part B.
 
 ---
 
-## Part B — Foundations: variables, list, dict (20′)
+## Part B — Foundations: variables, list, dict (30′)
 
 ### B1. Variables & types — [Follow along]
 
@@ -147,6 +150,8 @@ print(rating is None)   # True
 
 **Scenario:** you manage data for a café.
 
+**Core (1–6)**
+
 1. Create `cost = [30, 45, 25, 60]` (million VND, 4 months) and compute the sum and the maximum.
 2. Create `customer = {'name': 'An', 'age': 28}`, then add `'city'` with value `'Hanoi'`.
 3. Create `promo_code = None` (customer has not entered a code) and check whether it is `None`.
@@ -154,8 +159,26 @@ print(rating is None)   # True
 5. Today’s orders: `orders = ['Latte', 'Mocha', 'Latte', 'Tea', 'Latte']`. Count total cups sold, and how many `'Latte'` (use `.count()`).
 6. Using `menu` from (4), compute **total revenue** if each item in `orders` is sold once (hint: add `menu[item]` for each item — a `for` loop is fine).
 
+**Challenge (7–9) — list of dictionaries**
+
+Real business data often looks like a **list of records**, each record a dict:
+
+```python
+inventory = [
+    {'sku': 'L01', 'name': 'Latte',    'price': 45000, 'stock': 12},
+    {'sku': 'E02', 'name': 'Espresso', 'price': 35000, 'stock': 3},
+    {'sku': 'M03', 'name': 'Mocha',    'price': 50000, 'stock': 0},
+    {'sku': 'T04', 'name': 'Tea',      'price': 30000, 'stock': 8},
+]
+```
+
+7. Print the **name** of every item whose `stock` is **strictly less than 5** (low stock). Collect the names in a new list `low_stock`.
+8. Compute the **inventory value** = sum of `price * stock` over all items. Store it in `inventory_value`.
+9. A delivery arrives: add **10** units to the stock of `'Espresso'` (find that dict in the list and update it). Then recompute `inventory_value`.
+
 ::: solution
 ```python
+# Core
 cost = [30, 45, 25, 60]
 sum(cost)        # 160
 max(cost)        # 60
@@ -177,13 +200,42 @@ orders.count('Latte')       # 3
 total = 0
 for item in orders:
     total += menu[item]
-print(total)                # 45000*3 + 50000 + 30000 = 215000
+print(total)                # 215000
+
+# Challenge
+inventory = [
+    {'sku': 'L01', 'name': 'Latte',    'price': 45000, 'stock': 12},
+    {'sku': 'E02', 'name': 'Espresso', 'price': 35000, 'stock': 3},
+    {'sku': 'M03', 'name': 'Mocha',    'price': 50000, 'stock': 0},
+    {'sku': 'T04', 'name': 'Tea',      'price': 30000, 'stock': 8},
+]
+
+low_stock = []
+for item in inventory:
+    if item['stock'] < 5:
+        low_stock.append(item['name'])
+print(low_stock)            # ['Espresso', 'Mocha']
+
+inventory_value = 0
+for item in inventory:
+    inventory_value += item['price'] * item['stock']
+print(inventory_value)      # 885000
+
+for item in inventory:
+    if item['name'] == 'Espresso':
+        item['stock'] += 10
+        break
+
+inventory_value = 0
+for item in inventory:
+    inventory_value += item['price'] * item['stock']
+print(inventory_value)      # 885000 + 35000*10 = 1235000
 ```
 :::
 
 ---
 
-## Part C — Indexing & slicing (30′) — FOCUS
+## Part C — Indexing & slicing (40′) — FOCUS
 
 This is the most important skill in today’s lab. Master it and reading pandas `loc` / `iloc` in Week 4 becomes much easier.
 
@@ -256,6 +308,19 @@ print(weekend)           # [210, 160]
 8. Take **odd-numbered months** (Jan, Mar, May, … — hint: `rev[::2]`).
 9. Contract code `code = "VN-2025-0917"`. Slice the country code `"VN"` (first 2 chars) and the trailing number `"0917"` (last 4 chars).
 
+**Challenge (10–13) — combine lists + mid-string slices**
+
+```python
+months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+rev = [50, 55, 48, 60, 65, 70, 72, 68, 75, 80, 90, 120]
+ticket = "INV-HN-2025-0042"
+```
+
+10. Compute **H1** revenue (first 6 months) and **H2** revenue (last 6 months). Then compute **growth** = H2 total − H1 total.
+11. Find the **best month name**: use `rev.index(max(rev))` to get the index, then look up that index in `months`.
+12. From `ticket`, extract: region code `"HN"` (characters after the first `-`, before the next `-`), year `"2025"`, and serial `"0042"`. Use slicing only (count positions carefully).
+13. Build a new list `q_labels = ['Q1','Q2','Q3','Q4']` and a list `q_totals` with the sum of each quarter of `rev` (four slices). Print each label next to its total with a `for` loop over indices `0..3`.
+
 ::: solution
 ```python
 # Set 1
@@ -274,21 +339,44 @@ word[-1]        # 'N'
 rev = [50, 55, 48, 60, 65, 70, 72, 68, 75, 80, 90, 120]
 rev[:3]             # Q1:  [50, 55, 48]
 rev[-3:]            # Q4: [80, 90, 120]
-last6 = rev[6:]     # last 6 months: [72, 68, 75, 80, 90, 120]
+last6 = rev[6:]
 sum(last6)          # 505
-rev[::2]            # odd months: [50, 48, 65, 72, 75, 90]
+rev[::2]            # odd months
 
 code = "VN-2025-0917"
 code[:2]            # 'VN'
 code[-4:]           # '0917'
+
+# Challenge
+months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+rev = [50, 55, 48, 60, 65, 70, 72, 68, 75, 80, 90, 120]
+h1 = rev[:6]
+h2 = rev[6:]
+growth = sum(h2) - sum(h1)     # 505 - 348 = 157
+
+best_i = rev.index(max(rev))
+print(months[best_i], rev[best_i])   # Dec 120
+
+ticket = "INV-HN-2025-0042"
+# I N V - H N - 2 0 2 5 - 0 0 4 2
+# 0 1 2 3 4 5 6 7 8 9 ...
+ticket[4:6]     # 'HN'
+ticket[7:11]    # '2025'
+ticket[-4:]     # '0042'
+
+q_labels = ['Q1', 'Q2', 'Q3', 'Q4']
+q_totals = [sum(rev[0:3]), sum(rev[3:6]), sum(rev[6:9]), sum(rev[9:12])]
+for i in range(4):
+    print(q_labels[i], q_totals[i])
+# Q1 153, Q2 195, Q3 215, Q4 290
 ```
 :::
 
 ---
 
-## Part D — Minimal NumPy (20′)
+## Part D — Minimal NumPy (30′)
 
-NumPy is the array-computing library; **pandas is built on NumPy**. You only need three ideas for this course.
+NumPy is the array-computing library; **pandas is built on NumPy**. You only need three ideas for this course — but you will practise them on **messy** numbers (missing values).
 
 ### D1. Arrays & indexing/slicing — [Follow along]
 
@@ -332,9 +420,18 @@ print(b)                 # [100. 120.  nan  95.]
 np.isnan(b)              # [False False  True False] — find missing cells
 ```
 
+Useful helpers when data has gaps:
+
+```python
+np.isnan(b).sum()        # how many missing
+np.nanmean(b)            # mean that ignores nan
+```
+
 ### ✅ [Try yourself] — Exercises D
 
-**Scenario:** you analyse quarterly sales for a store chain.
+**Scenario:** you analyse sales for a store chain.
+
+**Core (1–5)**
 
 1. Create `sales = np.array([200, 240, 180, 300])` (4 quarters), increase all values by 15%, then compute the mean.
 2. From the 3-store × 2-quarter table `np.array([[10,20],[30,40],[50,60]])`, get: store 3 / quarter 2 (row 2, column 1); and the entire **column 0** (quarter 1 for every store).
@@ -342,8 +439,28 @@ np.isnan(b)              # [False False  True False] — find missing cells
 4. On `sales` from (1), apply **10% VAT** (`* 1.1`), compute the mean, then find **quarters above the mean** (hint: `sales > sales.mean()` returns a True/False array).
 5. Satisfaction scores with blanks: `scores = np.array([8, np.nan, 7, 9, np.nan, 6])`. Count **how many missing cells** (hint: `np.isnan(scores).sum()`).
 
+**Challenge (6–9) — clean, then analyse**
+
+```python
+import numpy as np
+
+sales = np.array([200., 240., np.nan, 300., 180., 260.])  # 6 months, one missing
+tbl = np.array([
+    [10., 20., 15.],
+    [30., 40., 35.],
+    [50., 60., 55.],
+    [25., np.nan, 40.],
+])  # 4 stores × 3 quarters
+```
+
+6. Count missing values in `sales`. Compute `np.nanmean(sales)`.
+7. **Impute:** create `sales_filled = sales.copy()`. Replace every `nan` with the nan-mean from (6). Then compute the mean of `sales_filled` (should match the nan-mean).
+8. From `tbl`, extract: row 0 (store 1), column 1 (quarter 2 for all stores), and the value at store 3 / quarter 3 (`tbl[2, 2]`).
+9. Count missing cells in `tbl`. Create `tbl_q1 = tbl[:, 0]` (all stores, quarter 1) and compute its sum (**no** missing in Q1). Then create a boolean mask `np.isnan(tbl)` and explain in a comment which store–quarter is missing.
+
 ::: solution
 ```python
+# Core
 sales = np.array([200, 240, 180, 300])
 (sales * 1.15).mean()    # 276.0
 
@@ -352,16 +469,38 @@ m[2, 1]      # 60
 m[:, 0]      # array([10, 30, 50])
 
 x = np.array([5, np.nan, 8, np.nan])
-np.isnan(x)  # [False  True False  True]
+np.isnan(x)
 
-# Q4
 sales_vat = sales * 1.1
-sales_vat.mean()             # 264.0
-sales_vat > sales_vat.mean() # [False False False  True] → only Q4 above mean
+sales_vat.mean()              # 264.0
+sales_vat > sales_vat.mean() # only Q4 True
 
-# Q5
 scores = np.array([8, np.nan, 7, 9, np.nan, 6])
-np.isnan(scores).sum()       # 2
+np.isnan(scores).sum()        # 2
+
+# Challenge
+sales = np.array([200., 240., np.nan, 300., 180., 260.])
+np.isnan(sales).sum()         # 1
+mu = np.nanmean(sales)        # 236.0
+
+sales_filled = sales.copy()
+sales_filled[np.isnan(sales_filled)] = mu
+sales_filled.mean()           # 236.0
+
+tbl = np.array([
+    [10., 20., 15.],
+    [30., 40., 35.],
+    [50., 60., 55.],
+    [25., np.nan, 40.],
+])
+tbl[0, :]      # store 1
+tbl[:, 1]      # Q2 (includes nan)
+tbl[2, 2]      # 55.0
+
+np.isnan(tbl).sum()   # 1
+tbl_q1 = tbl[:, 0]
+tbl_q1.sum()          # 115.0
+# Missing cell: store 4 (row 3), quarter 2 (column 1)
 ```
 :::
 
@@ -369,55 +508,76 @@ np.isnan(scores).sum()       # 2
 
 ## Integrated business mini-case (required)
 
-Combine today’s skills in one business scenario. Complete **all** tasks in your notebook before submitting.
+Combine today’s skills in one business scenario with **missing data**. Complete **all** tasks in your notebook before submitting.
 
-**Context:** you analyse a retail store for one week:
+**Context:** you analyse a retail store for one week. Wednesday’s revenue was not recorded.
 
 ```python
 import numpy as np
 
-days     = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-revenue  = np.array([120, 150, 90, 200, 175, 210, 160])   # million VND
-cost     = np.array([80, 95, 70, 110, 100, 120, 90])        # million VND
-store    = {'name': 'Store A', 'region': 'Hanoi', 'staff': 8}
+days    = np.array(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
+revenue = np.array([120., 150., np.nan, 200., 175., 210., 160.])  # million VND
+cost    = np.array([80., 95., 70., 110., 100., 120., 90.])         # million VND
+store   = {
+    'name': 'Store A',
+    'region': 'Hanoi',
+    'staff': 8,
+    'open_hours': {'weekday': 10, 'weekend': 12},
+}
 ```
 
-Tasks:
+**Tasks**
 
-1. Print store name and region (dict access).
-2. What is **weekday** revenue (Mon–Fri)? Slice, then sum.
-3. What is **weekend** revenue (Sat, Sun)? Use negative indices.
-4. Compute **daily profit** = revenue − cost (vectorization); store in `profit`.
-5. What is **average** daily profit?
-6. Which days are **above** average profit? (`profit > profit.mean()`)
-7. Which day has the highest revenue? (hint: `revenue.max()`, then find its position)
+1. Print store name, region, and weekday opening hours (nested dict access: `store['open_hours']['weekday']`).
+2. Which **day name(s)** have missing revenue? Hint: `days[np.isnan(revenue)]`.
+3. Create `revenue_filled = revenue.copy()`. Replace missing values with `np.nanmean(revenue)`.
+4. Compute **weekday** revenue (Mon–Fri) and **weekend** revenue (Sat–Sun) from `revenue_filled` using slicing; print both totals.
+5. Compute **daily profit** = `revenue_filled - cost`; store in `profit`.
+6. Print the **average** daily profit.
+7. Print the **day names** whose profit is strictly above the mean (`days[profit > profit.mean()]`).
+8. Which day has the **highest profit**? Use `np.argmax(profit)` to get the index, then index into `days`.
+9. Compute **profit margin** = `profit / revenue_filled` (vectorization). Compare **mean weekday margin** (`margin[:5].mean()`) vs **mean weekend margin** (`margin[-2:].mean()`). Which is higher?
+10. **Business memo (4–5 sentences)** in a markdown or comment cell: summarise revenue pattern, the impact of imputing Wednesday, and one recommendation for the store manager.
 
 ::: solution
 ```python
+import numpy as np
+
+days    = np.array(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
+revenue = np.array([120., 150., np.nan, 200., 175., 210., 160.])
+cost    = np.array([80., 95., 70., 110., 100., 120., 90.])
+store   = {
+    'name': 'Store A',
+    'region': 'Hanoi',
+    'staff': 8,
+    'open_hours': {'weekday': 10, 'weekend': 12},
+}
+
 # 1
-print(store['name'], '-', store['region'])   # Store A - Hanoi
+print(store['name'], store['region'], store['open_hours']['weekday'])
 
 # 2
-weekdays = revenue[:5]
-weekdays.sum()          # 735
+print(days[np.isnan(revenue)])   # ['Wed']
 
 # 3
-weekend = revenue[-2:]
-weekend.sum()           # 370
+revenue_filled = revenue.copy()
+revenue_filled[np.isnan(revenue_filled)] = np.nanmean(revenue)
 
 # 4
-profit = revenue - cost
-print(profit)           # [40 55 20 90 75 90 70]
+print(revenue_filled[:5].sum())   # weekdays
+print(revenue_filled[-2:].sum())  # weekend
 
-# 5
-profit.mean()           # ≈ 62.86
+# 5–6
+profit = revenue_filled - cost
+print(profit.mean())
 
-# 6
-profit > profit.mean()
-# [False False False  True  True  True  True] → Thu, Fri, Sat, Sun
+# 7–8
+print(days[profit > profit.mean()])
+print(days[np.argmax(profit)], profit.max())
 
-# 7
-revenue.max()           # 210 → Saturday (index 5)
+# 9
+margin = profit / revenue_filled
+print(margin[:5].mean(), margin[-2:].mean())
 ```
 :::
 
@@ -425,16 +585,16 @@ revenue.max()           # 210 → Saturday (index 5)
 
 ## Wrap-up
 
-Today you practised: variables & data structures; **indexing & slicing** on lists, strings, and arrays; three NumPy ideas (array, vectorization, `np.nan`); and an integrated retail mini-case.
+Today you practised: variables & nested structures; **indexing & slicing**; NumPy arrays with **missing values**; and an integrated retail mini-case that forces you to clean data before deciding.
 
 **Before you leave:** export `lab2_YourName.ipynb` and upload it to the [Lab 2 Drive folder](https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing).
 
 ---
 
-## Optional stretch
+## Optional stretch (after you submit)
 
 1. Given `months = [1,2,3,4,5,6,7,8,9,10,11,12]`, slice Q1, Q4, and even months.
-2. Create any 12-month revenue array; compute yearly total and monthly mean with NumPy.
+2. Build a 12-month revenue array with **two** `np.nan` values; impute with `nanmean`; plot is not required — just print before/after means.
 3. Optional reading (NEU textbook Ch. 4): sets, `while` loops, list comprehensions.
 
 ---
@@ -446,6 +606,7 @@ Today you practised: variables & data structures; **indexing & slicing** on list
 | `NameError: name 'np' is not defined` | Run `import numpy as np` first |
 | Slicing returns too few / too many items | Remember: `stop` is **exclusive** |
 | `IndexError: list index out of range` | Index past the end; counting starts at 0 |
+| `nan` appears in means / comparisons | Use `np.nanmean` / boolean masks; or impute first |
 | VS Code missing NumPy | `pip install numpy` (or `pip3`) in Terminal |
 | Prefer no local install | Use Google Colab |
 

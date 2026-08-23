@@ -189,10 +189,14 @@ emits links; `status: tbd` shows the title greyed out with no links. Source: `sr
 - **Due:** End of Week 2
 - **Weight:** Part of 10% Attendance & Participation
 - **CLOs:** 2, 5, 6
-- **Parts:** A environment check → B variables/list/dict → C indexing & slicing → D NumPy
+- **Effort:** ~2–2.5 hours (expanded challenges)
+- **Parts:** A environment → B foundations + list-of-dicts challenge → C indexing/slicing
+  + H1/H2/ticket challenge → D NumPy + imputation challenge → E mini-case with missing
+  revenue, margins, business memo
 - **Deliverable:** notebook `lab2_YourName.ipynb` uploaded to
   https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing
 - Answer keys use `::: solution` fences (stripped on public build)
+- **Schedule link:** temporarily hidden (assignment page still built under `/assignments/`)
 
 ### Future Labs (not yet written)
 
@@ -458,6 +462,14 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-08-23 — Increase Lab 2 complexity
+
+- Expanded required **Challenge** blocks in Parts B (list of dicts), C (H1/H2, ticket
+  parsing, quarterly totals), and D (`nanmean` imputation, 2D table with gaps)
+- Mini-case now includes missing Wednesday revenue, imputation, boolean day filters,
+  profit margins, and a short business memo; expected effort ~2–2.5 hours
+- Rebuilt public assignment page (solutions still stripped)
+
 ### 2026-08-19 — Re-enable Week 2 quiz on the live site
 
 - Uncommented `quiz:` for Week 2 in `src/data/lectures.yml`; rebuilt and deployed
@@ -532,7 +544,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-08-19 (Week 2 quiz re-enabled on schedule)
+**Last Updated:** 2026-08-23 (Lab 2 complexity increased; ~2–2.5 h effort)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
