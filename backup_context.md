@@ -196,7 +196,7 @@ emits links; `status: tbd` shows the title greyed out with no links. Source: `sr
 - **Deliverable:** notebook `lab2_YourName.ipynb` uploaded to
   https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing
 - Answer keys use `::: solution` fences (stripped on public build)
-- **Instructor notebook:** `lab/lab2_answers.ipynb` — full worked answers with Vietnamese
+- **Instructor notebook:** `lab/lab2_answers.ipynb` — full worked answers with English
   comments (gitignored; do not publish)
 - **Schedule link:** temporarily hidden (assignment page still built under `/assignments/`)
 
@@ -464,6 +464,11 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-08-26 — Lab 2 answer notebook explanations in English
+
+- Rewrote all comments and markdown in `lab/lab2_answers.ipynb` to English
+- File remains gitignored (instructor-only)
+
 ### 2026-08-26 — Lab 2 instructor answer notebook
 
 - Created `lab/lab2_answers.ipynb` (full solutions + detailed Vietnamese comments)
@@ -552,7 +557,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-08-26 (Lab 2 instructor answer notebook created; gitignored)
+**Last Updated:** 2026-08-26 (Lab 2 answer notebook explanations switched to English)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
