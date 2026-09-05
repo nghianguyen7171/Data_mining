@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warm-up Quiz: CRISP-DM & GIGO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #111827;
+            line-height: 1.6;
+        }
+        .question-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .options-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 1.5rem;
+            flex-grow: 1;
+        }
+        .option-item {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            padding: 0.75rem 0.5rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.2s, opacity 0.2s;
+            border: 1px solid transparent;
+        }
+        .option-item:hover:not(.disabled) {
+            background-color: #f3f4f6;
+            cursor: pointer;
+        }
+        .option-item.disabled {
+            opacity: 0.7;
+        }
+        .option-input {
+            margin-top: 0.3rem;
+            margin-right: 0.75rem;
+            cursor: inherit;
+        }
+        .correct-answer-box {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.95rem;
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        .explanation-text {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            font-style: italic;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10 flex items-center justify-center min-h-screen">
+    <div class="max-w-3xl w-full mx-auto">
+        <header class="mb-8 text-center">
+            <h1 class="text-2xl font-bold text-gray-900 mb-1">Warm-up Quiz</h1>
+            <h2 class="text-lg text-gray-600">Topic: CRISP-DM Process & GIGO Principle</h2>
+        </header>
+
+        <!-- Main container for question content -->
+        <main id="quiz-container">
+            <!-- Content will be rendered by JS -->
+        </main>
+
+        <!-- Summary container (hidden by default) -->
+        <div id="summary-container" class="hidden text-center bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Quiz Completed!</h3>
+            <p class="text-lg mb-6">Your Score: <span id="final-score" class="font-bold text-blue-600 text-3xl">0/4</span></p>
+            <div class="flex justify-center space-x-4">
+                <button id="review-btn" class="px-6 py-2 bg-gray-200 text-gray-800 font-semibold rounded hover:bg-gray-300 transition duration-150">Review Answers</button>
+                <button id="reset-btn" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition duration-150">Restart Quiz</button>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div id="navigation-controls" class="mt-6 flex justify-between items-center">
+            <button id="prev-btn" class="px-4 py-2 bg-gray-200 text-gray-700 font-medium rounded hover:bg-gray-300 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
+                &larr; Previous
+            </button>
+            
+            <span id="progress-text" class="text-sm font-medium text-gray-500">1 / 4</span>
+            
+            <button id="next-btn" class="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
+                Next &rarr;
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const rawQuizData = [
+            {
+                section: "Part 1: Warm-up",
+                questions: [
+                    { 
+                        question: "Which is the correct order of the first three CRISP-DM phases?", 
+                        options: [
+                            "Modeling → Evaluation → Deployment", 
+                            "Business Understanding → Data Understanding → Data Preparation", 
+                            "Data Preparation → Modeling → Business Understanding", 
+                            "Data Understanding → Modeling → Evaluation"
+                        ], 
+                        correctAnswer: 1,
+                        explanation: "CRISP-DM has 6 phases; the first three must be done before any model is built. Today's session covers phases 2 (Data Understanding) and 3 (Data Preparation)."
+                    },
+                    { 
+                        question: "Roughly what share of a data mining project's total effort goes into data preparation?", 
+                        options: [
+                            "5–10%", 
+                            "20–30%", 
+                            "70–80%", 
+                            "0%"
+                        ], 
+                        correctAnswer: 2,
+                        explanation: "Data preparation is the largest part of a data mining project — about 70–80% of the effort."
+                    },
+                    { 
+                        question: "\"Garbage In, Garbage Out\" (GIGO) means:", 
+                        options: [
+                            "Data mining always improves data quality", 
+                            "The quality of results depends directly on the quality of the input data", 
+                            "A bigger model fixes bad data", 
+                            "Missing values can always be ignored"
+                        ], 
+                        correctAnswer: 1,
+                        explanation: "If input data is flawed, even the best model produces misleading results — sometimes \"worse than nothing\"."
+                    },
+                    { 
+                        question: "Which statement is TRUE about the limits of data mining?", 
+                        options: [
+                            "It can answer any business question", 
+                            "Predictive models always match reality", 
+                            "It can only work with data already collected, which may be biased or outdated", 
+                            "Common sense is unnecessary once you have a model"
+                        ], 
+                        correctAnswer: 2,
+                        explanation: "Data mining only uses data already collected; decisions must also weigh context, resources, risk, and common sense."
+                    }
+                ]
+            }
+        ];
+
+        let flatQuestions = [];
+        rawQuizData.forEach((sectionData) => {
+            sectionData.questions.forEach((q) => {
+                flatQuestions.push({
+                    sectionTitle: sectionData.section,
+                    question: q.question,
+                    options: q.options,
+                    correctAnswer: q.correctAnswer,
+                    explanation: q.explanation,
+                    userAnswer: null
+                });
+            });
+        });
+
+        const totalQuestions = flatQuestions.length;
+        let currentIndex = 0;
+        let isReviewMode = false;
+
+        // DOM Elements
+        const container = document.getElementById('quiz-container');
+        const summaryContainer = document.getElementById('summary-container');
+        const navControls = document.getElementById('navigation-controls');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressText = document.getElementById('progress-text');
+        const reviewBtn = document.getElementById('review-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const finalScoreSpan = document.getElementById('final-score');
+
+        function renderQuestion(index) {
+            container.innerHTML = '';
+            
+            const q = flatQuestions[index];
+            const card = document.createElement('div');
+            card.className = 'question-card';
+
+            // Section Title
+            const sectionEl = document.createElement('h3');
+            sectionEl.className = 'section-title';
+            sectionEl.textContent = q.sectionTitle;
+            card.appendChild(sectionEl);
+
+            // Question Text
+            const questionText = document.createElement('p');
+            questionText.className = 'font-semibold text-gray-800 text-lg mb-2';
+            questionText.textContent = `Question ${index + 1}: ${q.question}`;
+            card.appendChild(questionText);
+
+            // Options List
+            const optionsList = document.createElement('ul');
+            optionsList.className = 'options-list';
+            
+            const hasAnswered = q.userAnswer !== null;
+            const shouldShowResult = hasAnswered || isReviewMode;
+
+            q.options.forEach((opt, optIndex) => {
+                const li = document.createElement('li');
+                li.className = `option-item ${shouldShowResult ? 'disabled' : ''}`;
+                
+                const inputId = `opt-${optIndex}`;
+                
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = `question-radio`;
+                input.id = inputId;
+                input.value = optIndex;
+                input.className = 'option-input';
+                
+                if (q.userAnswer === optIndex) {
+                    input.checked = true;
+                }
+
+                if (shouldShowResult) {
+                    input.disabled = true;
+                } else {
+                    // Handle immediate selection (Flashcard style)
+                    li.addEventListener('click', () => {
+                        if (q.userAnswer === null && !isReviewMode) {
+                            q.userAnswer = optIndex;
+                            renderQuestion(currentIndex); // Re-render to show immediate feedback & explanation
+                        }
+                    });
+                }
+
+                const label = document.createElement('label');
+                label.htmlFor = inputId;
+                label.className = `text-gray-700 w-full ${shouldShowResult ? 'cursor-default' : 'cursor-pointer'}`;
+                label.textContent = opt;
+
+                // Apply styling based on correctness
+                if (shouldShowResult) {
+                    if (optIndex === q.correctAnswer) {
+                        li.classList.add('bg-green-50', 'border-green-200');
+                        label.classList.add('text-green-800', 'font-bold');
+                    } else if (q.userAnswer === optIndex && optIndex !== q.correctAnswer) {
+                        li.classList.add('bg-red-50', 'border-red-200');
+                        label.classList.add('text-red-700', 'line-through');
+                    }
+                }
+
+                li.appendChild(input);
+                li.appendChild(label);
+                optionsList.appendChild(li);
+            });
+
+            card.appendChild(optionsList);
+
+            if (shouldShowResult) {
+                const answerBox = document.createElement('div');
+                answerBox.className = 'correct-answer-box';
+                answerBox.style.display = 'block';
+                
+                let feedbackText = '';
+                if (hasAnswered && q.userAnswer === q.correctAnswer) {
+                    answerBox.classList.add('bg-green-100', 'border', 'border-green-300', 'text-green-800');
+                    feedbackText = `<strong>Correct!</strong> You got it right.`;
+                } else if (hasAnswered && q.userAnswer !== q.correctAnswer) {
+                    answerBox.classList.add('bg-red-100', 'border', 'border-red-300', 'text-red-800');
+                    feedbackText = `<strong>Incorrect.</strong> The correct answer is: <br/><span class="font-semibold text-gray-900 mt-1 mb-2 inline-block">${q.options[q.correctAnswer]}</span>`;
+                } else {
+                    answerBox.classList.add('bg-yellow-100', 'border', 'border-yellow-300', 'text-yellow-800');
+                    feedbackText = `<strong>Not answered.</strong> The correct answer is: <br/><span class="font-semibold text-gray-900 mt-1 mb-2 inline-block">${q.options[q.correctAnswer]}</span>`;
+                }
+
+                // Attach the detailed explanation from the "Recall" section
+                answerBox.innerHTML = `
+                    ${feedbackText}
+                    <div class="explanation-text">
+                        <strong>💡 Recall:</strong> ${q.explanation}
+                    </div>
+                `;
+                
+                card.appendChild(answerBox);
+            }
+
+            container.appendChild(card);
+            updateNavigation();
+        }
+
+        function updateNavigation() {
+            progressText.textContent = `${currentIndex + 1} / ${totalQuestions}`;
+            
+            prevBtn.disabled = currentIndex === 0;
+
+            const q = flatQuestions[currentIndex];
+            const hasAnswered = q.userAnswer !== null;
+
+            if (currentIndex === totalQuestions - 1) {
+                if (!isReviewMode) {
+                    nextBtn.textContent = 'Submit';
+                    nextBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    nextBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                    // Chỉ cho nộp khi đã trả lời xong câu cuối
+                    nextBtn.disabled = !hasAnswered; 
+                } else {
+                    nextBtn.textContent = 'Finish';
+                    nextBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    nextBtn.classList.add('bg-gray-600', 'hover:bg-gray-700');
+                    nextBtn.disabled = false;
+                }
+            } else {
+                nextBtn.innerHTML = 'Next &rarr;';
+                nextBtn.classList.remove('bg-green-600', 'hover:bg-green-700', 'bg-gray-600', 'hover:bg-gray-700');
+                nextBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                // Nếu chưa trả lời, không cho sang câu tiếp (bắt buộc hoàn thành)
+                nextBtn.disabled = (!isReviewMode && !hasAnswered);
+            }
+        }
+
+        function calculateScore() {
+            let score = 0;
+            flatQuestions.forEach(q => {
+                if (q.userAnswer === q.correctAnswer) score++;
+            });
+            return score;
+        }
+
+        function showSummary() {
+            const score = calculateScore();
+            container.style.display = 'none';
+            navControls.style.display = 'none';
+            summaryContainer.style.display = 'block';
+            finalScoreSpan.textContent = `${score}/${totalQuestions}`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion(currentIndex);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < totalQuestions - 1) {
+                currentIndex++;
+                renderQuestion(currentIndex);
+            } else if (currentIndex === totalQuestions - 1) {
+                showSummary();
+            }
+        });
+
+        reviewBtn.addEventListener('click', () => {
+            isReviewMode = true;
+            summaryContainer.style.display = 'none';
+            container.style.display = 'block';
+            navControls.style.display = 'flex';
+            currentIndex = 0;
+            renderQuestion(currentIndex);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            isReviewMode = false;
+            currentIndex = 0;
+            flatQuestions.forEach(q => q.userAnswer = null);
+            
+            summaryContainer.style.display = 'none';
+            container.style.display = 'block';
+            navControls.style.display = 'flex';
+            
+            renderQuestion(currentIndex);
+        });
+
+        // Initialize the first question
+        renderQuestion(currentIndex);
+
+    </script>
+</body>
+</html>

@@ -52,6 +52,7 @@ lectures:
       - "Data quality: missing values, outliers, duplicates"
       - "Normalisation, standardisation, and creating new variables"
     clos: "1, 2, 5"
+    # quiz: "assets/materials/3.Quiz_WarmUp_CRISP-DM.html"  # temporarily hidden (warm-up)
     assessment: "—"
 
   - id: 4

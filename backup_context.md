@@ -322,7 +322,8 @@ Data Mining/
 │   │       ├── 1.Intro_CRISP-DM.pdf          # Week 1 slides
 │   │       ├── 1.Quiz_Intro_CRISP-DM.html    # Week 1 quiz
 │   │       ├── 2.Basic_Py.pdf               # Week 2 slides (Python basics)
-│   │       └── 2.Quiz_Basic_Py.html         # Week 2 in-class quiz (code → result)
+│   │       ├── 2.Quiz_Basic_Py.html         # Week 2 in-class quiz (code → result)
+│   │       └── 3.Quiz_WarmUp_CRISP-DM.html  # Week 3 warm-up (hidden on schedule)
 │   └── styles/
 │       ├── _variables.scss       # Theme tokens (accent colour, fonts)
 │       └── main.scss             # Template stylesheet
@@ -400,6 +401,9 @@ deliberately opting in.
 - `src/assets/materials/2.Basic_Py.pdf` — Week 2 slides (Python basics)
 - `src/assets/materials/2.Quiz_Basic_Py.html` — Week 2 in-class quiz (18 one-liner
   code→result MCQs; source `quizz/quizz2_Basic_Py.html`); linked on Week 2 Materials
+- `src/assets/materials/3.Quiz_WarmUp_CRISP-DM.html` — Week 3 warm-up (CRISP-DM & GIGO;
+  source `quizz/quizz3.1.warm_up.html`); **temporarily hidden** from Schedule (commented
+  `quiz:` on Week 3; Week 3 still `tbd`)
 - Schedule Materials column supports `slides`, `notebook`, and `quiz` links
 - `README.md` — setup, contribution guide, common tasks, deploy flow, collaborator instructions
 - Live site deployed at https://nghianguyen7171.github.io/Data_mining/
@@ -417,6 +421,8 @@ deliberately opting in.
   material; published copies live under `src/assets/materials/` / `src/assignments/`
 - **Re-enable Lab 2 schedule link** when ready: restore `assignment:` + `Lab 2 submission`
   in `lectures.yml`
+- **Re-enable Week 3 warm-up quiz** when ready: uncomment `quiz:` and set Week 3
+  `status: released`
 
 ---
 
@@ -463,6 +469,13 @@ deliberately opting in.
 ---
 
 ## Change Log
+
+### 2026-09-05 — Upload Week 3 warm-up quiz (hidden)
+
+- Copied `quizz/quizz3.1.warm_up.html` → `src/assets/materials/3.Quiz_WarmUp_CRISP-DM.html`
+- 4 MCQs on CRISP-DM order, data-prep effort (70–80%), GIGO, and DM limits
+- Added commented `quiz:` on Week 3 in `lectures.yml` (not shown on Schedule; Week 3 still tbd)
+- Rebuilt and deployed so the direct URL works
 
 ### 2026-08-26 — Lab 2 answer notebook explanations in English
 
@@ -557,7 +570,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-08-26 (Lab 2 answer notebook explanations switched to English)
+**Last Updated:** 2026-09-05 (Week 3 warm-up quiz uploaded; schedule link hidden)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
