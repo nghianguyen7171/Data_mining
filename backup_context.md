@@ -146,7 +146,7 @@ practical exam on Orange and a group project presentation; the final is a writte
 | :--- | :--------- | :--------------------------------------------------------------- | :----------------- | :--------- | :----------------------------------------- |
 | 1    | Lecture    | Introduction to Data Mining & CRISP-DM                           | **Released** | 1, 2       | Lab 0 submission                           |
 | 2    | Lab        | Lab 2 — Python Basics & Minimal NumPy                           | **Released** | 2, 5, 6    | — (Lab 2 link temporarily hidden)          |
-| 3    | Lecture    | Understanding & Preparing Data                                   | TBD                | 1, 2, 5    | —                                         |
+| 3    | Lecture    | Understanding & Preparing Data                                   | **Released** | 1, 2, 5    | —                                         |
 | 4    | Lab        | Lab 1 — pandas Introduction & Data Cleaning                     | TBD                | 2, 5, 6    | Lab 1 + Excel exercise                     |
 | 5    | Lecture    | Finding Relationships — Correlation & Association Rules         | TBD                | 2, 3       | —                                         |
 | 6    | Lab        | Lab 2 — Correlation & Market-Basket Analysis                    | TBD                | 3, 5, 6    | Lab 2 + Presentation#1                     |
@@ -323,6 +323,7 @@ Data Mining/
 │   │       ├── 1.Quiz_Intro_CRISP-DM.html    # Week 1 quiz
 │   │       ├── 2.Basic_Py.pdf               # Week 2 slides (Python basics)
 │   │       ├── 2.Quiz_Basic_Py.html         # Week 2 in-class quiz (code → result)
+│   │       ├── 3.Data_Understanding.pdf     # Week 3 slides
 │   │       └── 3.Quiz_WarmUp_CRISP-DM.html  # Week 3 warm-up (hidden on schedule)
 │   └── styles/
 │       ├── _variables.scss       # Theme tokens (accent colour, fonts)
@@ -401,9 +402,11 @@ deliberately opting in.
 - `src/assets/materials/2.Basic_Py.pdf` — Week 2 slides (Python basics)
 - `src/assets/materials/2.Quiz_Basic_Py.html` — Week 2 in-class quiz (18 one-liner
   code→result MCQs; source `quizz/quizz2_Basic_Py.html`); linked on Week 2 Materials
+- `src/assets/materials/3.Data_Understanding.pdf` — Week 3 slides (from
+  `slides/3. Data Undersranding.pdf`)
 - `src/assets/materials/3.Quiz_WarmUp_CRISP-DM.html` — Week 3 warm-up (CRISP-DM & GIGO;
   source `quizz/quizz3.1.warm_up.html`); **temporarily hidden** from Schedule (commented
-  `quiz:` on Week 3; Week 3 still `tbd`)
+  `quiz:` on Week 3)
 - Schedule Materials column supports `slides`, `notebook`, and `quiz` links
 - `README.md` — setup, contribution guide, common tasks, deploy flow, collaborator instructions
 - Live site deployed at https://nghianguyen7171.github.io/Data_mining/
@@ -412,7 +415,7 @@ deliberately opting in.
 
 - **TA collaborator access:** Le Duy Khanh collaborator invitation sent; awaiting acceptance
   (Write access on personal repo)
-- **Remaining weeks:** Slides for Weeks 3–15 added to `src/assets/materials/` and
+- **Remaining weeks:** Slides for Weeks 4–15 added to `src/assets/materials/` and
   `status: released` set in `lectures.yml` as content is ready
 - **Lab assignments:** Lab 1 (Week 4) and later labs not yet written — add per week as taught
 - **This-week banner:** Update `src/data/this-week.yml` each week (or delete `current:` block
@@ -421,8 +424,7 @@ deliberately opting in.
   material; published copies live under `src/assets/materials/` / `src/assignments/`
 - **Re-enable Lab 2 schedule link** when ready: restore `assignment:` + `Lab 2 submission`
   in `lectures.yml`
-- **Re-enable Week 3 warm-up quiz** when ready: uncomment `quiz:` and set Week 3
-  `status: released`
+- **Re-enable Week 3 warm-up quiz** when ready: uncomment `quiz:` in `lectures.yml`
 
 ---
 
@@ -469,6 +471,12 @@ deliberately opting in.
 ---
 
 ## Change Log
+
+### 2026-09-08 — Publish Week 3 slides
+
+- Copied `slides/3. Data Undersranding.pdf` → `src/assets/materials/3.Data_Understanding.pdf`
+- Set Week 3 `status: released` with `slides:` in `lectures.yml`; warm-up quiz still hidden
+- Rebuilt and deployed
 
 ### 2026-09-05 — Upload Week 3 warm-up quiz (hidden)
 
@@ -570,7 +578,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-05 (Week 3 warm-up quiz uploaded; schedule link hidden)
+**Last Updated:** 2026-09-08 (Week 3 slides `3.Data_Understanding.pdf` published)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course

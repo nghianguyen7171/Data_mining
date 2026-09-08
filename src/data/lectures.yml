@@ -45,13 +45,14 @@ lectures:
     week: 3
     type: "Lecture"
     title: "Understanding & Preparing Data"
-    status: tbd
+    status: released
     topics:
       - "Variable types and roles (target, feature, meta)"
       - "Data warehouse, data mart, and data lake concepts"
       - "Data quality: missing values, outliers, duplicates"
       - "Normalisation, standardisation, and creating new variables"
     clos: "1, 2, 5"
+    slides: "assets/materials/3.Data_Understanding.pdf"
     # quiz: "assets/materials/3.Quiz_WarmUp_CRISP-DM.html"  # temporarily hidden (warm-up)
     assessment: "—"
 
