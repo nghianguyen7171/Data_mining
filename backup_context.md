@@ -146,7 +146,7 @@ practical exam on Orange and a group project presentation; the final is a writte
 | :--- | :--------- | :--------------------------------------------------------------- | :----------------- | :--------- | :----------------------------------------- |
 | 1    | Lecture    | Introduction to Data Mining & CRISP-DM                           | **Released** | 1, 2       | Lab 0 submission                           |
 | 2    | Lab        | Lab 2 — Python Basics & Minimal NumPy                           | **Released** | 2, 5, 6    | — (Lab 2 link temporarily hidden)          |
-| 3    | Lecture    | Understanding & Preparing Data                                   | **Released** | 1, 2, 5    | Lab 3 submission                           |
+| 3    | Lecture    | Understanding & Preparing Data                                   | **Released** | 1, 2, 5    | — (Lab 3 link temporarily hidden)          |
 | 4    | Lab        | Lab 1 — pandas Introduction & Data Cleaning                     | TBD                | 2, 5, 6    | Lab 1 + Excel exercise                     |
 | 5    | Lecture    | Finding Relationships — Correlation & Association Rules         | TBD                | 2, 3       | —                                         |
 | 6    | Lab        | Lab 2 — Correlation & Market-Basket Analysis                    | TBD                | 3, 5, 6    | Lab 2 + Presentation#1                     |
@@ -485,6 +485,12 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-09-08 — Temporarily hide Lab 3 link on the live site
+
+- Commented out `assignment:` for Week 3 in `src/data/lectures.yml` (assignment page kept)
+- Assessment column shows `—`; re-enable by restoring `assignment` + `Lab 3 submission`
+- Rebuilt and deployed
+
 ### 2026-09-08 — Publish Lab 3 (Orange data scrubbing)
 
 - Added English assignment `src/assignments/lab3-data-scrubbing.md` from `lab/lab3.md`
@@ -598,7 +604,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-08 (Lab 3 Orange data scrubbing published)
+**Last Updated:** 2026-09-08 (Lab 3 schedule link temporarily hidden)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
