@@ -146,7 +146,7 @@ practical exam on Orange and a group project presentation; the final is a writte
 | :--- | :--------- | :--------------------------------------------------------------- | :----------------- | :--------- | :----------------------------------------- |
 | 1    | Lecture    | Introduction to Data Mining & CRISP-DM                           | **Released** | 1, 2       | Lab 0 submission                           |
 | 2    | Lab        | Lab 2 — Python Basics & Minimal NumPy                           | **Released** | 2, 5, 6    | — (Lab 2 link temporarily hidden)          |
-| 3    | Lecture    | Understanding & Preparing Data                                   | **Released** | 1, 2, 5    | —                                         |
+| 3    | Lecture    | Understanding & Preparing Data                                   | **Released** | 1, 2, 5    | Lab 3 submission                           |
 | 4    | Lab        | Lab 1 — pandas Introduction & Data Cleaning                     | TBD                | 2, 5, 6    | Lab 1 + Excel exercise                     |
 | 5    | Lecture    | Finding Relationships — Correlation & Association Rules         | TBD                | 2, 3       | —                                         |
 | 6    | Lab        | Lab 2 — Correlation & Market-Basket Analysis                    | TBD                | 3, 5, 6    | Lab 2 + Presentation#1                     |
@@ -199,6 +199,18 @@ emits links; `status: tbd` shows the title greyed out with no links. Source: `sr
 - **Instructor notebook:** `lab/lab2_answers.ipynb` — full worked answers with English
   comments (gitignored; do not publish)
 - **Schedule link:** temporarily hidden (assignment page still built under `/assignments/`)
+
+### Lab 3 — Data Scrubbing in Orange
+
+- **File:** `src/assignments/lab3-data-scrubbing.md` (English; draft `lab/lab3.md`)
+- **Due:** End of Week 3
+- **Weight:** Part of 10% Attendance & Participation
+- **CLOs:** 1, 2, 5, 6
+- **Tool:** Orange only (no code)
+- **Data:** `src/assets/materials/customers_dirty.csv` (from `lab/customers_dirty.csv`)
+- **Design rule:** student page does **not** list planted issues (no “Vấn đề cài sẵn”
+  table, no specific dirty values as answer keys); students discover via widgets
+- **Deliverables:** `.ows`, cleaned CSV, A/B/C answers, mini-memo, Box Plot screenshot
 
 ### Future Labs (not yet written)
 
@@ -316,7 +328,8 @@ Data Mining/
 │   │   └── resources.md          # Resources page
 │   ├── assignments/
 │   │   ├── lab0-setup.md         # Lab 0 assignment
-│   │   └── lab2-python-basics.md # Lab 2 — Python basics (Week 2)
+│   │   ├── lab2-python-basics.md # Lab 2 — Python basics (Week 2)
+│   │   └── lab3-data-scrubbing.md # Lab 3 — Orange data scrubbing (Week 3)
 │   ├── assets/
 │   │   └── materials/
 │   │       ├── 1.Intro_CRISP-DM.pdf          # Week 1 slides
@@ -472,6 +485,13 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-09-08 — Publish Lab 3 (Orange data scrubbing)
+
+- Added English assignment `src/assignments/lab3-data-scrubbing.md` from `lab/lab3.md`
+- Published dataset `customers_dirty.csv` under materials; Week 3 Assessment → Lab 3
+- Intentionally omitted planted-issue spoilers from the student page
+- Rebuilt and deployed
+
 ### 2026-09-08 — Publish Week 3 slides
 
 - Copied `slides/3. Data Undersranding.pdf` → `src/assets/materials/3.Data_Understanding.pdf`
@@ -578,7 +598,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-08 (Week 3 slides `3.Data_Understanding.pdf` published)
+**Last Updated:** 2026-09-08 (Lab 3 Orange data scrubbing published)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 3 — Data Scrubbing in Orange · Data Mining</title>
+  <meta name="description" content="Data Mining — Faculty of Data Science and Artificial Intelligence, National Economics University.">
+  <link rel="stylesheet" href="/Data_mining/assets/css/main.css">
+  <link rel="icon" href="/Data_mining/assets/images/fda-logo.png">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/Data_mining">
+        <img src="/Data_mining/assets/images/neu-logo.png" alt="" class="brand-logo">
+        <img src="/Data_mining/assets/images/fda-logo.png" alt="" class="brand-logo">
+        <span class="brand-text">
+          <span class="brand-course">Data Mining</span>
+          <span class="brand-dept">Faculty of Data Science and Artificial Intelligence</span>
+        </span>
+      </a>
+  
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/Data_mining" >Home</a>
+        <a href="/Data_mining/syllabus.html" >Syllabus</a>
+        <a href="/Data_mining/assignments/" class="is-active" aria-current="page">Assignments</a>
+        <a href="/Data_mining/resources.html" >Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="wrap prose prose-narrow assignment">
+  <p class="crumb"><a href="/Data_mining/assignments/">Assignments</a></p>
+  <h1>Lab 3 — Data Scrubbing in Orange</h1>
+  <dl class="assignment-meta">
+    <div><dt>Due</dt><dd>End of Week 3</dd></div>
+    <div><dt>Released</dt><dd>Week 3</dd></div>
+    <div><dt>Weight</dt><dd>Part of 10% Attendance &amp; Participation</dd></div>
+    <div><dt>CLOs</dt><dd>1, 2, 5, 6</dd></div>
+  </dl>
+  <h2>Goal</h2>
+<p>By the end of this lab you will apply the <strong>Data Understanding</strong> and <strong>Data Preparation</strong> ideas from Week 3 in a full Orange workflow. You will inspect a dirty customer dataset, clean it with the four scrubbing pillars (inconsistent values, missing values, data reduction, attribute reduction), handle outliers, normalise scales, create simple derived features, and export a <strong>model-ready</strong> file for churn analysis.</p>
+<p><strong>This lab is Orange only (drag-and-drop). No coding required.</strong></p>
+<p><strong>Business context:</strong> you are an analyst at an <strong>e-commerce</strong> company. Marketing wants to study which customers are at risk of <strong>churn</strong>, but the customer extract you received is not yet analysis-ready. Your job is to make it trustworthy before any modelling.</p>
+<p><strong>Prepare</strong></p>
+<ol>
+<li>Open <strong>Orange Data Mining</strong>.</li>
+<li>Download the practice file: <a href="../assets/materials/customers_dirty.csv">customers_dirty.csv</a>.</li>
+</ol>
+<blockquote>
+<p><strong>Important:</strong> do <strong>not</strong> look for an answer key online or share cleaned files before you finish. The point of the lab is to <strong>discover</strong> quality issues yourself with Orange widgets.</p>
+</blockquote>
+<hr>
+<h2>What to submit</h2>
+<p>Submit <strong>all</strong> of the following before the end of Week 3 (Drive / LMS link announced in class):</p>
+<ol>
+<li>Orange workflow file <code>lab3_YourName.ows</code></li>
+<li>Cleaned dataset <code>customers_clean_YourName.csv</code></li>
+<li>Written answers to the Part A / B / C questions below</li>
+<li>A <strong>mini-memo</strong> (5–6 sentences) as specified in Part D</li>
+<li>One <strong>Box Plot</strong> screenshot for <code>MonthlySpend</code> that shows how you identified extreme values</li>
+</ol>
+<hr>
+<h2>Dataset overview</h2>
+<p>File: <strong><code>customers_dirty.csv</code></strong></p>
+<p>Each row is one customer. Column meanings:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CustomerID</code></td>
+<td>Customer identifier</td>
+</tr>
+<tr>
+<td><code>Age</code></td>
+<td>Age in years</td>
+</tr>
+<tr>
+<td><code>Gender</code></td>
+<td>Gender label</td>
+</tr>
+<tr>
+<td><code>City</code></td>
+<td>City</td>
+</tr>
+<tr>
+<td><code>Tenure_Months</code></td>
+<td>Months as a customer</td>
+</tr>
+<tr>
+<td><code>MonthlySpend</code></td>
+<td>Average monthly spend</td>
+</tr>
+<tr>
+<td><code>SatisfactionLevel</code></td>
+<td>Satisfaction category (e.g. Low / Medium / High)</td>
+</tr>
+<tr>
+<td><code>IsActive</code></td>
+<td>Whether the account is active</td>
+</tr>
+<tr>
+<td><code>SignupDate</code></td>
+<td>Signup date</td>
+</tr>
+<tr>
+<td><code>Churn</code></td>
+<td>Churned? (<code>Yes</code> / <code>No</code>) — <strong>target</strong> for later modelling</td>
+</tr>
+</tbody></table>
+<p>Treat this file as a <strong>real dirty extract</strong>: expect missing cells, inconsistent labels, odd values, and columns that may not belong in the modelling feature set. Your first job is to <strong>profile</strong> it.</p>
+<hr>
+<h2>Lab overview</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Content</th>
+<th>Lecture map</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>Load &amp; profile the data</td>
+<td>Data Understanding</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Four scrubbing pillars</td>
+<td>Data Scrubbing</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Outliers, normalisation, feature engineering</td>
+<td>Supplemental prep</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Export clean data + mini-memo</td>
+<td>Model-ready dataset</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Part A — Load &amp; profile (15′)</h2>
+<h3>A1. Load the file — [Follow along]</h3>
+<ol>
+<li>Open Orange → <strong>New</strong> blank workflow.</li>
+<li>Drag a <strong>File</strong> widget (Data) → double-click → <strong>Browse</strong> → select <code>customers_dirty.csv</code>.</li>
+<li>In the File widget table, set <strong>roles</strong>:<ul>
+<li><code>Churn</code> → <strong>target</strong></li>
+<li><code>CustomerID</code> → <strong>meta</strong> (identifier; not used as a predictive feature)</li>
+<li>remaining columns → <strong>feature</strong> (unless you later move some to ignored)</li>
+</ul>
+</li>
+</ol>
+<p>📷 <strong>Screenshot required:</strong> File widget showing types/roles with <code>Churn</code> = target and <code>CustomerID</code> = meta.</p>
+<h3>A2. Inspect the table — [Follow along]</h3>
+<ol>
+<li>Add <strong>Data Table</strong>, connect <strong>File → Data Table</strong>, open it.</li>
+<li>Scroll the rows. Note blanks, surprising codes, and anything that looks wrong for a customer record.</li>
+</ol>
+<h3>A3. Statistics &amp; distributions — [Follow along]</h3>
+<ol>
+<li>Add <strong>Feature Statistics</strong>, connect from <strong>File</strong>.</li>
+<li>Read the <strong>Missing</strong> column carefully — which attributes are incomplete?</li>
+<li>Add <strong>Distributions</strong>, connect from <strong>File</strong>. Explore categorical columns (start with <code>Gender</code> and <code>SatisfactionLevel</code>). Look for labels that should mean the same thing but are written differently.</li>
+</ol>
+<h3>✍️ Questions — Part A</h3>
+<p><strong>A1.</strong> From <strong>Feature Statistics</strong>, report the missing count for:<br><code>Age</code> = ______ · <code>Gender</code> = ______ · <code>MonthlySpend</code> = ______ · <code>SatisfactionLevel</code> = ______</p>
+<p><strong>A2.</strong> List <strong>three</strong> invalid / suspicious values you found and the column each belongs to:<br>① ______  ② ______  ③ ______</p>
+<p><strong>A3.</strong> Which column is an <strong>identifier</strong> that should not be used as a predictive feature? ______</p>
+<p><strong>A4.</strong> How many <strong>rows</strong> and <strong>columns</strong> does the file have? ______</p>
+<hr>
+<h2>Part B — Four pillars of data scrubbing (40′)</h2>
+<p>Work in this order: <strong>fix inconsistent labels first</strong>, then impute, then reduce rows, then reduce attributes. That order matches the Week 3 lecture logic.</p>
+<h3>B1. Inconsistent values — [Follow along]</h3>
+<blockquote>
+<p>Standardise labels <strong>before</strong> imputation so “the same category” is not split across spelling variants.</p>
+</blockquote>
+<ol>
+<li>Add <strong>Edit Domain</strong> (Transform), connect <strong>File → Edit Domain</strong>.</li>
+<li>Open it and inspect categorical columns that looked inconsistent in Distributions (<code>Gender</code>, <code>SatisfactionLevel</code>, <code>IsActive</code>, and any other you noticed).</li>
+<li>Merge / rename values so each concept has <strong>one canonical label</strong>. Document every mapping you apply (from → to).</li>
+<li>For clearly invalid codes in a Yes/No-style field, choose a defensible rule using the lecture decision guidance (mode vs leave missing vs other). Write your rule in the answers.</li>
+<li>Click <strong>Apply</strong>. Re-check with <strong>Data Table</strong> and <strong>Distributions</strong> after Edit Domain.</li>
+</ol>
+<p>📷 <strong>Screenshot required:</strong> Edit Domain while you standardise at least one column.</p>
+<h3>B2. Missing values — [Follow along]</h3>
+<ol>
+<li>Add <strong>Impute</strong> (Transform), connect <strong>Edit Domain → Impute</strong>.</li>
+<li>Set a default method such as <strong>Average / Most frequent</strong> (mean for numeric, most frequent for categorical), <strong>or</strong> choose column-specific methods when that is safer.</li>
+<li>Open <strong>Data Table</strong> after Impute and confirm blanks are gone (or intentionally retained only if you justified that).</li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> a mean can be pulled by extreme numeric values. If a numeric column looks skewed in a Box Plot, consider <strong>Median</strong> for that column, or handle extremes first (Part C).</p>
+</blockquote>
+<h3>B3. Data reduction (rows) — [Follow along]</h3>
+<ol>
+<li>Add <strong>Select Rows</strong> (Transform), connect <strong>Impute → Select Rows</strong>.</li>
+<li>Keep only rows that are <strong>business-reasonable</strong> for this customer table (especially for <code>Age</code>). Use conditions such as <em>is between</em> / comparisons — choose thresholds you can defend.</li>
+<li>Re-open <strong>Data Table</strong> and record how many rows remain.</li>
+<li>While browsing the table (sort by key columns), check whether any rows appear to be <strong>exact duplicates</strong>. Note what you found; in practice duplicates should be removed before modelling.</li>
+</ol>
+<p>📷 <strong>Screenshot required:</strong> Select Rows with your filter condition(s) visible.</p>
+<p><em>(Optional intro)</em> <strong>Data Sampler</strong> can take a random subset for quick experiments — not required for submission.</p>
+<h3>B4. Attribute reduction — [Follow along]</h3>
+<ol>
+<li>Add <strong>Select Columns</strong> (Transform), connect <strong>Select Rows → Select Columns</strong>.</li>
+<li>Move identifier column(s) that should not train the model into <strong>Ignored</strong> (or keep them as meta only).</li>
+<li>Keep <code>Churn</code> as <strong>Target</strong>; keep useful predictors as <strong>Features</strong>.</li>
+</ol>
+<blockquote>
+<p><strong>Golden rule from lecture:</strong> drop a column from the <strong>analysis flow</strong>, do not delete it from the <strong>source file</strong>. Noise today may be signal tomorrow.</p>
+</blockquote>
+<h3>✍️ Questions — Part B</h3>
+<p><strong>B1.</strong> After <strong>Edit Domain</strong>, how many distinct values remain in <code>Gender</code>? List them: ______</p>
+<p><strong>B2.</strong> What did you do with invalid codes in <code>IsActive</code>? <strong>Why</strong> that choice? ______</p>
+<p><strong>B3.</strong> After <strong>Impute</strong>, are any required analysis fields still blank? For a numeric column you imputed, roughly what filled value was used (report the method and approximate value)? ______</p>
+<p><strong>B4.</strong> After <strong>Select Rows</strong>, how many rows remain, and how many were removed? ______</p>
+<p><strong>B5.</strong> Which column(s) did you ignore for modelling, and <strong>why</strong> must you not delete them from the original source file? ______</p>
+<hr>
+<h2>Part C — Outliers, normalisation, feature engineering (25′)</h2>
+<h3>C1. Detect &amp; treat outliers — [Follow along]</h3>
+<ol>
+<li>Add <strong>Box Plot</strong> (Visualize) on your cleaned flow (after Impute and/or Select Columns).</li>
+<li>Inspect numeric fields, especially <strong><code>MonthlySpend</code></strong>. Identify extreme points far from the box.</li>
+<li>Choose <strong>one</strong> treatment and justify it with business reasoning:<ul>
+<li><strong>Remove</strong> the row(s) with Select Rows (set a spend threshold you can defend), <strong>or</strong></li>
+<li><strong>Treat as error / missing</strong> and impute with a robust method (e.g. median).</li>
+</ul>
+</li>
+<li>Re-check the Box Plot after treatment.</li>
+</ol>
+<p>📷 <strong>Screenshot required:</strong> Box Plot for <code>MonthlySpend</code> showing the extreme value(s) you acted on.</p>
+<blockquote>
+<p>Outliers can be data-entry errors <strong>or</strong> VIP customers. Your decision must be explained in business language.</p>
+</blockquote>
+<h3>C2. Normalisation — [Follow along]</h3>
+<ol>
+<li>Add <strong>Preprocess</strong> (Transform).</li>
+<li>Add <strong>Normalize Features</strong> → interval <strong>[0, 1]</strong> (or another method you can explain).</li>
+<li>Confirm that numeric features such as <code>Age</code>, <code>MonthlySpend</code>, and <code>Tenure_Months</code> now share a comparable scale so one column does not dominate distance-based methods.</li>
+</ol>
+<h3>C3. Feature engineering (intro) — [Follow along]</h3>
+<p><strong>Binning — Discretize</strong></p>
+<ol>
+<li>Add <strong>Discretize</strong> (Transform).</li>
+<li>Discretize <code>Age</code> into a small number of meaningful groups (e.g. young / mid / older). Record how many bins you created and their labels/ranges.</li>
+</ol>
+<p><strong>Encoding — Continuize</strong></p>
+<ol>
+<li>Add <strong>Continuize</strong> (Transform).</li>
+<li>Encode categorical predictors so algorithms that need numbers can use them. Remember: for unordered (nominal) categories, encoding must not invent a false order.</li>
+</ol>
+<blockquote>
+<p>Splitting <code>SignupDate</code> into month/quarter is optional advanced practice (e.g. Feature Constructor). Introduce the idea only; pandas labs will go deeper later.</p>
+</blockquote>
+<h3>✍️ Questions — Part C</h3>
+<p><strong>C1.</strong> What extreme <code>MonthlySpend</code> value(s) did the Box Plot highlight? ______</p>
+<p><strong>C2.</strong> Did you <strong>remove</strong> or <strong>replace</strong> them? Give a <strong>business reason</strong>: ______</p>
+<p><strong>C3.</strong> After normalisation, what value range do <code>Age</code> and <code>MonthlySpend</code> fall into? ______</p>
+<p><strong>C4.</strong> How many Age groups did <strong>Discretize</strong> create? Name them: ______</p>
+<p><strong>C5.</strong> Why must categorical variables often be <strong>encoded</strong> before modelling? ______</p>
+<hr>
+<h2>Part D — Export &amp; mini-memo (10′)</h2>
+<ol>
+<li>Add <strong>Save Data</strong> (Data) at the end of the workflow → export <code>customers_clean_YourName.csv</code>.</li>
+<li><strong>File → Save As</strong> → <code>lab3_YourName.ows</code>.</li>
+</ol>
+<h3>Target workflow (guide)</h3>
+<pre><code>File → Edit Domain → Impute → Select Rows → Select Columns
+        → Preprocess (Normalize) → Discretize → Continuize → Save Data
+  │
+  ├→ Data Table
+  ├→ Feature Statistics / Distributions
+  └→ Box Plot
+</code></pre>
+<p>📷 <strong>Screenshot required (optional but recommended):</strong> full Orange canvas with widgets connected.</p>
+<h3>Mini-memo (5–6 sentences)</h3>
+<p>Write in your own words. Cover:</p>
+<ol>
+<li>What quality problems you found (without inventing issues you did not observe).</li>
+<li>The main cleaning steps you applied (widgets + methods).</li>
+<li>Your outlier decision and business justification.</li>
+<li>A one-line statement that the file is now ready (or not yet ready) for churn modelling — and what would still be risky.</li>
+</ol>
+<hr>
+<h2>Optional stretch</h2>
+<ol>
+<li>Compare the mean of <code>MonthlySpend</code> <strong>before vs after</strong> your outlier treatment. How large is the change, and what does that imply?</li>
+<li>Impute a skewed numeric column with <strong>Mean</strong> vs <strong>Median</strong> and explain which is safer here.</li>
+<li>In <strong>Distributions</strong>, colour by <code>Churn</code>. Which age band or satisfaction level looks riskier? (Preview of later analytical weeks.)</li>
+</ol>
+<hr>
+<h2>Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>What to try</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Age</code> loaded as text</td>
+<td>In <strong>File</strong>, set the column type to Numeric and reload</td>
+</tr>
+<tr>
+<td>Edit Domain does not list odd labels</td>
+<td>Confirm the column is categorical; re-check Distributions</td>
+</tr>
+<tr>
+<td>Impute leaves strange codes</td>
+<td>Standardise / repair labels in <strong>Edit Domain</strong> first</td>
+</tr>
+<tr>
+<td>Means look absurd</td>
+<td>Extreme values may dominate — treat outliers or use <strong>Median</strong></td>
+</tr>
+<tr>
+<td>Select Rows removes too much</td>
+<td>Re-check operators (<code>is between</code>, ≥, ≤) and thresholds</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>References</h2>
+<ul>
+<li>Week 3 slides: <code>3.Data_Understanding.pdf</code></li>
+<li>North, M. <em>Data Mining for the Masses</em> — Chapter 3 (Data Preparation)</li>
+<li>Orange widget catalogue: <a href="https://orangedatamining.com/widget-catalog">https://orangedatamining.com/widget-catalog</a></li>
+<li>Practice data: <a href="../assets/materials/customers_dirty.csv">customers_dirty.csv</a></li>
+</ul>
+
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-course">Data Mining</p>
+        <p class="footer-meta">IST 4520 · Fall 2026 · 3 credits</p>
+      </div>
+      <div>
+        <p class="footer-meta">Faculty of Data Science and Artificial Intelligence</p>
+        <p class="footer-meta">College of Technology, National Economics University</p>
+        <p class="footer-meta"><a href="https://github.com/nghianguyen7171/Data_mining">Source on GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
