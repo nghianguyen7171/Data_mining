@@ -54,8 +54,8 @@ lectures:
     clos: "1, 2, 5"
     slides: "assets/materials/3.Data_Understanding.pdf"
     # quiz: "assets/materials/3.Quiz_WarmUp_CRISP-DM.html"  # temporarily hidden (warm-up)
-    # assignment: "lab3-data-scrubbing"  # temporarily hidden
-    assessment: "—"
+    assignment: "lab3-data-scrubbing"
+    assessment: "Lab 3 submission"
 
   - id: 4
     week: 4

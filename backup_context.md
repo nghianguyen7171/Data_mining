@@ -146,7 +146,7 @@ practical exam on Orange and a group project presentation; the final is a writte
 | :--- | :--------- | :--------------------------------------------------------------- | :----------------- | :--------- | :----------------------------------------- |
 | 1    | Lecture    | Introduction to Data Mining & CRISP-DM                           | **Released** | 1, 2       | Lab 0 submission                           |
 | 2    | Lab        | Lab 2 — Python Basics & Minimal NumPy                           | **Released** | 2, 5, 6    | — (Lab 2 link temporarily hidden)          |
-| 3    | Lecture    | Understanding & Preparing Data                                   | **Released** | 1, 2, 5    | — (Lab 3 link temporarily hidden)          |
+| 3    | Lecture    | Understanding & Preparing Data                                   | **Released** | 1, 2, 5    | Lab 3 submission                           |
 | 4    | Lab        | Lab 1 — pandas Introduction & Data Cleaning                     | TBD                | 2, 5, 6    | Lab 1 + Excel exercise                     |
 | 5    | Lecture    | Finding Relationships — Correlation & Association Rules         | TBD                | 2, 3       | —                                         |
 | 6    | Lab        | Lab 2 — Correlation & Market-Basket Analysis                    | TBD                | 3, 5, 6    | Lab 2 + Presentation#1                     |
@@ -485,6 +485,11 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-09-09 — Publish Lab 3 link on the live site
+
+- Restored `assignment: lab3-data-scrubbing` / `assessment: Lab 3 submission` on Week 3
+- Rebuilt and deployed
+
 ### 2026-09-09 — Lab 3: IsActive mode guidance (Y, not N)
 
 - Instructor draft `lab/lab3.md` corrected: invalid `IsActive` codes map to mode **Y**
@@ -611,7 +616,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-09 (Lab 3 IsActive mode guidance aligned with corrected key)
+**Last Updated:** 2026-09-09 (Lab 3 published on Week 3 schedule)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
