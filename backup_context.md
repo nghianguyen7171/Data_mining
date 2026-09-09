@@ -485,6 +485,13 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-09-09 — Lab 3: IsActive mode guidance (Y, not N)
+
+- Instructor draft `lab/lab3.md` corrected: invalid `IsActive` codes map to mode **Y**
+  (31 Y vs 28 N), not N
+- Student page updated to require verifying **mode** via Distributions (without revealing Y)
+- Rebuilt `docs/assignments/lab3-data-scrubbing.html` and deployed
+
 ### 2026-09-08 — Temporarily hide Lab 3 link on the live site
 
 - Commented out `assignment:` for Week 3 in `src/data/lectures.yml` (assignment page kept)
@@ -604,7 +611,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-08 (Lab 3 schedule link temporarily hidden)
+**Last Updated:** 2026-09-09 (Lab 3 IsActive mode guidance aligned with corrected key)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course

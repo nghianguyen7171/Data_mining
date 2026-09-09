@@ -118,7 +118,7 @@ Work in this order: **fix inconsistent labels first**, then impute, then reduce 
 1. Add **Edit Domain** (Transform), connect **File → Edit Domain**.
 2. Open it and inspect categorical columns that looked inconsistent in Distributions (`Gender`, `SatisfactionLevel`, `IsActive`, and any other you noticed).
 3. Merge / rename values so each concept has **one canonical label**. Document every mapping you apply (from → to).
-4. For clearly invalid codes in a Yes/No-style field, choose a defensible rule using the lecture decision guidance (mode vs leave missing vs other). Write your rule in the answers.
+4. For clearly invalid codes in a Yes/No-style field (`IsActive`), follow the Week 3 decision guidance: map broken codes to the **mode** (the most frequent *valid* category), unless you have a stronger business reason not to. Verify the mode yourself with **Distributions** or value counts — do not guess. Write your mapping and justification in the answers.
 5. Click **Apply**. Re-check with **Data Table** and **Distributions** after Edit Domain.
 
 📷 **Screenshot required:** Edit Domain while you standardise at least one column.
@@ -154,7 +154,7 @@ Work in this order: **fix inconsistent labels first**, then impute, then reduce 
 
 **B1.** After **Edit Domain**, how many distinct values remain in `Gender`? List them: ______
 
-**B2.** What did you do with invalid codes in `IsActive`? **Why** that choice? ______
+**B2.** What did you do with invalid codes in `IsActive`? If you followed the **mode** rule, which value did you use, and **how did you confirm** it was the mode? ______
 
 **B3.** After **Impute**, are any required analysis fields still blank? For a numeric column you imputed, roughly what filled value was used (report the method and approximate value)? ______
 

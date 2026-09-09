@@ -187,7 +187,7 @@
 <li>Add <strong>Edit Domain</strong> (Transform), connect <strong>File → Edit Domain</strong>.</li>
 <li>Open it and inspect categorical columns that looked inconsistent in Distributions (<code>Gender</code>, <code>SatisfactionLevel</code>, <code>IsActive</code>, and any other you noticed).</li>
 <li>Merge / rename values so each concept has <strong>one canonical label</strong>. Document every mapping you apply (from → to).</li>
-<li>For clearly invalid codes in a Yes/No-style field, choose a defensible rule using the lecture decision guidance (mode vs leave missing vs other). Write your rule in the answers.</li>
+<li>For clearly invalid codes in a Yes/No-style field (<code>IsActive</code>), follow the Week 3 decision guidance: map broken codes to the <strong>mode</strong> (the most frequent <em>valid</em> category), unless you have a stronger business reason not to. Verify the mode yourself with <strong>Distributions</strong> or value counts — do not guess. Write your mapping and justification in the answers.</li>
 <li>Click <strong>Apply</strong>. Re-check with <strong>Data Table</strong> and <strong>Distributions</strong> after Edit Domain.</li>
 </ol>
 <p>📷 <strong>Screenshot required:</strong> Edit Domain while you standardise at least one column.</p>
@@ -220,7 +220,7 @@
 </blockquote>
 <h3>✍️ Questions — Part B</h3>
 <p><strong>B1.</strong> After <strong>Edit Domain</strong>, how many distinct values remain in <code>Gender</code>? List them: ______</p>
-<p><strong>B2.</strong> What did you do with invalid codes in <code>IsActive</code>? <strong>Why</strong> that choice? ______</p>
+<p><strong>B2.</strong> What did you do with invalid codes in <code>IsActive</code>? If you followed the <strong>mode</strong> rule, which value did you use, and <strong>how did you confirm</strong> it was the mode? ______</p>
 <p><strong>B3.</strong> After <strong>Impute</strong>, are any required analysis fields still blank? For a numeric column you imputed, roughly what filled value was used (report the method and approximate value)? ______</p>
 <p><strong>B4.</strong> After <strong>Select Rows</strong>, how many rows remain, and how many were removed? ______</p>
 <p><strong>B5.</strong> Which column(s) did you ignore for modelling, and <strong>why</strong> must you not delete them from the original source file? ______</p>
