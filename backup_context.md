@@ -196,9 +196,9 @@ emits links; `status: tbd` shows the title greyed out with no links. Source: `sr
 - **Deliverable:** notebook `lab2_YourName.ipynb` uploaded to
   https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing
 - Answer keys use `::: solution` fences (stripped on public build)
-- **Instructor notebook:** `lab/lab2_answers.ipynb` — full worked answers with English
-  comments (gitignored; do not publish)
-- **Schedule link:** temporarily hidden (assignment page still built under `/assignments/`)
+- **Answer notebook:** `src/assets/materials/2.Lab2_Answers.ipynb` (from `lab/lab2_answers.ipynb`);
+  linked on Week 2 Materials as **Answers**; also linked from the Lab 2 assignment page
+- **Schedule link for Lab 2 assignment:** temporarily hidden (assignment page still built)
 
 ### Lab 3 — Data Scrubbing in Orange
 
@@ -336,6 +336,7 @@ Data Mining/
 │   │       ├── 1.Quiz_Intro_CRISP-DM.html    # Week 1 quiz
 │   │       ├── 2.Basic_Py.pdf               # Week 2 slides (Python basics)
 │   │       ├── 2.Quiz_Basic_Py.html         # Week 2 in-class quiz (code → result)
+│   │       ├── 2.Lab2_Answers.ipynb         # Lab 2 worked-answer notebook
 │   │       ├── 3.Data_Understanding.pdf     # Week 3 slides
 │   │       ├── 3.Quiz_WarmUp_CRISP-DM.html  # Week 3 warm-up quiz
 │   │       └── 3.Quiz_Data_Understanding.html # Week 3 main quiz
@@ -487,6 +488,12 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-09-09 — Publish Lab 2 answer notebook (.ipynb)
+
+- Copied `lab/lab2_answers.ipynb` → `src/assets/materials/2.Lab2_Answers.ipynb`
+- Week 2 Materials: **Answers** download link (`notebook` + `notebook_label`)
+- Added download link on Lab 2 assignment wrap-up; rebuilt and deployed
+
 ### 2026-09-09 — Publish Week 3 warm-up + data-understanding quizzes
 
 - Copied `quizz/quizz3.2.data_understanding.html` → `3.Quiz_Data_Understanding.html`
@@ -625,7 +632,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-09 (Week 3 Warm-up + Quiz published on schedule)
+**Last Updated:** 2026-09-09 (Lab 2 answer notebook published as downloadable .ipynb)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course

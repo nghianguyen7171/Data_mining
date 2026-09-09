@@ -38,7 +38,7 @@
             <td class="col-materials">
               {{#if (isReleased this.status)}}
                 {{#if this.slides}}<a class="mat" href="{{url this.slides}}">Slides</a>{{/if}}
-                {{#if this.notebook}}<a class="mat" href="{{url this.notebook}}">Notebook</a>{{/if}}
+                {{#if this.notebook}}<a class="mat" href="{{url this.notebook}}">{{#if this.notebook_label}}{{this.notebook_label}}{{else}}Notebook{{/if}}</a>{{/if}}
                 {{#if this.quizzes}}
                   {{#each this.quizzes}}
                     <a class="mat" href="{{url this.path}}">{{#if this.label}}{{this.label}}{{else}}Quiz{{/if}}</a>
