@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Data Understanding, Preparation & Ethics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #111827;
+            line-height: 1.6;
+        }
+        .question-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .options-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 1.5rem;
+            flex-grow: 1;
+        }
+        .option-item {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            padding: 0.75rem 0.5rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.2s, opacity 0.2s;
+            border: 1px solid transparent;
+        }
+        .option-item:hover:not(.disabled) {
+            background-color: #f3f4f6;
+            cursor: pointer;
+        }
+        .option-item.disabled {
+            opacity: 0.7;
+        }
+        .option-input {
+            margin-top: 0.3rem;
+            margin-right: 0.75rem;
+            cursor: inherit;
+        }
+        .correct-answer-box {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.95rem;
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        .explanation-text {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            font-style: italic;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10 flex items-center justify-center min-h-screen">
+    <div class="max-w-3xl w-full mx-auto">
+        <header class="mb-8 text-center">
+            <h1 class="text-2xl font-bold text-gray-900 mb-1">Knowledge Check</h1>
+            <h2 class="text-lg text-gray-600">Topic: Data Understanding, Preparation & Ethics</h2>
+        </header>
+
+        <main id="quiz-container">
+            <!-- Content will be rendered by JS -->
+        </main>
+
+        <div id="summary-container" class="hidden text-center bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Quiz Completed!</h3>
+            <p class="text-lg mb-6">Your Score: <span id="final-score" class="font-bold text-blue-600 text-3xl">0/14</span></p>
+            <div class="flex justify-center space-x-4">
+                <button id="review-btn" class="px-6 py-2 bg-gray-200 text-gray-800 font-semibold rounded hover:bg-gray-300 transition duration-150">Review Answers</button>
+                <button id="reset-btn" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition duration-150">Restart Quiz</button>
+            </div>
+        </div>
+
+        <div id="navigation-controls" class="mt-6 flex justify-between items-center">
+            <button id="prev-btn" class="px-4 py-2 bg-gray-200 text-gray-700 font-medium rounded hover:bg-gray-300 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
+                &larr; Previous
+            </button>
+            
+            <span id="progress-text" class="text-sm font-medium text-gray-500">1 / 14</span>
+            
+            <button id="next-btn" class="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
+                Next &rarr;
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const rawQuizData = [
+            {
+                section: "Part 1: Data Understanding",
+                questions: [
+                    { 
+                        question: "According to the course's standard terminology (North Textbook), what are the correct terms for the horizontal and vertical elements of a data table?", 
+                        options: [
+                            "Tuples and Fields", 
+                            "Instances and Features", 
+                            "Examples and Attributes", 
+                            "Observations and Attributes"
+                        ], 
+                        correctAnswer: 3,
+                        explanation: "Different tools use different terms. To avoid confusion, our standard (North Textbook) uses 'Observations' for rows and 'Attributes' for columns."
+                    },
+                    { 
+                        question: "Why should an analyst extract a dataset from a Data Warehouse (OLAP) instead of running intensive mining algorithms directly on the live Operational Database (OLTP)?", 
+                        options: [
+                            "Because OLTP databases do not support numeric variables.", 
+                            "Because OLAP warehouses are optimized for fast analytical queries, whereas hitting the OLTP can crash daily business transactions.", 
+                            "Because Data Warehouses only store unstructured data like images.", 
+                            "Because OLAP completely prevents the 'Out-of-synch' phenomenon."
+                        ], 
+                        correctAnswer: 1,
+                        explanation: "OLTP is built for fast read/write of daily operations. Running heavy analytical models directly on it can slow down or crash the live system. Data Warehouses (OLAP) are specifically optimized for analysis."
+                    },
+                    { 
+                        question: "A retail company records the exact time of each purchase (e.g., '2023-10-31 14:00'). To predict holiday shopping surges, the analyst splits this into 'Day of Week' and 'Month'. What type of variable was the original timestamp?", 
+                        options: [
+                            "Ordinal", 
+                            "Categorical / Nominal", 
+                            "Datetime", 
+                            "Numeric"
+                        ], 
+                        correctAnswer: 2,
+                        explanation: "Datetime variables store specific timestamps. They are often unpacked into smaller components (like Day, Month, Quarter) to expose seasonality and cyclical trends."
+                    },
+                    { 
+                        question: "When assigning roles to variables before algorithm training, what role must be assigned to the specific variable the model is attempting to predict (e.g., 'Customer Churn')?", 
+                        options: [
+                            "Feature / Attribute", 
+                            "Target / Label", 
+                            "Meta / ID", 
+                            "Numeric"
+                        ], 
+                        correctAnswer: 1,
+                        explanation: "The Target (or Label) is the dependent variable the model seeks to predict. Features are the independent inputs the model learns from, and Meta/IDs are explicitly excluded."
+                    },
+                    { 
+                        question: "What is the primary advantage of utilizing 'Organizational Data' (like aggregated census or CDC statistics) compared to raw 'Operational Data'?", 
+                        options: [
+                            "It contains transaction-level details like exact timestamps and prices.", 
+                            "It is always 100% free of missing values.", 
+                            "It inherently protects individual privacy by obscuring granular details.", 
+                            "It requires zero data scrubbing."
+                        ], 
+                        correctAnswer: 2,
+                        explanation: "Organizational data is typically summarized and aggregated. By grouping data at a macro level (e.g., by region), it inherently protects individual privacy."
+                    }
+                ]
+            },
+            {
+                section: "Part 2: Data Preparation (Scrubbing)",
+                questions: [
+                    { 
+                        question: "A bank's dataset has missing values in the 'Criminal Record' column. Why is it highly risky to Impute (replace) these missing values with the statistical Mode (e.g., 'No')?", 
+                        options: [
+                            "Because it forces a subjective reality where one does not exist, which is a major ethical risk.", 
+                            "Because distance-based algorithms cannot process the word 'No'.", 
+                            "Because it will artificially increase the variance of the dataset.", 
+                            "Because the Mode should only be used for Numeric variables."
+                        ], 
+                        correctAnswer: 0,
+                        explanation: "Never force a value where one does not exist. Subjective or sensitive variables demand safe handling (like deleting the row) over blind statistical imputation to avoid distorting realities."
+                    },
+                    { 
+                        question: "An algorithm is analyzing two features: Age (range: 18-80) and Annual Income (range: $20,000 - $1,000,000). Why is Normalization/Scaling necessary here?", 
+                        options: [
+                            "To convert the numeric values into categorical bins.", 
+                            "To remove Outliers from the Annual Income column.", 
+                            "To prevent the massive numeric range of Income from mathematically overpowering the Age variable in distance-based algorithms.", 
+                            "To impute missing values in both columns."
+                        ], 
+                        correctAnswer: 2,
+                        explanation: "Distance-based algorithms calculate spatial relationships. Without normalization (scaling both to 0.0 - 1.0), the variable with the larger range will completely dominate the model's logic."
+                    },
+                    { 
+                        question: "When applying 'Attribute Reduction' to remove algorithmic noise, what is the Golden Rule regarding the foundational source database?", 
+                        options: [
+                            "Always delete irrelevant columns permanently from the source database to save space.", 
+                            "Only drop columns within the active analytical workflow; never delete them from the source database.", 
+                            "Attributes should only be reduced if they contain missing data.", 
+                            "Replace the dropped attributes with aggregated data."
+                        ], 
+                        correctAnswer: 1,
+                        explanation: "Today's noise may be tomorrow's critical signal. You should only drop columns within your software workflow (like Orange or Python), never permanently deleting data from the foundational database."
+                    },
+                    { 
+                        question: "To speed up the testing of a new predictive model on a massive database of 10 million rows, an analyst extracts a random subset of 500,000 rows. What is this Data Reduction technique called?", 
+                        options: [
+                            "Filtering", 
+                            "Binning", 
+                            "Encoding", 
+                            "Sampling"
+                        ], 
+                        correctAnswer: 3,
+                        explanation: "Sampling is the process of extracting a random subset of data. This allows for rapid model testing and iteration before deploying the heavy algorithm on the full dataset."
+                    },
+                    { 
+                        question: "A marketer transforms a continuous 'Age' column (e.g., 25, 42, 60) into specific text categories like 'Young Adult,' 'Middle-Aged,' and 'Senior.' Which feature engineering technique is this?", 
+                        options: [
+                            "Encoding", 
+                            "Normalization", 
+                            "Binning (Discretization)", 
+                            "Datetime Splitting"
+                        ], 
+                        correctAnswer: 2,
+                        explanation: "Binning (or Discretization) is the process of translating continuous numbers into discrete categories or groups."
+                    }
+                ]
+            },
+            {
+                section: "Part 3: Ethics & Privacy",
+                questions: [
+                    { 
+                        question: "In data mining, continuous exposure to numbers, code, and algorithms can easily obscure a fundamental truth. What is the analyst's primary mandate regarding this?", 
+                        options: [
+                            "To ensure algorithms run as fast as possible, regardless of data origin.", 
+                            "To remember that behind every number is a real person, making ethics and privacy the primary filter at every stage.", 
+                            "To prioritize business revenue targets over data privacy regulations.", 
+                            "To automatically impute all missing data to ensure the model doesn't crash."
+                        ], 
+                        correctAnswer: 1,
+                        explanation: "The analyst's mandate is to realize that humans become data points, then algorithms, then targeted profiles. Ethics and privacy must be maintained across all these levels of abstraction."
+                    },
+                    { 
+                        question: "In the 2003 JetBlue scandal, the airline provided 1 million passenger records to a government contractor (Torch Concepts). What was the core ethical violation?", 
+                        options: [
+                            "The data was shared and supplemented with purchased data to build 'terrorist profiles' without notifying or seeking permission from the passengers.", 
+                            "The data was hacked because JetBlue did not use proper encryption.", 
+                            "Torch Concepts accidentally deleted the data from the OLTP database.", 
+                            "JetBlue charged the government too much money for the data."
+                        ], 
+                        correctAnswer: 0,
+                        explanation: "JetBlue violated ethical boundaries (informed consent) by handing over massive amounts of personal data to a contractor without passenger knowledge, leading to lawsuits and Senate investigations."
+                    },
+                    { 
+                        question: "'Implementing robust encryption and storage protocols to prevent hackers from stealing data' falls under which dimension of data management?", 
+                        options: [
+                            "Ethical Boundary (What we should do)", 
+                            "Technical Security (What we can do)", 
+                            "Data Scrubbing", 
+                            "Feature Engineering"
+                        ], 
+                        correctAnswer: 1,
+                        explanation: "Technical Security focuses on what we CAN do to protect systems from unauthorized access (encryption, firewalls). Ethical Boundaries focus on what we SHOULD do (consent, avoiding exploitation)."
+                    },
+                    { 
+                        question: "A marketing team wants to use a legally obtained, highly granular dataset to target financially vulnerable customers with predatory loan ads, arguing it will maximize quarterly profits. What does the course teach about this?", 
+                        options: [
+                            "If the data was legally obtained, it is perfectly fine to use it.", 
+                            "If the predictive model has an accuracy over 95%, it should be deployed.", 
+                            "Business objectives do not justify unethical means.", 
+                            "The analyst should normalize the data first."
+                        ], 
+                        correctAnswer: 2,
+                        explanation: "Just because we possess the data and have the technical capability to exploit it for profit does not mean we should. Business goals do not override ethical obligations to the human beings behind the data."
+                    }
+                ]
+            }
+        ];
+
+        let flatQuestions = [];
+        rawQuizData.forEach((sectionData) => {
+            sectionData.questions.forEach((q) => {
+                flatQuestions.push({
+                    sectionTitle: sectionData.section,
+                    question: q.question,
+                    options: q.options,
+                    correctAnswer: q.correctAnswer,
+                    explanation: q.explanation,
+                    userAnswer: null
+                });
+            });
+        });
+
+        const totalQuestions = flatQuestions.length;
+        let currentIndex = 0;
+        let isReviewMode = false;
+
+        const container = document.getElementById('quiz-container');
+        const summaryContainer = document.getElementById('summary-container');
+        const navControls = document.getElementById('navigation-controls');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressText = document.getElementById('progress-text');
+        const reviewBtn = document.getElementById('review-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const finalScoreSpan = document.getElementById('final-score');
+
+        function renderQuestion(index) {
+            container.innerHTML = '';
+            
+            const q = flatQuestions[index];
+            const card = document.createElement('div');
+            card.className = 'question-card';
+
+            const sectionEl = document.createElement('h3');
+            sectionEl.className = 'section-title';
+            sectionEl.textContent = q.sectionTitle;
+            card.appendChild(sectionEl);
+
+            const questionText = document.createElement('p');
+            questionText.className = 'font-semibold text-gray-800 text-lg mb-2';
+            questionText.textContent = `Question ${index + 1}: ${q.question}`;
+            card.appendChild(questionText);
+
+            const optionsList = document.createElement('ul');
+            optionsList.className = 'options-list';
+            
+            const hasAnswered = q.userAnswer !== null;
+            const shouldShowResult = hasAnswered || isReviewMode;
+
+            q.options.forEach((opt, optIndex) => {
+                const li = document.createElement('li');
+                li.className = `option-item ${shouldShowResult ? 'disabled' : ''}`;
+                
+                const inputId = `opt-${optIndex}`;
+                
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = `question-radio`;
+                input.id = inputId;
+                input.value = optIndex;
+                input.className = 'option-input';
+                
+                if (q.userAnswer === optIndex) {
+                    input.checked = true;
+                }
+
+                if (shouldShowResult) {
+                    input.disabled = true;
+                } else {
+                    li.addEventListener('click', () => {
+                        if (q.userAnswer === null && !isReviewMode) {
+                            q.userAnswer = optIndex;
+                            renderQuestion(currentIndex); 
+                        }
+                    });
+                }
+
+                const label = document.createElement('label');
+                label.htmlFor = inputId;
+                label.className = `text-gray-700 w-full ${shouldShowResult ? 'cursor-default' : 'cursor-pointer'}`;
+                label.textContent = opt;
+
+                if (shouldShowResult) {
+                    if (optIndex === q.correctAnswer) {
+                        li.classList.add('bg-green-50', 'border-green-200');
+                        label.classList.add('text-green-800', 'font-bold');
+                    } else if (q.userAnswer === optIndex && optIndex !== q.correctAnswer) {
+                        li.classList.add('bg-red-50', 'border-red-200');
+                        label.classList.add('text-red-700', 'line-through');
+                    }
+                }
+
+                li.appendChild(input);
+                li.appendChild(label);
+                optionsList.appendChild(li);
+            });
+
+            card.appendChild(optionsList);
+
+            if (shouldShowResult) {
+                const answerBox = document.createElement('div');
+                answerBox.className = 'correct-answer-box';
+                answerBox.style.display = 'block';
+                
+                let feedbackText = '';
+                if (hasAnswered && q.userAnswer === q.correctAnswer) {
+                    answerBox.classList.add('bg-green-100', 'border', 'border-green-300', 'text-green-800');
+                    feedbackText = `<strong>Correct!</strong> Well done.`;
+                } else if (hasAnswered && q.userAnswer !== q.correctAnswer) {
+                    answerBox.classList.add('bg-red-100', 'border', 'border-red-300', 'text-red-800');
+                    feedbackText = `<strong>Incorrect.</strong> The correct answer is: <br/><span class="font-semibold text-gray-900 mt-1 mb-2 inline-block">${q.options[q.correctAnswer]}</span>`;
+                } else {
+                    answerBox.classList.add('bg-yellow-100', 'border', 'border-yellow-300', 'text-yellow-800');
+                    feedbackText = `<strong>Not answered.</strong> The correct answer is: <br/><span class="font-semibold text-gray-900 mt-1 mb-2 inline-block">${q.options[q.correctAnswer]}</span>`;
+                }
+
+                answerBox.innerHTML = `
+                    ${feedbackText}
+                    <div class="explanation-text">
+                        <strong>💡 Recall:</strong> ${q.explanation}
+                    </div>
+                `;
+                
+                card.appendChild(answerBox);
+            }
+
+            container.appendChild(card);
+            updateNavigation();
+        }
+
+        function updateNavigation() {
+            progressText.textContent = `${currentIndex + 1} / ${totalQuestions}`;
+            
+            prevBtn.disabled = currentIndex === 0;
+
+            const q = flatQuestions[currentIndex];
+            const hasAnswered = q.userAnswer !== null;
+
+            if (currentIndex === totalQuestions - 1) {
+                if (!isReviewMode) {
+                    nextBtn.textContent = 'Submit';
+                    nextBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    nextBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                    nextBtn.disabled = !hasAnswered; 
+                } else {
+                    nextBtn.textContent = 'Finish';
+                    nextBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    nextBtn.classList.add('bg-gray-600', 'hover:bg-gray-700');
+                    nextBtn.disabled = false;
+                }
+            } else {
+                nextBtn.innerHTML = 'Next &rarr;';
+                nextBtn.classList.remove('bg-green-600', 'hover:bg-green-700', 'bg-gray-600', 'hover:bg-gray-700');
+                nextBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                nextBtn.disabled = (!isReviewMode && !hasAnswered);
+            }
+        }
+
+        function calculateScore() {
+            let score = 0;
+            flatQuestions.forEach(q => {
+                if (q.userAnswer === q.correctAnswer) score++;
+            });
+            return score;
+        }
+
+        function showSummary() {
+            const score = calculateScore();
+            container.style.display = 'none';
+            navControls.style.display = 'none';
+            summaryContainer.style.display = 'block';
+            finalScoreSpan.textContent = `${score}/${totalQuestions}`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion(currentIndex);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < totalQuestions - 1) {
+                currentIndex++;
+                renderQuestion(currentIndex);
+            } else if (currentIndex === totalQuestions - 1) {
+                showSummary();
+            }
+        });
+
+        reviewBtn.addEventListener('click', () => {
+            isReviewMode = true;
+            summaryContainer.style.display = 'none';
+            container.style.display = 'block';
+            navControls.style.display = 'flex';
+            currentIndex = 0;
+            renderQuestion(currentIndex);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            isReviewMode = false;
+            currentIndex = 0;
+            flatQuestions.forEach(q => q.userAnswer = null);
+            
+            summaryContainer.style.display = 'none';
+            container.style.display = 'block';
+            navControls.style.display = 'flex';
+            
+            renderQuestion(currentIndex);
+        });
+
+        // Initialize the first question
+        renderQuestion(currentIndex);
+
+    </script>
+</body>
+</html>

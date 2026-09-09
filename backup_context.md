@@ -337,7 +337,8 @@ Data Mining/
 │   │       ├── 2.Basic_Py.pdf               # Week 2 slides (Python basics)
 │   │       ├── 2.Quiz_Basic_Py.html         # Week 2 in-class quiz (code → result)
 │   │       ├── 3.Data_Understanding.pdf     # Week 3 slides
-│   │       └── 3.Quiz_WarmUp_CRISP-DM.html  # Week 3 warm-up (hidden on schedule)
+│   │       ├── 3.Quiz_WarmUp_CRISP-DM.html  # Week 3 warm-up quiz
+│   │       └── 3.Quiz_Data_Understanding.html # Week 3 main quiz
 │   └── styles/
 │       ├── _variables.scss       # Theme tokens (accent colour, fonts)
 │       └── main.scss             # Template stylesheet
@@ -418,9 +419,11 @@ deliberately opting in.
 - `src/assets/materials/3.Data_Understanding.pdf` — Week 3 slides (from
   `slides/3. Data Undersranding.pdf`)
 - `src/assets/materials/3.Quiz_WarmUp_CRISP-DM.html` — Week 3 warm-up (CRISP-DM & GIGO;
-  source `quizz/quizz3.1.warm_up.html`); **temporarily hidden** from Schedule (commented
-  `quiz:` on Week 3)
-- Schedule Materials column supports `slides`, `notebook`, and `quiz` links
+  source `quizz/quizz3.1.warm_up.html`); linked as **Warm-up**
+- `src/assets/materials/3.Quiz_Data_Understanding.html` — Week 3 quiz (data understanding,
+  preparation, ethics; source `quizz/quizz3.2.data_understanding.html`); linked as **Quiz**
+- Schedule Materials supports `slides`, `notebook`, single `quiz:`, or `quizzes:` list
+  (`label` + `path`) for multiple quiz links
 - `README.md` — setup, contribution guide, common tasks, deploy flow, collaborator instructions
 - Live site deployed at https://nghianguyen7171.github.io/Data_mining/
 
@@ -437,7 +440,6 @@ deliberately opting in.
   material; published copies live under `src/assets/materials/` / `src/assignments/`
 - **Re-enable Lab 2 schedule link** when ready: restore `assignment:` + `Lab 2 submission`
   in `lectures.yml`
-- **Re-enable Week 3 warm-up quiz** when ready: uncomment `quiz:` in `lectures.yml`
 
 ---
 
@@ -484,6 +486,13 @@ deliberately opting in.
 ---
 
 ## Change Log
+
+### 2026-09-09 — Publish Week 3 warm-up + data-understanding quizzes
+
+- Copied `quizz/quizz3.2.data_understanding.html` → `3.Quiz_Data_Understanding.html`
+- Enabled both Week 3 quizzes via new `quizzes:` list in `lectures.yml`
+- Extended `schedule.hbs` to render multiple labeled quiz links (backward-compatible with `quiz:`)
+- Rebuilt and deployed
 
 ### 2026-09-09 — Publish Lab 3 link on the live site
 
@@ -616,7 +625,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-09 (Lab 3 published on Week 3 schedule)
+**Last Updated:** 2026-09-09 (Week 3 Warm-up + Quiz published on schedule)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course

@@ -53,7 +53,11 @@ lectures:
       - "Normalisation, standardisation, and creating new variables"
     clos: "1, 2, 5"
     slides: "assets/materials/3.Data_Understanding.pdf"
-    # quiz: "assets/materials/3.Quiz_WarmUp_CRISP-DM.html"  # temporarily hidden (warm-up)
+    quizzes:
+      - label: "Warm-up"
+        path: "assets/materials/3.Quiz_WarmUp_CRISP-DM.html"
+      - label: "Quiz"
+        path: "assets/materials/3.Quiz_Data_Understanding.html"
     assignment: "lab3-data-scrubbing"
     assessment: "Lab 3 submission"
 

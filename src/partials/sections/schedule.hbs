@@ -39,8 +39,14 @@
               {{#if (isReleased this.status)}}
                 {{#if this.slides}}<a class="mat" href="{{url this.slides}}">Slides</a>{{/if}}
                 {{#if this.notebook}}<a class="mat" href="{{url this.notebook}}">Notebook</a>{{/if}}
-                {{#if this.quiz}}<a class="mat" href="{{url this.quiz}}">Quiz</a>{{/if}}
-                {{#unless this.slides}}{{#unless this.notebook}}{{#unless this.quiz}}<span class="dash">—</span>{{/unless}}{{/unless}}{{/unless}}
+                {{#if this.quizzes}}
+                  {{#each this.quizzes}}
+                    <a class="mat" href="{{url this.path}}">{{#if this.label}}{{this.label}}{{else}}Quiz{{/if}}</a>
+                  {{/each}}
+                {{else}}
+                  {{#if this.quiz}}<a class="mat" href="{{url this.quiz}}">Quiz</a>{{/if}}
+                {{/if}}
+                {{#unless this.slides}}{{#unless this.notebook}}{{#unless this.quiz}}{{#unless this.quizzes}}<span class="dash">—</span>{{/unless}}{{/unless}}{{/unless}}{{/unless}}
               {{else}}
                 <span class="dash">—</span>
               {{/if}}
