@@ -488,6 +488,11 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-09-09 — Lab 2 answers link forces .ipynb download
+
+- Schedule / assignment links use `download="…ipynb"` plus `assets/js/site.js`
+  blob fallback (GitHub Pages otherwise opens raw JSON)
+
 ### 2026-09-09 — Publish Lab 2 answer notebook (.ipynb)
 
 - Copied `lab/lab2_answers.ipynb` → `src/assets/materials/2.Lab2_Answers.ipynb`
@@ -632,7 +637,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-09 (Lab 2 answer notebook published as downloadable .ipynb)
+**Last Updated:** 2026-09-09 (Lab 2 Answers link forces .ipynb download)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course

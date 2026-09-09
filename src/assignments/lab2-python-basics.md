@@ -589,7 +589,7 @@ Today you practised: variables & nested structures; **indexing & slicing**; NumP
 
 **Before you leave:** export `lab2_YourName.ipynb` and upload it to the [Lab 2 Drive folder](https://drive.google.com/drive/folders/1f0WA6zKYyynvVFG2nJZ09SsOSyxzXPpB?usp=sharing).
 
-**Worked answers (optional download):** [2.Lab2_Answers.ipynb](../assets/materials/2.Lab2_Answers.ipynb) — full solution notebook with English comments. Use it to check your work after submitting.
+**Worked answers (optional download):** <a href="../assets/materials/2.Lab2_Answers.ipynb" download="2.Lab2_Answers.ipynb">2.Lab2_Answers.ipynb</a> — full solution notebook with English comments. Use it to check your work after submitting.
 
 ---
 

@@ -106,6 +106,7 @@ function registerHelpers(course) {
   Handlebars.registerHelper('eq', (a, b) => a === b);
   Handlebars.registerHelper('year', () => new Date().getFullYear());
   Handlebars.registerHelper('concat', (...args) => args.slice(0, -1).join(''));
+  Handlebars.registerHelper('basename', (p) => path.basename(String(p || '')));
   Handlebars.registerHelper('md', (s) => new Handlebars.SafeString(marked.parse(String(s || ''))));
   Handlebars.registerHelper('mdInline', (s) => new Handlebars.SafeString(marked.parseInline(String(s || ''))));
   Handlebars.registerHelper('isReleased', (status) => (status || 'released') === 'released');
