@@ -434,7 +434,7 @@ deliberately opting in.
 
 - **TA collaborator access:** Le Duy Khanh collaborator invitation sent; awaiting acceptance
   (Write access on personal repo)
-- **Remaining weeks:** Slides for Weeks 4–15 added to `src/assets/materials/` and
+- **Remaining weeks:** Slides for Weeks 5–15 added to `src/assets/materials/` and
   `status: released` set in `lectures.yml` as content is ready
 - **Lab assignments:** Lab 1 (Week 4) and later labs not yet written — add per week as taught
 - **This-week banner:** Update `src/data/this-week.yml` each week (or delete `current:` block
