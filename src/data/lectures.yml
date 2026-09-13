@@ -67,12 +67,13 @@ lectures:
     week: 4
     type: "Lab"
     title: "Lab 1 — pandas Introduction & Data Cleaning"
-    status: tbd
+    status: released
     topics:
       - "pandas: reading data, selecting and filtering, descriptive stats, handling missing values"
       - "Data cleaning in Orange: Impute, Distributions, Scatter Plot, Box Plot"
       - "Business memo: documenting data quality findings"
     clos: "2, 5, 6"
+    slides: "assets/materials/4.Pandas.pdf"
     assessment: "Lab 1 + Excel exercise"
 
   - id: 5

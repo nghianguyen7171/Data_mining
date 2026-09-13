@@ -338,6 +338,7 @@ Data Mining/
 │   │       ├── 2.Quiz_Basic_Py.html         # Week 2 in-class quiz (code → result)
 │   │       ├── 2.Lab2_Answers.ipynb         # Lab 2 worked-answer notebook
 │   │       ├── 3.Data_Understanding.pdf     # Week 3 slides
+│   │       ├── 4.Pandas.pdf                 # Week 4 slides (pandas)
 │   │       ├── 3.Quiz_WarmUp_CRISP-DM.html  # Week 3 warm-up quiz
 │   │       └── 3.Quiz_Data_Understanding.html # Week 3 main quiz
 │   └── styles/
@@ -419,6 +420,7 @@ deliberately opting in.
   code→result MCQs; source `quizz/quizz2_Basic_Py.html`); linked on Week 2 Materials
 - `src/assets/materials/3.Data_Understanding.pdf` — Week 3 slides (from
   `slides/3. Data Undersranding.pdf`)
+- `src/assets/materials/4.Pandas.pdf` — Week 4 slides (from `slides/4. Pandas.pdf`)
 - `src/assets/materials/3.Quiz_WarmUp_CRISP-DM.html` — Week 3 warm-up (CRISP-DM & GIGO;
   source `quizz/quizz3.1.warm_up.html`); linked as **Warm-up**
 - `src/assets/materials/3.Quiz_Data_Understanding.html` — Week 3 quiz (data understanding,
@@ -487,6 +489,12 @@ deliberately opting in.
 ---
 
 ## Change Log
+
+### 2026-09-13 — Publish Week 4 pandas slides
+
+- Copied `slides/4. Pandas.pdf` → `src/assets/materials/4.Pandas.pdf`
+- Week 4 status → `released`; Materials link **Slides**
+- Rebuilt and deployed
 
 ### 2026-09-09 — Lab 2 answers link forces .ipynb download
 
@@ -637,7 +645,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-09 (Lab 2 Answers link forces .ipynb download)
+**Last Updated:** 2026-09-13 (Week 4 pandas slides published)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
