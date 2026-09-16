@@ -66,15 +66,17 @@ lectures:
   - id: 4
     week: 4
     type: "Lab"
-    title: "Lab 1 — pandas Introduction & Data Cleaning"
+    title: "Lab 4 — pandas & Journal-Style Figures with cnsplots"
     status: released
     topics:
-      - "pandas: reading data, selecting and filtering, descriptive stats, handling missing values"
-      - "Data cleaning in Orange: Impute, Distributions, Scatter Plot, Box Plot"
-      - "Business memo: documenting data quality findings"
+      - "pandas: build a feature table from PathMNIST histology images"
+      - "cnsplots: compose a publication-style multi-panel figure"
+      - "Classification teaser: confusion matrix and ROC for tumor vs other"
+      - "Interpret the figure and write a short PDF report"
     clos: "2, 5, 6"
     slides: "assets/materials/4.Pandas.pdf"
-    assessment: "Lab 1 + Excel exercise"
+    assignment: "lab4-pandas-cnsplots"
+    assessment: "Lab 4 submission"
 
   - id: 5
     week: 5

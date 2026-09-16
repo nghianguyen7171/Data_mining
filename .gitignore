@@ -1,4 +1,6 @@
 node_modules/
 docs-keys/
+preview/
+make-preview.js
 lab/lab2_answers.ipynb
 .DS_Store

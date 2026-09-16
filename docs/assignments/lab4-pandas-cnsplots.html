@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 4 — pandas &amp; Journal-Style Figures with cnsplots · Data Mining</title>
+  <meta name="description" content="Data Mining — Faculty of Data Science and Artificial Intelligence, National Economics University.">
+  <link rel="stylesheet" href="/Data_mining/assets/css/main.css">
+  <link rel="icon" href="/Data_mining/assets/images/fda-logo.png">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/Data_mining">
+        <img src="/Data_mining/assets/images/neu-logo.png" alt="" class="brand-logo">
+        <img src="/Data_mining/assets/images/fda-logo.png" alt="" class="brand-logo">
+        <span class="brand-text">
+          <span class="brand-course">Data Mining</span>
+          <span class="brand-dept">Faculty of Data Science and Artificial Intelligence</span>
+        </span>
+      </a>
+  
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/Data_mining" >Home</a>
+        <a href="/Data_mining/syllabus.html" >Syllabus</a>
+        <a href="/Data_mining/assignments/" class="is-active" aria-current="page">Assignments</a>
+        <a href="/Data_mining/resources.html" >Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="wrap prose prose-narrow assignment">
+  <p class="crumb"><a href="/Data_mining/assignments/">Assignments</a></p>
+  <h1>Lab 4 — pandas &amp; Journal-Style Figures with cnsplots</h1>
+  <dl class="assignment-meta">
+    <div><dt>Due</dt><dd>End of Week 4</dd></div>
+    <div><dt>Released</dt><dd>Week 4</dd></div>
+    <div><dt>Weight</dt><dd>Part of 10% Attendance &amp; Participation</dd></div>
+    <div><dt>CLOs</dt><dd>2, 5, 6</dd></div>
+  </dl>
+  <h2>Goal</h2>
+<p>By the end of this lab you will practise <strong>pandas</strong> feature tables and <strong>cnsplots</strong> multi-panel figures on a real medical imaging dataset. You will load PathMNIST colorectal histology images, build colour/brightness features, explore differences across tissue types, run a small classification teaser, and assemble <strong>your own</strong> multi-panel scientific figure.</p>
+<p><strong>This lab is Python only</strong> (Colab recommended, or VS Code locally).</p>
+<p><strong>How to work:</strong> you will <strong>build a notebook from a blank file</strong>, type each cell by hand, run it, and observe the output. You do not need to memorise APIs — type along, understand each step, then <strong>customise your own figure</strong> at the end.</p>
+<p><strong>Business / clinical context:</strong> you are a <strong>data analyst</strong> working with a Pathology department. Every day, clinicians produce thousands of <strong>tissue image patches</strong> from <strong>colorectal cancer</strong> biopsies. Manual review is slow and tiring. The department asks: <em>“Analyse this histology set — how do tissue types differ? Can we separate <strong>tumor</strong> from non-tumor using data? Present the findings as <strong>one scientific figure</strong> for a tumour-board report.”</em></p>
+<p>This is a <strong>data-assisted diagnosis</strong> scenario — a realistic healthcare analytics use case. In this lab you will: use <strong>pandas</strong> to turn images into a feature table → explore tissue differences → try a small model to predict tumor → present everything as a <strong>multi-panel, Nature-style figure</strong> with <strong>cnsplots</strong>.</p>
+<p><strong>Takeaway:</strong> turning raw data into a <em>convincing scientific visual</em> is a skill that helps your analysis get heard — in healthcare, business, or research.</p>
+<blockquote>
+<p><strong>PathMNIST:</strong> a curated colorectal histology image set (28×28 RGB), each image with a <strong>tissue-type label</strong>, open licence (CC BY 4.0). Because the figure uses <em>images and labels from the same set</em>, the visuals match the data you analyse.</p>
+</blockquote>
+<hr>
+<h2>Learning objectives</h2>
+<ol>
+<li>Load data and build a <strong>feature table</strong> with pandas.</li>
+<li>Read, understand, and <strong>edit</strong> cnsplots charting code.</li>
+<li>Compose charts into <strong>one publication-style multi-panel figure</strong>.</li>
+<li><strong>Interpret</strong> the figure: what does it say about the data?</li>
+</ol>
+<hr>
+<h2>Prepare (once)</h2>
+<p><strong>Download the data:</strong> get <strong><code>pathmnist.npz</code></strong> from:</p>
+<p><a href="https://zenodo.org/records/10519652/files/pathmnist.npz?download=1">https://zenodo.org/records/10519652/files/pathmnist.npz?download=1</a></p>
+<p>(Open the link in a browser; the file downloads automatically — a few hundred MB.)</p>
+<p><strong>Create a blank notebook:</strong></p>
+<ul>
+<li><strong>Colab (recommended — nothing to install):</strong> go to <a href="https://colab.research.google.com">colab.research.google.com</a> → <strong>File → New notebook</strong>. Then open the <strong>Files</strong> icon (left sidebar) → <strong>Upload</strong> → choose <code>pathmnist.npz</code>. <em>(The file lands in <code>/content</code> and is ready to use. If the runtime restarts, upload again.)</em></li>
+<li><strong>Local machine (VS Code):</strong> create a new file <code>lab4.ipynb</code> in the <strong>same folder</strong> as <code>pathmnist.npz</code>.</li>
+</ul>
+<blockquote>
+<p>From here, each <strong>Cell N</strong> below is <strong>one code cell</strong> you type into the notebook and run (Shift+Enter).</p>
+</blockquote>
+<hr>
+<h2>Build the notebook — cell by cell</h2>
+<h3>Cell 1 — Install packages</h3>
+<pre><code class="language-python">!pip install -q cnsplots scikit-learn
+</code></pre>
+<p><em>(On a machine where these are already installed, you can skip this, or run <code>pip install cnsplots scikit-learn</code> in a terminal.)</em></p>
+<h3>Cell 2 — Imports</h3>
+<pre><code class="language-python">import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import cnsplots as cns
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+print(&quot;cnsplots&quot;, cns.__version__)
+</code></pre>
+<h3>Cell 3 — Load PathMNIST</h3>
+<p><code>pathmnist.npz</code> is a NumPy archive with images + labels (no <code>medmnist</code> / <code>torch</code> required).</p>
+<pre><code class="language-python">data = np.load(&quot;pathmnist.npz&quot;)
+imgs   = data[&quot;train_images&quot;]            # (N, 28, 28, 3) — N images, each 28×28 colour
+labels = data[&quot;train_labels&quot;].flatten()  # tissue-type label per image
+print(&quot;Images:&quot;, imgs.shape[0], &quot;| each image shape:&quot;, imgs.shape[1:])
+</code></pre>
+<blockquote>
+<p>If you see <em>&quot;No such file&quot;</em>: check that <code>pathmnist.npz</code> is in the working directory (Colab: did you Upload?; local: same folder as the notebook).</p>
+</blockquote>
+<h3>Cell 4 — pandas: build a feature table</h3>
+<p>Each image → mean brightness of channels <strong>R, G, B</strong> plus overall brightness. Keep four representative tissue types and use <strong>short names</strong> so charts stay readable.</p>
+<pre><code class="language-python">SHORT = {0: &quot;Adipose&quot;, 3: &quot;Lymph&quot;, 5: &quot;Muscle&quot;, 8: &quot;Tumor&quot;}   # 4 tissue types
+order = [&quot;Adipose&quot;, &quot;Lymph&quot;, &quot;Muscle&quot;, &quot;Tumor&quot;]
+
+rng = np.random.default_rng(0)
+idx = np.where(np.isin(labels, list(SHORT)))[0]       # images in the 4 classes
+idx = rng.choice(idx, size=min(800, idx.size), replace=False)  # sample up to 800
+sub_imgs, sub_lab = imgs[idx], labels[idx]
+
+df = pd.DataFrame({
+    &quot;label&quot;: [SHORT[l] for l in sub_lab],
+    &quot;meanR&quot;: sub_imgs[:, :, :, 0].mean(axis=(1, 2)),
+    &quot;meanG&quot;: sub_imgs[:, :, :, 1].mean(axis=(1, 2)),
+    &quot;meanB&quot;: sub_imgs[:, :, :, 2].mean(axis=(1, 2)),
+})
+df[&quot;brightness&quot;] = df[[&quot;meanR&quot;, &quot;meanG&quot;, &quot;meanB&quot;]].mean(axis=1)
+df.head()
+</code></pre>
+<h3>Cell 5 — Get familiar with the table (pandas)</h3>
+<pre><code class="language-python">df.describe()          # descriptive stats
+</code></pre>
+<pre><code class="language-python">df[&quot;label&quot;].value_counts()   # image count per tissue type
+</code></pre>
+<h3>Cell 6 — Quick plot (matplotlib)</h3>
+<pre><code class="language-python">df[&quot;brightness&quot;].plot(kind=&quot;hist&quot;, bins=20, title=&quot;Brightness distribution&quot;)
+plt.show()
+</code></pre>
+<h3>Cell 7 — Two models → data for confusion matrix &amp; ROC</h3>
+<p>Predict <strong>Tumor vs Other</strong> from colour features (classification teaser).</p>
+<pre><code class="language-python">X = df[[&quot;meanR&quot;, &quot;meanG&quot;, &quot;meanB&quot;, &quot;brightness&quot;]].values
+y = (df[&quot;label&quot;] == &quot;Tumor&quot;).astype(int).values
+Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.3, random_state=0, stratify=y)
+
+lr = LogisticRegression(max_iter=500).fit(Xtr, ytr)
+rf = RandomForestClassifier(n_estimators=120, random_state=0).fit(Xtr, ytr)
+
+pred = lr.predict(Xte); m = {0: &quot;Other&quot;, 1: &quot;Tumor&quot;}
+conf_df = pd.DataFrame({&quot;truth&quot;: [m[v] for v in yte], &quot;pred&quot;: [m[v] for v in pred]})
+roc_df  = pd.DataFrame({&quot;label&quot;: yte,
+                        &quot;Logistic&quot;:     lr.predict_proba(Xte)[:, 1],
+                        &quot;RandomForest&quot;: rf.predict_proba(Xte)[:, 1]})
+print(&quot;Accuracy:&quot;, round((pred == yte).mean(), 3))
+</code></pre>
+<hr>
+<h2>Build a multi-panel FIGURE (main part)</h2>
+<p>cnsplots idea: create a <code>multipanel</code> “frame”, add each <strong>panel</strong> with <code>mp.panel(&quot;A&quot;, width, height)</code>; use <code>mp.newline()</code> to start a new row; finish with <code>cns.savefig(...)</code>.</p>
+<p><strong>Sample figure for reference</strong> (one complete result you can aim toward — <em>yours does not need to look identical</em>):</p>
+<p><img src="../assets/materials/4.Figure_PathMNIST.png" alt="Sample figure — PathMNIST colorectal histology analysis"></p>
+<p><em>The sample above includes: four representative tissue images + sample counts (row 1); brightness violin, colour-channel KDE, colour-space scatter (row 2); confusion matrix, two-model ROC, histogram, empty panel (row 3). This is only <strong>one example</strong> — in the next section you choose panels and layout yourself.</em></p>
+<h3>Cell 8 — Figure frame + a few starter panels</h3>
+<p>Type this cell first to learn the mechanism (it builds a 3-panel figure):</p>
+<pre><code class="language-python">def first_img(cls_id):                       # one representative image for a tissue class
+    return imgs[np.where(labels == cls_id)[0][0]]
+
+mp = cns.multipanel(max_width=560,
+                    title=&quot;Figure 1 — Colorectal Histology Analysis&quot;,
+                    title_fontweight=&quot;bold&quot;, loc=&quot;left&quot;)
+
+# Panel A: one tumor tissue image
+ax = mp.panel(&quot;A&quot;, 72, 72); ax.imshow(first_img(8)); ax.set_title(&quot;Tumor&quot;, fontsize=7); ax.set_axis_off()
+
+# Panel B: barplot of sample counts per type
+mp.panel(&quot;B&quot;, 95, 72, color_cycle=&quot;Bold&quot;)
+cnt = df[&quot;label&quot;].value_counts().reindex(order).reset_index(); cnt.columns = [&quot;label&quot;, &quot;n&quot;]
+ax = cns.barplot(data=cnt, x=&quot;label&quot;, y=&quot;n&quot;, order=order); ax.set_title(&quot;Sample count&quot;); ax.set_xlabel(&quot;&quot;)
+
+# Panel C: colour-space scatter
+mp.panel(&quot;C&quot;, 95, 72, color_cycle=&quot;Set1&quot;)
+ax = cns.scatterplot(data=df, x=&quot;meanR&quot;, y=&quot;meanB&quot;, hue=&quot;label&quot;, s=5); ax.set_title(&quot;Color space&quot;)
+ax.get_legend().set_title(None)
+
+cns.savefig(&quot;Figure.png&quot;)   # use .pdf / .svg for vector output in reports
+print(&quot;Saved Figure.png&quot;)
+</code></pre>
+<p>Run the cell → you should see a 3-panel figure A–B–C. <strong>This is the skeleton.</strong> Your task in the next section: <strong>add more panels</strong> to make a larger, polished figure that is <em>yours</em>.</p>
+<hr>
+<h2>Requirement — YOUR figure, not a clone</h2>
+<p>Expand the Cell 8 figure into a larger layout (<strong>at least 6 panels</strong>) by <strong>picking extra panels from the menu below</strong> and adding new rows with <code>mp.newline()</code>. Every student should produce a different figure depending on panels and layout.</p>
+<p><strong>How to start a new row</strong> (place between panels):</p>
+<pre><code class="language-python">mp.newline()   # new row; use margin_top=16 on the first panel of a row for breathing room
+</code></pre>
+<h3>Panel menu (copy into your figure, then edit)</h3>
+<p><strong>① Tissue image</strong> (add another class — IDs: 0=Adipose, 3=Lymph, 5=Muscle, 8=Tumor):</p>
+<pre><code class="language-python">ax = mp.panel(&quot;D&quot;, 72, 72); ax.imshow(first_img(0)); ax.set_title(&quot;Adipose&quot;, fontsize=7); ax.set_axis_off()
+</code></pre>
+<p><strong>② Violin — distribution of one feature by tissue type:</strong></p>
+<pre><code class="language-python">mp.panel(&quot;E&quot;, 95, 90, margin_top=16, color_cycle=&quot;Ecotyper3&quot;)
+ax = cns.violinplot(data=df, x=&quot;label&quot;, y=&quot;brightness&quot;, order=order); ax.set_title(&quot;Brightness&quot;); ax.set_xlabel(&quot;&quot;)
+</code></pre>
+<p><strong>③ KDE — density of one colour channel:</strong></p>
+<pre><code class="language-python">mp.panel(&quot;F&quot;, 95, 90, margin_top=16, color_cycle=&quot;Set1&quot;)
+ax = cns.kdeplot(data=df, x=&quot;meanR&quot;, hue=&quot;label&quot;); ax.set_title(&quot;meanR density&quot;); ax.get_legend().set_title(None)
+</code></pre>
+<p><strong>④ Histogram:</strong></p>
+<pre><code class="language-python">mp.panel(&quot;G&quot;, 95, 90, margin_top=16)
+ax = cns.histplot(data=df, x=&quot;brightness&quot;); ax.set_title(&quot;Brightness hist&quot;)
+</code></pre>
+<p><strong>⑤ Confusion matrix (uses <code>conf_df</code> from Cell 7):</strong></p>
+<pre><code class="language-python">mp.panel(&quot;H&quot;, 72, 80, margin_top=16)
+ax = cns.confusionplot(data=conf_df, x=&quot;pred&quot;, y=&quot;truth&quot;, add_pvalue=False,
+                       x_order=[&quot;Other&quot;,&quot;Tumor&quot;], y_order=[&quot;Other&quot;,&quot;Tumor&quot;], cmap=&quot;Blues&quot;)
+ax.set_title(&quot;Confusion&quot;)
+</code></pre>
+<p><strong>⑥ ROC (uses <code>roc_df</code> from Cell 7):</strong></p>
+<pre><code class="language-python">mp.panel(&quot;I&quot;, 95, 90, margin_top=16, color_cycle=&quot;ECharts&quot;)
+ax = cns.rocplot(roc_df, &quot;label&quot;, [&quot;Logistic&quot;, &quot;RandomForest&quot;]); ax.set_title(&quot;ROC&quot;)
+</code></pre>
+<p><strong>⑦ Boxplot / ⑧ Placeholder (space reserved for later):</strong></p>
+<pre><code class="language-python">mp.panel(&quot;J&quot;, 95, 90, margin_top=16)
+ax = cns.boxplot(data=df, x=&quot;label&quot;, y=&quot;meanG&quot;, order=order); ax.set_title(&quot;meanG&quot;); ax.set_xlabel(&quot;&quot;)
+# or:
+mp.panel(&quot;K&quot;, 80, 80, margin_top=16); cns.placeholderplot(&quot;Add panel\n(optional)&quot;)
+</code></pre>
+<blockquote>
+<p><strong>Remember:</strong> keep <code>cns.savefig(&quot;Figure.png&quot;)</code> as the <strong>last</strong> line (after all panels) so the figure is saved as an <strong>image</strong> for the report in the submission section. Label panels (A, B, C…) in the order you add them.</p>
+<p><em>(Colab: after running, download <code>Figure.png</code> via <strong>Files</strong> → right-click → Download.)</em></p>
+</blockquote>
+<p><strong>Required for submission:</strong> figure with ≥ <strong>6 panels</strong>, including <strong>at least 1 tissue-image panel</strong> and <strong>at least 1 model-evaluation panel</strong> (confusion or ROC). Beyond that, <strong>customise</strong>: change colour cycles, titles, or create a new pandas feature (e.g. <code>df[&quot;ratioRB&quot;] = df[&quot;meanR&quot;]/df[&quot;meanB&quot;]</code>) and plot it.</p>
+<hr>
+<h2>Interpret the figure — what does it say?</h2>
+<p>Answer from <strong>your own figure</strong>:</p>
+<p><strong>Q1 — Class balance.</strong> Which tissue type has the <strong>most / fewest</strong> samples? Is the data balanced? Why does that matter?</p>
+<p><strong>Q2 — Discriminative features.</strong> Looking at violin / KDE / scatter: which tissue is <strong>brightest / darkest</strong>? Do any pairs <strong>overlap</strong> in colour space and look hard to separate? What does that suggest about recognising tissue from colour alone?</p>
+<p><strong>Q3 — Model quality.</strong> On the confusion matrix, how many Tumor cases are correct / wrong? On the ROC, which model is better? If AUC = 1.00, is that <strong>realistic</strong>, or is the task too easy?</p>
+<p><strong>Q4 — Clinical meaning.</strong> Are colour features alone enough to help a clinician separate cancer? Should this tool <strong>replace</strong> or <strong>support</strong> the clinician?</p>
+<blockquote>
+<p>Write a <strong>figure caption</strong> (2–3 sentences) as in a paper, summarising what your figure shows.</p>
+</blockquote>
+<hr>
+<h2>What to submit — ONE PDF only</h2>
+<p>You <strong>do not submit the notebook</strong>. Instead, write a <strong>short report</strong> in Word (<code>.docx</code>), <strong>export to <code>.pdf</code></strong>, and submit <strong>only that PDF</strong>.</p>
+<h3>Report steps</h3>
+<ol>
+<li>Create a new Word file (Microsoft Word, or <strong>Google Docs</strong> — both can export PDF).</li>
+<li><strong>Insert the figure:</strong> <strong>Insert → Picture</strong>, choose the <code>Figure.png</code> you saved above. Centre it on the page.</li>
+<li>Fill in the sections using the structure below.</li>
+<li><strong>Export PDF:</strong> Word → <strong>File → Save As / Export → PDF</strong> (Google Docs → <strong>File → Download → PDF</strong>).</li>
+<li>Name the file <code>Lab4_FullName_StudentID.pdf</code> and submit <strong>only this PDF</strong>.</li>
+</ol>
+<p>Submission folder / LMS link will be announced in class (or on the course site when published).</p>
+<h3>Report structure (~1–2 pages)</h3>
+<ul>
+<li><strong>Title:</strong> Lab 4 — Full name, student ID, class.</li>
+<li><strong>1. Figure:</strong> your figure (paste <code>Figure.png</code>) plus a <strong>figure caption</strong> (2–3 sentences) summarising what it shows.</li>
+<li><strong>2. Analysis — answer Q1–Q4</strong> (above): 2–4 lines each.</li>
+<li><strong>3. Customisation note:</strong> which panels you added/changed relative to the Cell 8 skeleton and <strong>why</strong> (2–3 lines).</li>
+</ul>
+<p><strong>Suggested grading weights:</strong> figure meets requirements &amp; is clear (40%) · Q1–Q4 analysis (35%) · creativity / customisation (25%).</p>
+<blockquote>
+<p><strong>Note:</strong> submit <strong>PDF only</strong>. Do not submit the <code>.ipynb</code> notebook or the original <code>.docx</code>.</p>
+</blockquote>
+<hr>
+<h2>Common troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>No such file: pathmnist.npz</code></td>
+<td>Colab: Upload again (Files → Upload). Local: put the file next to the notebook</td>
+</tr>
+<tr>
+<td><code>ModuleNotFoundError: cnsplots</code></td>
+<td>Re-run Cell 1: <code>!pip install -q cnsplots scikit-learn</code></td>
+</tr>
+<tr>
+<td>Axis labels overlapping</td>
+<td>Shorten class names, or increase <code>margin_top</code> on the first panel of a row</td>
+</tr>
+<tr>
+<td>Figure looks cramped</td>
+<td>Increase <code>max_width</code> in <code>cns.multipanel(...)</code></td>
+</tr>
+<tr>
+<td><code>get_legend()</code> returns None</td>
+<td>That panel has no legend — remove the <code>.get_legend()...</code> line</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>References</h2>
+<ul>
+<li><strong>cnsplots</strong> — docs &amp; examples: <a href="https://cnsplots.farid.one/latest">https://cnsplots.farid.one/latest</a> (Getting Started, Examples Gallery).</li>
+<li><strong>PathMNIST / MedMNIST v2</strong> — dataset: <a href="https://medmnist.com">https://medmnist.com</a> (CC BY 4.0).</li>
+<li>Course lecture notes: Week 4 slides / <code>lec4.md</code> (pandas + cnsplots).</li>
+</ul>
+
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-course">Data Mining</p>
+        <p class="footer-meta">IST 4520 · Fall 2026 · 3 credits</p>
+      </div>
+      <div>
+        <p class="footer-meta">Faculty of Data Science and Artificial Intelligence</p>
+        <p class="footer-meta">College of Technology, National Economics University</p>
+        <p class="footer-meta"><a href="https://github.com/nghianguyen7171/Data_mining">Source on GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="/Data_mining/assets/js/site.js" defer></script>
+</body>
+</html>

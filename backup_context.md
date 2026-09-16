@@ -212,12 +212,24 @@ emits links; `status: tbd` shows the title greyed out with no links. Source: `sr
   table, no specific dirty values as answer keys); students discover via widgets
 - **Deliverables:** `.ows`, cleaned CSV, A/B/C answers, mini-memo, Box Plot screenshot
 
+### Lab 4 — pandas & Journal-Style Figures with cnsplots
+
+- **File:** `src/assignments/lab4-pandas-cnsplots.md` (English; draft `lab/lab4.md`)
+- **Published:** Week 4 schedule links it as **Lab 4 submission** (`assignment: lab4-pandas-cnsplots`);
+  Week 4 title updated to "Lab 4 — pandas & Journal-Style Figures with cnsplots"
+- **Due:** End of Week 4
+- **Weight:** Part of 10% Attendance & Participation
+- **CLOs:** 2, 5, 6
+- **Tool:** Python (Colab or VS Code) + pandas + cnsplots + scikit-learn
+- **Data:** PathMNIST via Zenodo `pathmnist.npz` (students download; not hosted on site)
+- **Sample figure:** `src/assets/materials/4.Figure_PathMNIST.png`
+- **Deliverable:** one PDF report only (`Lab4_FullName_StudentID.pdf`) — not the notebook
+
 ### Future Labs (not yet written)
 
-- Lab 1 (Week 4): pandas + data cleaning in Orange
 - Correlation / market-basket lab (later week in schedule)
-- Lab 3 (Week 10): classification in Orange (Test & Score, Confusion Matrix, ROC)
-- Lab 4 (Week 12): regression + group project launch
+- Classification lab in Orange (Test & Score, Confusion Matrix, ROC)
+- Regression + group project launch (later schedule week)
 
 ---
 
@@ -436,7 +448,7 @@ deliberately opting in.
   (Write access on personal repo)
 - **Remaining weeks:** Slides for Weeks 5–15 added to `src/assets/materials/` and
   `status: released` set in `lectures.yml` as content is ready
-- **Lab assignments:** Lab 1 (Week 4) and later labs not yet written — add per week as taught
+- **Lab assignments:** Lab 4 English page built locally for review; later labs TBD as taught
 - **This-week banner:** Update `src/data/this-week.yml` each week (or delete `current:` block
   when content is stale — the banner disappears rather than showing wrong information)
 - **Draft folders** (`lec/`, `lab/`, `quizz/`, `refs/`, `slides/`) exist locally as authoring
@@ -489,6 +501,18 @@ deliberately opting in.
 ---
 
 ## Change Log
+
+### 2026-09-16 — Publish Lab 4 on the Week 4 schedule
+
+- Week 4 `title` → "Lab 4 — pandas & Journal-Style Figures with cnsplots"; topics updated
+- Added `assignment: lab4-pandas-cnsplots`; `assessment: "Lab 4 submission"`
+- Rebuilt and deployed (assignment page + sample figure already in `docs/`)
+
+### 2026-09-14 — Lab 4 English assignment (local build for review)
+
+- Translated `lab/lab4.md` → `src/assignments/lab4-pandas-cnsplots.md`
+- Copied sample figure → `src/assets/materials/4.Figure_PathMNIST.png`
+- Built locally: `docs/assignments/lab4-pandas-cnsplots.html` (not linked on schedule yet)
 
 ### 2026-09-13 — Publish Week 4 pandas slides
 
@@ -645,7 +669,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-13 (Week 4 pandas slides published)
+**Last Updated:** 2026-09-16 (Lab 4 published on the Week 4 schedule)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
