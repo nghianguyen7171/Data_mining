@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 5 — Finding Relationships in Orange: Correlation &amp; Association Rules · Data Mining</title>
+  <meta name="description" content="Data Mining — Faculty of Data Science and Artificial Intelligence, National Economics University.">
+  <link rel="stylesheet" href="/Data_mining/assets/css/main.css">
+  <link rel="icon" href="/Data_mining/assets/images/fda-logo.png">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/Data_mining">
+        <img src="/Data_mining/assets/images/neu-logo.png" alt="" class="brand-logo">
+        <img src="/Data_mining/assets/images/fda-logo.png" alt="" class="brand-logo">
+        <span class="brand-text">
+          <span class="brand-course">Data Mining</span>
+          <span class="brand-dept">Faculty of Data Science and Artificial Intelligence</span>
+        </span>
+      </a>
+  
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/Data_mining" >Home</a>
+        <a href="/Data_mining/syllabus.html" >Syllabus</a>
+        <a href="/Data_mining/assignments/" class="is-active" aria-current="page">Assignments</a>
+        <a href="/Data_mining/resources.html" >Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="wrap prose prose-narrow assignment">
+  <p class="crumb"><a href="/Data_mining/assignments/">Assignments</a></p>
+  <h1>Lab 5 — Finding Relationships in Orange: Correlation &amp; Association Rules</h1>
+  <dl class="assignment-meta">
+    <div><dt>Due</dt><dd>End of Week 6</dd></div>
+    <div><dt>Released</dt><dd>Week 6</dd></div>
+    <div><dt>Weight</dt><dd>Part of 10% Attendance &amp; Participation</dd></div>
+    <div><dt>CLOs</dt><dd>3, 5, 6</dd></div>
+  </dl>
+  <h2>Goal</h2>
+<p>By the end of this lab you will apply the <strong>Week 5</strong> ideas on <strong>finding relationships</strong> to a real retail scenario, using <strong>Orange</strong> (drag-and-drop, no code):</p>
+<ol>
+<li>Use <strong>Correlation</strong> to see which numeric customer factors relate to monthly spending.</li>
+<li>Use <strong>Association Rules</strong> to find which products are frequently bought together.</li>
+<li>Synthesise both findings into <strong>one publication-style figure</strong> with <strong>cnsplots</strong> (the library from Lab 4).</li>
+</ol>
+<p><strong>This lab is Orange only (drag-and-drop). No coding required</strong> — except the short, ready-to-run cnsplots snippet in Part D.</p>
+<p><strong>Business context:</strong> you are an analyst at a <strong>supermarket chain</strong>. Management wants to know: (1) <em>which customer factors relate to spending?</em> and (2) <em>which products are often bought together, for combos / shelf placement?</em> You will answer both in Orange — with <strong>Correlation</strong> (for numeric variables) and <strong>Association Rules</strong> (for products).</p>
+<hr>
+<h2>Prepare</h2>
+<ol>
+<li>Open <strong>Orange Data Mining</strong>.</li>
+<li><strong>Download the dataset</strong> <code>retail_customers.csv</code>:<ul>
+<li>Direct download: <a href="../assets/materials/retail_customers.csv">retail_customers.csv</a></li>
+<li>Or from the course Drive folder: <a href="https://drive.google.com/drive/folders/1CpesuxhRWxfsmseJQljkNcKVVWe578iv?usp=sharing">dataset folder</a></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>Dataset: <code>retail_customers.csv</code></h2>
+<p>80 customers × 11 columns:</p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Identifier</td>
+<td><code>CustomerID</code></td>
+<td>Customer ID (meta)</td>
+</tr>
+<tr>
+<td><strong>Numeric</strong> (for Correlation)</td>
+<td><code>Age</code></td>
+<td>Age</td>
+</tr>
+<tr>
+<td></td>
+<td><code>MonthlyIncome</code></td>
+<td>Monthly income (million VND)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>MonthlySpend</code></td>
+<td>Monthly spend at the supermarket (million VND)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>VisitsPerMonth</code></td>
+<td>Visits per month</td>
+</tr>
+<tr>
+<td><strong>Products</strong> Yes/No (for Association Rules)</td>
+<td><code>Diapers, Beer, Bread, Milk, Chips, Cola</code></td>
+<td>Whether the customer bought that item</td>
+</tr>
+</tbody></table>
+<p>Each customer has both <strong>numeric attributes</strong> (to measure correlation) and a <strong>basket</strong> (products purchased) — so one dataset serves both techniques.</p>
+<hr>
+<h2>Lab overview</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Content</th>
+<th>Key widgets</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td><strong>Correlation</strong> — which factors relate to spending?</td>
+<td>Correlations, Scatter Plot</td>
+</tr>
+<tr>
+<td>B</td>
+<td><strong>Association Rules</strong> — which products are bought together?</td>
+<td>Select Columns, Association Rules</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Connect the two techniques &amp; wrap up</td>
+<td>—</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Synthesise findings into one figure</td>
+<td>cnsplots</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Part A — Correlation (35′)</h2>
+<h3>A1. Load the data — [Follow along]</h3>
+<ol>
+<li>Open Orange → <strong>File</strong> → choose <code>retail_customers.csv</code>.</li>
+<li>Check column roles: <code>CustomerID</code> → <strong>meta</strong>; numeric columns → <strong>feature</strong>; product columns → <strong>feature</strong> (categorical).</li>
+</ol>
+<h3>A2. Correlation matrix — [Follow along]</h3>
+<ol>
+<li>Drag a <strong>Correlations</strong> widget; connect <strong>File → Correlations</strong>.</li>
+<li>Double-click: Orange lists correlation coefficients for <strong>every pair of numeric variables</strong>, ranked by strength.</li>
+</ol>
+<p>📷 <strong>[Screenshot: the Correlations window — table of r values for numeric pairs]</strong></p>
+<p><strong>Observe &amp; note:</strong> which pair has the <strong>highest |r|</strong>? Which pair is close to 0?</p>
+<h3>A3. Verify with a Scatter Plot — [Follow along]</h3>
+<blockquote>
+<p>Remember the lesson: <em>an r value must be checked with a scatter plot</em> (the Anscombe trap).</p>
+</blockquote>
+<ol>
+<li>Drag a <strong>Scatter Plot</strong>; connect <strong>File → Scatter Plot</strong> (or from Correlations).</li>
+<li>Plot the pair with the highest |r| (e.g. X = <code>MonthlyIncome</code>, Y = <code>MonthlySpend</code>).</li>
+<li>Turn on <strong>Show regression line</strong> if available.</li>
+<li>Also plot a near-zero pair (e.g. <code>Age</code> vs <code>MonthlySpend</code>) for comparison.</li>
+</ol>
+<p>📷 <strong>[Screenshot: Scatter Plot of the highest-|r| pair, with regression line]</strong></p>
+<h3>✍️ Part A questions (put answers in your report)</h3>
+<p><strong>A1.</strong> Which numeric pair is the <strong>most strongly</strong> correlated? Give the r value. Is it positive or negative?</p>
+<p><strong>A2.</strong> Is <code>Age</code> related to <code>MonthlySpend</code>? (give r) What does that say about using Age to predict spending?</p>
+<p><strong>A3.</strong> On the scatter plot of the strongest pair, do the points hug the line closely? Are there any <strong>outliers</strong> far from the cloud?</p>
+<p><strong>A4.</strong> Business interpretation: which factor is the most <strong>reliable</strong> for predicting a customer&#39;s spending?</p>
+<hr>
+<h2>Part B — Association Rules (40′)</h2>
+<h3>B0. Install the Associate add-on (once) — [Follow along]</h3>
+<p>The association-rule widgets are <strong>not installed by default</strong>. Go to <strong>Options → Add-ons → tick &quot;Associate&quot; → OK → restart Orange</strong>.</p>
+<h3>B1. Prepare the product data — [Follow along]</h3>
+<p>Association Rules work with <strong>categories</strong>. The product columns are already Yes/No (categorical), so they are usable as-is; we just need to <strong>keep only the product columns</strong>.</p>
+<ol>
+<li>Drag a <strong>Select Columns</strong> widget; connect <strong>File → Select Columns</strong>.</li>
+<li>Move the 6 product columns (<code>Diapers…Cola</code>) to <strong>Features</strong>; send the numeric columns and <code>CustomerID</code> to <strong>Ignored/Meta</strong>.</li>
+</ol>
+<p>📷 <strong>[Screenshot: Select Columns — only the 6 product columns under Features]</strong></p>
+<h3>B2. Generate association rules — [Follow along]</h3>
+<ol>
+<li>Drag an <strong>Association Rules</strong> widget (Associate section); connect <strong>Select Columns → Association Rules</strong>.</li>
+<li>Set thresholds: <strong>Minimal support</strong> e.g. 0.10 (10%), <strong>Minimal confidence</strong> e.g. 0.50 (50%).</li>
+<li>Inspect the rules table: each row is a rule with <strong>Support, Confidence, Lift</strong> (and a few other metrics).</li>
+<li>Sort by <strong>Lift</strong> descending; focus on rules of the form <code>Product=Yes → Product=Yes</code>.</li>
+</ol>
+<p>📷 <strong>[Screenshot: the Association Rules table, sorted by Lift, showing high-Lift rules]</strong></p>
+<h3>B3. Read the results — [Follow along]</h3>
+<ul>
+<li>Find rules with <strong>Lift &gt; 1</strong> and <strong>high Confidence</strong> → these are product pairs <em>genuinely</em> bought together.</li>
+<li>Notice a rule with <strong>Lift ≈ 1</strong> → that pair is nearly <em>independent</em> (not worth a combo).</li>
+</ul>
+<h3>✍️ Part B questions (put answers in your report)</h3>
+<p><strong>B1.</strong> Which <code>Product=Yes → Product=Yes</code> rule has the <strong>highest Lift</strong>? Give its Support, Confidence, and Lift.</p>
+<p><strong>B2.</strong> Explain that rule in words (e.g. “customers who buy … also buy … in …% of cases, … times more than random”).</p>
+<p><strong>B3.</strong> Find a rule with <strong>Lift ≈ 1</strong>. What does that mean about those two products?</p>
+<p><strong>B4.</strong> Compare rule <code>A → B</code> and <code>B → A</code> (same two products): which metric is the <strong>same</strong>, which is <strong>different</strong>? Why?</p>
+<p><strong>B5.</strong> Business recommendation: based on the high-Lift rules, which product pair(s) would you <strong>shelve together / bundle into a combo</strong>?</p>
+<hr>
+<h2>Part C — Connect the two techniques (10′)</h2>
+<p>Both belong to the <strong>“find relationships” (Relate)</strong> family, but they differ:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Correlation</th>
+<th>Association Rules</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Used for</td>
+<td><strong>Numeric</strong> variables (Age, Income, Spend…)</td>
+<td><strong>Categories / products</strong> (Yes/No)</td>
+</tr>
+<tr>
+<td>Output</td>
+<td>A single <strong>r</strong> (direction + strength)</td>
+<td>Rules A→B + <strong>Support/Confidence/Lift</strong></td>
+</tr>
+<tr>
+<td>Captures</td>
+<td><strong>Linear</strong> relationships</td>
+<td>Any kind of <strong>co-occurrence</strong></td>
+</tr>
+</tbody></table>
+<h3>✍️ Part C questions</h3>
+<p><strong>C1.</strong> If you wanted to bring <code>VisitsPerMonth</code> (numeric) into the association-rule analysis, what step must you do first? (hint: the <strong>Discretize</strong> widget).</p>
+<p><strong>C2.</strong> In one sentence: in this dataset, which technique answers <em>“which factors relate to spending?”</em>, and which answers <em>“which products are bought together?”</em></p>
+<p><em>(Optional stretch: drag <strong>Discretize</strong> to split <code>MonthlyIncome</code>/<code>MonthlySpend</code> into Low/High, connect it into <strong>Association Rules</strong> with the products, and check for rules like {Income=High} → {Beer=Yes}.)</em></p>
+<hr>
+<h2>Part D — Synthesise a figure with cnsplots (required)</h2>
+<p>After analysing in Orange, <strong>synthesise your findings into ONE publication-style figure</strong> with <strong>cnsplots</strong> (the library from Lab 4). The figure combines both techniques: a scatter for correlation + a Lift barplot for association rules.</p>
+<p><strong>Sample figure for reference</strong> (yours may differ):</p>
+<p><img src="../assets/materials/5.Lab5_Retail_Sample.png" alt="Sample figure — Retail Insights"></p>
+<p><em>Panel A: the strong correlation pair (Income–Spend); Panel B: the weak pair (Age–Spend); Panel C: the Lift of association rules, dashed line = Lift threshold of 1.</em></p>
+<h3>Starter code (run on Colab / VS Code — edit and extend)</h3>
+<pre><code class="language-python">!pip install -q cnsplots
+import numpy as np, pandas as pd, cnsplots as cns
+
+df = pd.read_csv(&quot;retail_customers.csv&quot;)
+
+# Compute Lift for a few rules (by counting)
+def lift(A, B):
+    a = df[A]==&quot;Yes&quot;; b = df[B]==&quot;Yes&quot;; n = len(df); ab = (a &amp; b).sum()
+    return (ab/a.sum()) / (b.sum()/n)
+rules = [(&quot;Diapers&quot;,&quot;Beer&quot;), (&quot;Chips&quot;,&quot;Cola&quot;), (&quot;Bread&quot;,&quot;Milk&quot;), (&quot;Diapers&quot;,&quot;Milk&quot;)]
+lift_df = pd.DataFrame({&quot;rule&quot;:[f&quot;{a}-&gt;{b}&quot; for a,b in rules],
+                        &quot;lift&quot;:[lift(a,b) for a,b in rules]})
+
+r_is = np.corrcoef(df.MonthlyIncome, df.MonthlySpend)[0,1]
+
+mp = cns.multipanel(max_width=380, title=&quot;Figure — Retail Insights&quot;, title_fontweight=&quot;bold&quot;, loc=&quot;left&quot;)
+
+mp.panel(&quot;A&quot;, 95, 90)
+ax = cns.scatterplot(data=df, x=&quot;MonthlyIncome&quot;, y=&quot;MonthlySpend&quot;, s=6)
+ax.set_title(f&quot;Income vs Spend (r={r_is:.2f})&quot;)
+
+mp.panel(&quot;B&quot;, 95, 90)
+ax = cns.scatterplot(data=df, x=&quot;Age&quot;, y=&quot;MonthlySpend&quot;, s=6)
+ax.set_title(&quot;Age vs Spend&quot;)
+
+mp.panel(&quot;C&quot;, 120, 90, color_cycle=&quot;Bold&quot;)
+ax = cns.barplot(data=lift_df, x=&quot;rule&quot;, y=&quot;lift&quot;); ax.set_title(&quot;Association rules — Lift&quot;); ax.set_xlabel(&quot;&quot;)
+ax.axhline(1.0, color=&quot;gray&quot;, linestyle=&quot;--&quot;, linewidth=0.8)   # Lift = 1 threshold
+ax.set_xticklabels(ax.get_xticklabels(), rotation=30, ha=&quot;right&quot;)
+
+cns.savefig(&quot;retail_figure.png&quot;)   # use .pdf for vector output
+</code></pre>
+<h3>Requirements (required; creativity encouraged)</h3>
+<ul>
+<li>The figure must have <strong>at least 3 panels</strong>, including <strong>≥1 scatter (correlation)</strong> and <strong>≥1 Lift barplot (association rules)</strong>.</li>
+<li><strong>Customise it</strong>: change the scatter variables, add rules to the barplot, change the colour cycle / titles, or add a panel (e.g. a <code>Spend–Visits</code> scatter).</li>
+</ul>
+<h3>✍️ Part D questions</h3>
+<p><strong>D1.</strong> Looking at the Lift barplot: which rule is furthest above the threshold of 1? Which one is near 1 (not worth a combo)?</p>
+<p><strong>D2.</strong> How does this figure help present results to management, compared with just reading the numeric tables in Orange?</p>
+<hr>
+<h2>Workflow diagram</h2>
+<pre><code>                 ┌─→ Correlations ─→ Scatter Plot            (Part A: numeric)
+File (retail) ───┤
+                 └─→ Select Columns ─→ Association Rules      (Part B: products)
+                        (optional: Discretize to add numeric variables to rules)
+</code></pre>
+<p>📷 <strong>[Screenshot: the full connected workflow on the canvas]</strong></p>
+<hr>
+<h2>What to submit — ONE PDF</h2>
+<p>Do not submit the workflow. Write a <strong>short report</strong> (Word / Google Docs), <strong>export to PDF</strong>, and submit <strong>only one PDF</strong> (<code>Lab5_FullName_StudentID.pdf</code>) to the course Drive folder:</p>
+<p><strong><a href="https://drive.google.com/drive/folders/1qsVxXYheaJj7sJyUBslDG2Woxwk32MWw?usp=sharing">Submission folder (Google Drive)</a></strong></p>
+<p>Your report must include:</p>
+<ol>
+<li><strong>Orange screenshots</strong>: the Correlations matrix, one Scatter Plot, and the Association Rules table.</li>
+<li><strong>cnsplots figure</strong> (<code>retail_figure.png</code> / <code>.pdf</code>) synthesised in Part D — pasted into the report.</li>
+<li><strong>Answers</strong> to questions A1–A4, B1–B5, C1–C2, D1–D2.</li>
+<li><strong>A 3–4 sentence conclusion</strong>: two key findings (one about spending, one about product combos) and a recommendation for the supermarket.</li>
+</ol>
+<p><strong>Suggested grading weights:</strong> correct operations &amp; clear screenshots (35%) · reading/interpreting the numbers (40%) · business recommendation (25%).</p>
+<hr>
+<h2>Common troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>No Association Rules widget</td>
+<td>Install the <strong>Associate</strong> add-on, then restart Orange</td>
+</tr>
+<tr>
+<td>Association Rules produces no rules</td>
+<td>Lower <strong>Minimal support</strong> (e.g. 0.05) and/or <strong>Minimal confidence</strong></td>
+</tr>
+<tr>
+<td>Rules mixed with <code>=No</code></td>
+<td>Sort by Lift and filter to <code>=Yes → =Yes</code> rules for interpretation</td>
+</tr>
+<tr>
+<td>Correlations is empty</td>
+<td>Make sure numeric columns have the <strong>feature</strong> role and numeric type</td>
+</tr>
+<tr>
+<td>Want to add a numeric variable to the rules</td>
+<td>Use <strong>Discretize</strong> before Association Rules</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>References</h2>
+<ul>
+<li>North, M. <em>Data Mining for the Masses</em> — Ch. 4 (Correlation), Ch. 5 (Association Rules).</li>
+<li>Orange — widget catalog: <a href="https://orangedatamining.com/widget-catalog">orangedatamining.com/widget-catalog</a> (Correlations, Scatter Plot, Discretize, Association Rules).</li>
+<li>Course lecture notes: Week 5 slides (Correlation &amp; Association Rules).</li>
+</ul>
+
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-course">Data Mining</p>
+        <p class="footer-meta">IST 4520 · Fall 2026 · 3 credits</p>
+      </div>
+      <div>
+        <p class="footer-meta">Faculty of Data Science and Artificial Intelligence</p>
+        <p class="footer-meta">College of Technology, National Economics University</p>
+        <p class="footer-meta"><a href="https://github.com/nghianguyen7171/Data_mining">Source on GitHub</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="/Data_mining/assets/js/site.js" defer></script>
+</body>
+</html>

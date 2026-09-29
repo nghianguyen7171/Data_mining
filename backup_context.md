@@ -225,9 +225,23 @@ emits links; `status: tbd` shows the title greyed out with no links. Source: `sr
 - **Sample figure:** `src/assets/materials/4.Figure_PathMNIST.png`
 - **Deliverable:** one PDF report only (`Lab4_FullName_StudentID.pdf`) — not the notebook
 
+### Lab 5 — Correlation & Association Rules in Orange
+
+- **File:** `src/assignments/lab5-correlation-association.md` (English; draft `lab/lab5.md`)
+- **Published page:** `docs/assignments/lab5-correlation-association.html` (live in Assignments
+  index; Week 6 schedule Lab row not yet wired/released)
+- **Maps to schedule:** Week 6 Lab row ("Lab 2 — Correlation & Market-Basket Analysis")
+- **Due:** End of Week 6
+- **Weight:** Part of 10% Attendance & Participation
+- **CLOs:** 3, 5, 6
+- **Tool:** Orange (no code) for Parts A–C; short cnsplots snippet in Part D
+- **Data:** `src/assets/materials/retail_customers.csv` (80×11); also linked via Drive
+  dataset folder (1CpesuxhRWxfsmseJQljkNcKVVWe578iv)
+- **Sample figure:** `src/assets/materials/5.Lab5_Retail_Sample.png`
+- **Submission:** Drive folder 1qsVxXYheaJj7sJyUBslDG2Woxwk32MWw (one PDF only)
+
 ### Future Labs (not yet written)
 
-- Correlation / market-basket lab (later week in schedule)
 - Classification lab in Orange (Test & Score, Confusion Matrix, ROC)
 - Regression + group project launch (later schedule week)
 
@@ -505,6 +519,14 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-09-29 — Build Lab 5 (Correlation & Association Rules, English)
+
+- Translated `lab/lab5.md` → `src/assignments/lab5-correlation-association.md` (English)
+- Hosted dataset `retail_customers.csv` + sample figure `5.Lab5_Retail_Sample.png` in materials
+- Dataset Drive link + submission Drive link wired into the page
+- Built + deployed the assignment page (listed in Assignments index); Week 6 schedule
+  Lab row left `tbd`/unlinked pending a separate "publish to schedule" step
+
 ### 2026-09-29 — Publish Week 5 slides (Correlation & Association Rules)
 
 - Copied `slides/5. Correlation & Association Rules.pdf` →
@@ -679,7 +701,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-29 (Week 5 slides published)
+**Last Updated:** 2026-09-29 (Lab 5 Correlation & Association Rules page built in English)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
