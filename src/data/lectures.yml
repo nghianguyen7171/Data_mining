@@ -82,12 +82,13 @@ lectures:
     week: 5
     type: "Lecture"
     title: "Finding Relationships — Correlation & Association Rules"
-    status: tbd
+    status: released
     topics:
       - "Pearson correlation coefficient and the correlation matrix"
       - "Association rules: support, confidence, and lift"
       - "Market-basket analysis and product recommendation applications"
     clos: "2, 3"
+    slides: "assets/materials/5.Correlation_Association_Rules.pdf"
     assessment: "—"
 
   - id: 6

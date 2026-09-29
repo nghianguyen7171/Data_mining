@@ -351,6 +351,7 @@ Data Mining/
 │   │       ├── 2.Lab2_Answers.ipynb         # Lab 2 worked-answer notebook
 │   │       ├── 3.Data_Understanding.pdf     # Week 3 slides
 │   │       ├── 4.Pandas.pdf                 # Week 4 slides (pandas)
+│   │       ├── 5.Correlation_Association_Rules.pdf  # Week 5 slides
 │   │       ├── 3.Quiz_WarmUp_CRISP-DM.html  # Week 3 warm-up quiz
 │   │       └── 3.Quiz_Data_Understanding.html # Week 3 main quiz
 │   └── styles/
@@ -433,6 +434,8 @@ deliberately opting in.
 - `src/assets/materials/3.Data_Understanding.pdf` — Week 3 slides (from
   `slides/3. Data Undersranding.pdf`)
 - `src/assets/materials/4.Pandas.pdf` — Week 4 slides (from `slides/4. Pandas.pdf`)
+- `src/assets/materials/5.Correlation_Association_Rules.pdf` — Week 5 slides (from
+  `slides/5. Correlation & Association Rules.pdf`)
 - `src/assets/materials/3.Quiz_WarmUp_CRISP-DM.html` — Week 3 warm-up (CRISP-DM & GIGO;
   source `quizz/quizz3.1.warm_up.html`); linked as **Warm-up**
 - `src/assets/materials/3.Quiz_Data_Understanding.html` — Week 3 quiz (data understanding,
@@ -501,6 +504,13 @@ deliberately opting in.
 ---
 
 ## Change Log
+
+### 2026-09-29 — Publish Week 5 slides (Correlation & Association Rules)
+
+- Copied `slides/5. Correlation & Association Rules.pdf` →
+  `src/assets/materials/5.Correlation_Association_Rules.pdf`
+- Week 5 status → `released`; Materials link **Slides**
+- Rebuilt and deployed
 
 ### 2026-09-16 — Publish Lab 4 on the Week 4 schedule
 
@@ -669,7 +679,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-16 (Lab 4 published on the Week 4 schedule)
+**Last Updated:** 2026-09-29 (Week 5 slides published)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
