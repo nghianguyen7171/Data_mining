@@ -170,7 +170,8 @@ function buildAssignments(base, ctx) {
     const slug = path.basename(file, '.md');
     const { data, body } = parseFrontmatter(fs.readFileSync(path.join(dir, file), 'utf8'));
     const assignment = { ...data, slug };
-    listed.push(assignment);
+    // `hidden: true` keeps the page reachable by direct URL but omits it from the index list
+    if (!data.hidden) listed.push(assignment);
 
     const content = pageTpl({ ...ctx, assignment, bodyHtml: new Handlebars.SafeString(renderMarkdown(body)) });
     fs.outputFileSync(

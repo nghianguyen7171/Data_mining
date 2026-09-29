@@ -228,8 +228,10 @@ emits links; `status: tbd` shows the title greyed out with no links. Source: `sr
 ### Lab 5 — Correlation & Association Rules in Orange
 
 - **File:** `src/assignments/lab5-correlation-association.md` (English; draft `lab/lab5.md`)
-- **Published page:** `docs/assignments/lab5-correlation-association.html` (live in Assignments
-  index; Week 6 schedule Lab row not yet wired/released)
+- **Published page:** `docs/assignments/lab5-correlation-association.html` — **temporarily
+  hidden** from the Assignments index via `hidden: true` in frontmatter (page still builds at
+  its direct URL); Week 6 schedule Lab row not yet wired/released. Remove `hidden: true` to
+  re-list it. (build.js: assignments with `hidden: true` are omitted from the index list.)
 - **Maps to schedule:** Week 6 Lab row ("Lab 2 — Correlation & Market-Basket Analysis")
 - **Due:** End of Week 6
 - **Weight:** Part of 10% Attendance & Participation
@@ -519,6 +521,12 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-09-29 — Temporarily hide Lab 5 from the Assignments index
+
+- Added `hidden: true` to `lab5-correlation-association.md`; added `hidden` support in
+  build.js (page still builds at its URL, omitted from index list)
+- Re-enable by deleting the `hidden: true` line and rebuilding
+
 ### 2026-09-29 — Build Lab 5 (Correlation & Association Rules, English)
 
 - Translated `lab/lab5.md` → `src/assignments/lab5-correlation-association.md` (English)
@@ -701,7 +709,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-29 (Lab 5 Correlation & Association Rules page built in English)
+**Last Updated:** 2026-09-29 (Lab 5 temporarily hidden from Assignments index)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
