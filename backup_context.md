@@ -521,6 +521,17 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-10-07 — Lab 5 content corrections
+
+- Part B: added bolded `=No` warning after B2 and in B3 (interpret only `=Yes → =Yes`)
+- B1 now says "Among the `=Yes → =Yes` rules"
+- A3 reworded (clean dataset: ask about deviation vs regression line, no outlier assumed)
+- Part D: added Colab install-time note (2–4 min for cnsplots)
+- Dataset marked synthetic/illustrative
+- Optional stretch: appended "results may vary" note (product name already Beer)
+- Verified all product names on the page are only Diapers/Beer/Bread/Milk/Chips/Cola
+- Lab 5 remains hidden from the Assignments index
+
 ### 2026-09-29 — Temporarily hide Lab 5 from the Assignments index
 
 - Added `hidden: true` to `lab5-correlation-association.md`; added `hidden` support in
@@ -709,7 +720,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-09-29 (Lab 5 temporarily hidden from Assignments index)
+**Last Updated:** 2026-10-07 (Lab 5 content corrections; still hidden)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course

@@ -102,6 +102,7 @@
 </tr>
 </tbody></table>
 <p>Each customer has both <strong>numeric attributes</strong> (to measure correlation) and a <strong>basket</strong> (products purchased) — so one dataset serves both techniques.</p>
+<p>This is a synthetic/illustrative dataset created for teaching; the numbers are not real customer records.</p>
 <hr>
 <h2>Lab overview</h2>
 <table>
@@ -161,7 +162,7 @@
 <h3>✍️ Part A questions (put answers in your report)</h3>
 <p><strong>A1.</strong> Which numeric pair is the <strong>most strongly</strong> correlated? Give the r value. Is it positive or negative?</p>
 <p><strong>A2.</strong> Is <code>Age</code> related to <code>MonthlySpend</code>? (give r) What does that say about using Age to predict spending?</p>
-<p><strong>A3.</strong> On the scatter plot of the strongest pair, do the points hug the line closely? Are there any <strong>outliers</strong> far from the cloud?</p>
+<p><strong>A3.</strong> On the scatter plot of the strongest pair, do the points hug the regression line closely, or do some points deviate noticeably? (If you see no clear outlier, say so.)</p>
 <p><strong>A4.</strong> Business interpretation: which factor is the most <strong>reliable</strong> for predicting a customer&#39;s spending?</p>
 <hr>
 <h2>Part B — Association Rules (40′)</h2>
@@ -181,14 +182,20 @@
 <li>Inspect the rules table: each row is a rule with <strong>Support, Confidence, Lift</strong> (and a few other metrics).</li>
 <li>Sort by <strong>Lift</strong> descending; focus on rules of the form <code>Product=Yes → Product=Yes</code>.</li>
 </ol>
+<blockquote>
+<p><strong>Important:</strong> With Yes/No columns, Orange treats both <code>=Yes</code> and <code>=No</code> as items, so you will also see rules like <code>{Diapers=No} → {Bread=No}</code> (often high support but meaningless for combos). Only interpret rules of the form <code>Product=Yes → Product=Yes</code>; ignore any rule that contains <code>=No</code>.</p>
+</blockquote>
 <p>📷 <strong>[Screenshot: the Association Rules table, sorted by Lift, showing high-Lift rules]</strong></p>
 <h3>B3. Read the results — [Follow along]</h3>
+<blockquote>
+<p><strong>Important:</strong> With Yes/No columns, Orange treats both <code>=Yes</code> and <code>=No</code> as items, so you will also see rules like <code>{Diapers=No} → {Bread=No}</code> (often high support but meaningless for combos). Only interpret rules of the form <code>Product=Yes → Product=Yes</code>; ignore any rule that contains <code>=No</code>.</p>
+</blockquote>
 <ul>
 <li>Find rules with <strong>Lift &gt; 1</strong> and <strong>high Confidence</strong> → these are product pairs <em>genuinely</em> bought together.</li>
 <li>Notice a rule with <strong>Lift ≈ 1</strong> → that pair is nearly <em>independent</em> (not worth a combo).</li>
 </ul>
 <h3>✍️ Part B questions (put answers in your report)</h3>
-<p><strong>B1.</strong> Which <code>Product=Yes → Product=Yes</code> rule has the <strong>highest Lift</strong>? Give its Support, Confidence, and Lift.</p>
+<p><strong>B1.</strong> Among the <code>=Yes → =Yes</code> rules, which <code>Product=Yes → Product=Yes</code> rule has the <strong>highest Lift</strong>? Give its Support, Confidence, and Lift.</p>
 <p><strong>B2.</strong> Explain that rule in words (e.g. “customers who buy … also buy … in …% of cases, … times more than random”).</p>
 <p><strong>B3.</strong> Find a rule with <strong>Lift ≈ 1</strong>. What does that mean about those two products?</p>
 <p><strong>B4.</strong> Compare rule <code>A → B</code> and <code>B → A</code> (same two products): which metric is the <strong>same</strong>, which is <strong>different</strong>? Why?</p>
@@ -223,7 +230,7 @@
 <h3>✍️ Part C questions</h3>
 <p><strong>C1.</strong> If you wanted to bring <code>VisitsPerMonth</code> (numeric) into the association-rule analysis, what step must you do first? (hint: the <strong>Discretize</strong> widget).</p>
 <p><strong>C2.</strong> In one sentence: in this dataset, which technique answers <em>“which factors relate to spending?”</em>, and which answers <em>“which products are bought together?”</em></p>
-<p><em>(Optional stretch: drag <strong>Discretize</strong> to split <code>MonthlyIncome</code>/<code>MonthlySpend</code> into Low/High, connect it into <strong>Association Rules</strong> with the products, and check for rules like {Income=High} → {Beer=Yes}.)</em></p>
+<p><em>(Optional stretch: drag <strong>Discretize</strong> to split <code>MonthlyIncome</code>/<code>MonthlySpend</code> into Low/High, connect it into <strong>Association Rules</strong> with the products, and check for rules like {Income=High} → {Beer=Yes}. Results may vary — the goal here is to practise the Discretize step, not to guarantee a specific rule.)</em></p>
 <hr>
 <h2>Part D — Synthesise a figure with cnsplots (required)</h2>
 <p>After analysing in Orange, <strong>synthesise your findings into ONE publication-style figure</strong> with <strong>cnsplots</strong> (the library from Lab 4). The figure combines both techniques: a scatter for correlation + a Lift barplot for association rules.</p>
@@ -231,6 +238,9 @@
 <p><img src="../assets/materials/5.Lab5_Retail_Sample.png" alt="Sample figure — Retail Insights"></p>
 <p><em>Panel A: the strong correlation pair (Income–Spend); Panel B: the weak pair (Age–Spend); Panel C: the Lift of association rules, dashed line = Lift threshold of 1.</em></p>
 <h3>Starter code (run on Colab / VS Code — edit and extend)</h3>
+<blockquote>
+<p><strong>Note:</strong> the first install can take 2–4 minutes on Colab (cnsplots pulls several scientific libraries) — wait for it to finish; it is not frozen.</p>
+</blockquote>
 <pre><code class="language-python">!pip install -q cnsplots
 import numpy as np, pandas as pd, cnsplots as cns
 
