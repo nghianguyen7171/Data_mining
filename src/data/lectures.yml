@@ -94,15 +94,16 @@ lectures:
   - id: 6
     week: 6
     type: "Lab"
-    title: "Lab 2 — Correlation & Market-Basket Analysis"
-    status: tbd
+    title: "Lab 5 — Finding Relationships in Orange: Correlation & Association Rules"
+    status: released
     topics:
       - "Correlation matrix and scatter plots in Orange"
-      - "Association rules with the Orange Frequent Itemsets widget"
-      - "Business memo: interpreting association rules for a retail context"
+      - "Association rules with the Orange Associate add-on (support, confidence, lift)"
+      - "Synthesise findings into one cnsplots figure; business memo for a retail context"
       - "Current-event Presentation #1"
     clos: "3, 5, 6"
-    assessment: "Lab 2 + Presentation #1"
+    assignment: "lab5-correlation-association"
+    assessment: "Lab 5 + Presentation #1"
 
   - id: 7
     week: 7

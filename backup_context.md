@@ -228,10 +228,10 @@ emits links; `status: tbd` shows the title greyed out with no links. Source: `sr
 ### Lab 5 — Correlation & Association Rules in Orange
 
 - **File:** `src/assignments/lab5-correlation-association.md` (English; draft `lab/lab5.md`)
-- **Published page:** `docs/assignments/lab5-correlation-association.html` — **temporarily
-  hidden** from the Assignments index via `hidden: true` in frontmatter (page still builds at
-  its direct URL); Week 6 schedule Lab row not yet wired/released. Remove `hidden: true` to
-  re-list it. (build.js: assignments with `hidden: true` are omitted from the index list.)
+- **Published:** listed in the Assignments index and linked on the **Week 6** schedule Lab row
+  as **Lab 5 + Presentation #1** (`assignment: lab5-correlation-association`); Week 6 title
+  updated to the Lab 5 title, status `released`.
+  (build.js still supports `hidden: true` to omit any assignment from the index list.)
 - **Maps to schedule:** Week 6 Lab row ("Lab 2 — Correlation & Market-Basket Analysis")
 - **Due:** End of Week 6
 - **Weight:** Part of 10% Attendance & Participation
@@ -521,6 +521,13 @@ deliberately opting in.
 
 ## Change Log
 
+### 2026-10-07 — Publish Lab 5 on the Week 6 schedule
+
+- Removed `hidden: true` from `lab5-correlation-association.md` (now in Assignments index)
+- Week 6 schedule row → `released`; title updated to the Lab 5 title; topics refreshed
+- Added `assignment: lab5-correlation-association`; `assessment: "Lab 5 + Presentation #1"`
+- Rebuilt and deployed
+
 ### 2026-10-07 — Lab 5 content corrections
 
 - Part B: added bolded `=No` warning after B2 and in B3 (interpret only `=Yes → =Yes`)
@@ -720,7 +727,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-10-07 (Lab 5 content corrections; still hidden)
+**Last Updated:** 2026-10-07 (Lab 5 published on the Week 6 schedule)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course

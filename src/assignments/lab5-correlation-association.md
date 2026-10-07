@@ -1,6 +1,5 @@
 ---
 title: "Lab 5 — Finding Relationships in Orange: Correlation & Association Rules"
-hidden: true   # temporarily hidden from the Assignments index; page still builds at its URL
 due_week: 6
 due: "End of Week 6"
 weight: "Part of 10% Attendance & Participation"
