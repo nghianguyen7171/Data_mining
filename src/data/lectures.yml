@@ -109,13 +109,14 @@ lectures:
     week: 7
     type: "Lecture"
     title: "Clustering — k-Means & Customer Segmentation"
-    status: tbd
+    status: released
     topics:
       - "k-Means clustering: intuition and algorithm"
       - "Choosing the number of clusters k (Silhouette score)"
       - "Customer segmentation application"
       - "Midterm Exam 1 review: CRISP-DM, data preparation, association, clustering"
     clos: "3"
+    slides: "assets/materials/6.Clustering.pdf"
     assessment: "—"
 
   - id: 8
