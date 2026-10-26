@@ -369,6 +369,7 @@ Data Mining/
 │   │       ├── 4.Pandas.pdf                 # Week 4 slides (pandas)
 │   │       ├── 5.Correlation_Association_Rules.pdf  # Week 5 slides
 │   │       ├── 6.Clustering.pdf             # Week 7 slides (k-Means)
+│   │       ├── 7.Classification.pdf         # Week 9 slides (KNN & Naïve Bayes)
 │   │       ├── 3.Quiz_WarmUp_CRISP-DM.html  # Week 3 warm-up quiz
 │   │       └── 3.Quiz_Data_Understanding.html # Week 3 main quiz
 │   └── styles/
@@ -455,6 +456,8 @@ deliberately opting in.
   `slides/5. Correlation & Association Rules.pdf`)
 - `src/assets/materials/6.Clustering.pdf` — Week 7 slides, k-Means (from
   `slides/6. Clustering.pdf`; deck #6 maps to Week 7 since Week 6 is a lab)
+- `src/assets/materials/7.Classification.pdf` — Week 9 slides, KNN & Naïve Bayes (from
+  `slides/7. Classification.pdf`; deck #7 maps to Week 9)
 - `src/assets/materials/3.Quiz_WarmUp_CRISP-DM.html` — Week 3 warm-up (CRISP-DM & GIGO;
   source `quizz/quizz3.1.warm_up.html`); linked as **Warm-up**
 - `src/assets/materials/3.Quiz_Data_Understanding.html` — Week 3 quiz (data understanding,
@@ -523,6 +526,12 @@ deliberately opting in.
 ---
 
 ## Change Log
+
+### 2026-10-26 — Publish Week 9 slides (Classification I — KNN & Naïve Bayes)
+
+- Copied `slides/7. Classification.pdf` → `src/assets/materials/7.Classification.pdf`
+- Week 9 status → `released`; Materials link **Slides**
+- Rebuilt and deployed
 
 ### 2026-10-13 — Publish Week 7 slides (Clustering — k-Means)
 
@@ -736,7 +745,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-10-13 (Week 7 Clustering slides published)
+**Last Updated:** 2026-10-26 (Week 9 Classification slides published)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course

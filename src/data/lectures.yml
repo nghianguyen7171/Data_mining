@@ -135,13 +135,14 @@ lectures:
     week: 9
     type: "Lecture"
     title: "Classification I — KNN & Naïve Bayes"
-    status: tbd
+    status: released
     topics:
       - "Classification problem setup: train/test split, the confusion matrix"
       - "k-Nearest Neighbours (KNN)"
       - "Naïve Bayes classifier"
       - "Evaluation metrics: accuracy, precision, recall, F1-score"
     clos: "4"
+    slides: "assets/materials/7.Classification.pdf"
     assessment: "—"
 
   - id: 10
