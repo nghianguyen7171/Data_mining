@@ -161,12 +161,13 @@ lectures:
     week: 11
     type: "Lecture"
     title: "Prediction — Linear & Logistic Regression"
-    status: tbd
+    status: released
     topics:
       - "Linear regression: fitting a line, R², and residuals"
       - "Logistic regression for yes/no business outcomes"
       - "Interpreting coefficients in business language"
     clos: "4"
+    slides: "assets/materials/8.Pred.pdf"
     assessment: "—"
 
   - id: 12

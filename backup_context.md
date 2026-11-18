@@ -370,6 +370,7 @@ Data Mining/
 │   │       ├── 5.Correlation_Association_Rules.pdf  # Week 5 slides
 │   │       ├── 6.Clustering.pdf             # Week 7 slides (k-Means)
 │   │       ├── 7.Classification.pdf         # Week 9 slides (KNN & Naïve Bayes)
+│   │       ├── 8.Pred.pdf                   # Week 11 slides (linear & logistic regression)
 │   │       ├── 3.Quiz_WarmUp_CRISP-DM.html  # Week 3 warm-up quiz
 │   │       └── 3.Quiz_Data_Understanding.html # Week 3 main quiz
 │   └── styles/
@@ -458,6 +459,8 @@ deliberately opting in.
   `slides/6. Clustering.pdf`; deck #6 maps to Week 7 since Week 6 is a lab)
 - `src/assets/materials/7.Classification.pdf` — Week 9 slides, KNN & Naïve Bayes (from
   `slides/7. Clf_rvs.pdf`; replaces the earlier `slides/7. Classification.pdf` draft)
+- `src/assets/materials/8.Pred.pdf` — Week 11 slides, linear & logistic regression (from
+  `slides/8.Pred.pdf`; deck #8 maps to Week 11)
 - `src/assets/materials/3.Quiz_WarmUp_CRISP-DM.html` — Week 3 warm-up (CRISP-DM & GIGO;
   source `quizz/quizz3.1.warm_up.html`); linked as **Warm-up**
 - `src/assets/materials/3.Quiz_Data_Understanding.html` — Week 3 quiz (data understanding,
@@ -471,7 +474,7 @@ deliberately opting in.
 
 - **TA collaborator access:** Le Duy Khanh collaborator invitation sent; awaiting acceptance
   (Write access on personal repo)
-- **Remaining weeks:** Slides for Weeks 5–15 added to `src/assets/materials/` and
+- **Remaining weeks:** Slides for Weeks 12–15 added to `src/assets/materials/` and
   `status: released` set in `lectures.yml` as content is ready
 - **Lab assignments:** Lab 4 English page built locally for review; later labs TBD as taught
 - **This-week banner:** Update `src/data/this-week.yml` each week (or delete `current:` block
@@ -526,6 +529,144 @@ deliberately opting in.
 ---
 
 ## Change Log
+
+### 2026-11-18 — Publish Week 11 slides (Prediction — Linear & Logistic Regression)
+
+- Copied `slides/8.Pred.pdf` → `src/assets/materials/8.Pred.pdf`
+- Week 11 status → `released`; Materials link **Slides**
+- Rebuilt and deployed
+
+### 2026-11-16 — Publication level stratification (labels only)
+
+- Rubric has 4 levels; class had only 1–2. Recalibrated labels (no C1–C9 score changes):
+  - Level 1: Group 3
+  - Level 2: Groups 5, 6, 7, 8, 11
+  - Level 3: Groups 1, 2, 4, 9, 10 (tiềm năng hạn chế — đồ án/ứng dụng)
+  - Level 4: none
+- Updated `score.json`, grading_report D sections, calibration, rebuilt Phase 4 Excel/MD
+
+### 2026-11-16 — Phase 4: final grading package
+
+- Built `Final_Project/consolidated/build_final_package.py` (reproducible from score.json + oral + reports)
+- Outputs:
+  - `Final_Project/consolidated/DataMining_Final_Grading.xlsx` (FINAL_SCORES 43 member rows with `=SUM(F:N)`;
+    PUBLICATION_ASSESSMENT; ORAL_QUESTIONS 44 rows; CALIBRATION_NOTES)
+  - `Final_Project/consolidated/Final_Oral_Examination_Questions.md`
+  - `Final_Project/consolidated/Final_Grading_Summary.md`
+- Official totals: G3 9.50; G8 9.00; G7 8.75; G4–6/9–11 8.50; G1 8.25; G2 8.00 (range 8.00–9.50)
+- Only Group 3 remains publication level 1
+
+### 2026-11-16 — Applied Stratify-Strong + G3/G8 split
+
+- Lecturer: keep one of G3/G8 at 9.50, other at 9.00; apply Stratify-Strong to the rest
+- **Head-to-head:** Group 3 **9.50** (pub level 1); Group 8 **9.00** (C9 related+readiness −0.50; pub level 2)
+- Applied to `evaluations/`: G1 8.25, G2 8.00, G4 8.50, G6 8.50, G7 8.75, G8 9.00, G10 8.50, G11 8.50;
+  G3/G5/G9 unchanged at 9.50/8.50/8.50
+- Official range **8.00–9.50**; see `consolidated/proposed_score_adjustments.md`
+
+### 2026-11-16 — Phase 3 follow-up: stratification advice (scores still unchanged)
+
+- Lecturer noted Phase 2 range is narrow (8.25–9.50); Q1 (A1+A2) would cluster more at 8.75
+- Root cause recorded: ceiling on C1/C2/C5/C7 (~3.75 pts locked for nearly all groups)
+- Recommended paths discussed in chat (not applied): (1) dual signal; (2) mild; (3) Stratify-Strong — **(3) later chosen**
+
+### 2026-11-16 — Final Project grading, Phase 3: cross-group calibration (no score overwrite)
+
+- Audited all 11 official `evaluations/Group_*/score.json` against rubric `prompt/1.Eval.md`
+- Wrote `Final_Project/consolidated/cross_group_calibration.md`: official comparison table,
+  per-criterion consistency (focus C3/C4/C8/C9), publication potential by level (not total rank),
+  lecturer review flags, Phần 7 checklist
+- Wrote `Final_Project/consolidated/proposed_score_adjustments.md` (awaiting instructor approval):
+  - **A1 (primary):** Group 6 C3 hyperparameters 0.25 → 0.00 (C3 1.00→0.75; Total 9.00→8.75)
+  - **A2 (if Q1):** Group 9 C3 hyperparameters 0.00 → 0.25 (C3 0.75→1.00; Total 8.50→8.75)
+  - Other borderline items (G2/G7 C4, G5 C8, ceiling C1/C2/C5/C7) recorded only — no proposals
+- **Did not** modify any file under `evaluations/`
+- Official Phase 2 totals remain: 8.75, 8.25, 9.50, 8.75, 8.50, 9.00, 9.00, 9.50, 8.50, 8.75, 8.75
+
+### 2026-11-16 — Final Project grading, Phase 2: Groups 7–11 evaluated (complete)
+
+- Graded remaining groups only after explicit request to finish all:
+  - **Group 7** (credit-card fraud / cost-aware policy): **9.00**, pub level 2
+  - **Group 8** (Shenzhen EV day-ahead forecast + commitment): **9.50**, pub level 1
+  - **Group 9** (diabetes Precision@K / boosting): **8.50**, pub level 2 (C3 hyper 0.00)
+  - **Group 10** (Airbnb Shinjuku): **8.75**, pub level 2
+  - **Group 11** (IWA corporate environmental impact): **8.75**, pub level 2 (C3 hyper 0.00)
+- Outputs under `Final_Project/evaluations/Group_{7..11}/` (reports, oral Qs, score.json; figures for G7–G8)
+- All `score.json` arithmetic validated; rogue `backup-context.md` removed (canonical file is `backup_context.md`)
+- Phase 2 complete for all 11 submitted groups
+
+### 2026-11-16 — Final Project grading, Phase 2: Group 6 evaluated
+
+- Evaluated only Group 6 (maternal health risk; severity-aware decisions, adaptive acquisition, review capacity):
+  total **9.00/10**, publication potential "Tiềm năng trung bình"
+- Key deductions: classifiers not explained (C3 1.00); contribution limited by automated, near-deterministic labels
+  (C9 1.25/2.00)
+- Borderline: hyperparameters 0.25 (tuning procedure documented, final values missing) vs Group 5's 0.00
+- All checked numbers consistent (confusion matrix → Macro-F1, reference cost, capacity counts)
+- Outputs: `Final_Project/evaluations/Group_6/{grading_report.md, oral_questions.md, score.json}` + `figures/`
+- Groups 7–11 pending
+
+### 2026-11-16 — Final Project grading, Phase 2: Group 5 evaluated
+
+- Evaluated only Group 5 (Beijing PM2.5 episode-onset early warning, LightGBM, LOSO transfer): total **8.50/10**,
+  publication potential "Tiềm năng trung bình"
+- Key deductions: no LightGBM hyperparameters/principle (C3 0.75); dataset source never cited (C8 citation 0.00);
+  publication potential 1.25/2.00
+- All checked numbers consistent; Figures 1–2 re-rendered at 250 dpi (`figures/`)
+- Outputs: `Final_Project/evaluations/Group_5/{grading_report.md, oral_questions.md, score.json}` + `figures/`
+- Groups 6–11 pending
+
+### 2026-11-16 — Final Project grading, Phase 2: Group 4 evaluated
+
+- Evaluated only Group 4 (Online Retail II: RFM segmentation, FP-Growth backtest, 90-day repeat prediction):
+  total **8.75/10**, publication potential "Tiềm năng trung bình" (close to level 3)
+- Key deductions: algorithms described in one sentence each (−0.25); publication potential 1.00/2.00
+  (applied integration, thin related work, not manuscript-ready)
+- All checked figures consistent (cleaning funnel, segment counts, backtest, OOT lift/capture, deciles)
+- Outputs: `Final_Project/evaluations/Group_4/{grading_report.md, oral_questions.md, score.json}` + `figures/`
+- Groups 5–11 pending
+
+### 2026-11-16 — Final Project grading, Phase 2: Group 3 evaluated
+
+- Evaluated only Group 3 (ViSpamReviews spam detection + rating distortion): total **9.50/10**,
+  publication potential "Tiềm năng cao"
+- Key deductions: 8 classifiers not explained (−0.25); incremental methodological novelty (−0.25)
+- Outputs: `Final_Project/evaluations/Group_3/{grading_report.md, oral_questions.md, score.json}`
+  + `figures/`
+- Groups 4–11 pending
+
+### 2026-11-16 — Final Project grading, Phase 2: Group 2 evaluated
+
+- Evaluated only Group 2 (Rossmann forecasting + Promo2 FE): total **8.25/10**, publication
+  potential "Tiềm năng trung bình"
+- Key deductions: thin RF/LightGBM principles; Mission 1 estimand conflation + possible
+  PromoInterval misreading; unsupported Discussion claim; minor numeric inconsistencies
+- Outputs: `Final_Project/evaluations/Group_2/{grading_report.md, oral_questions.md, score.json}`
+  + `figures/`
+- Groups 3–11 pending
+
+### 2026-11-16 — Final Project grading, Phase 2: Group 1 evaluated
+
+- Rubric/prompt: `Final_Project/prompt/1.Eval.md` (9 criteria, 10 pts, 0.25 steps, 4 oral questions)
+- Evaluated only Group 1 (Spotify chart longevity): total **8.75/10**, publication potential
+  "Tiềm năng trung bình"
+- Outputs: `Final_Project/evaluations/Group_1/{grading_report.md, oral_questions.md, score.json}`
+  + `figures/` (130 dpi renders of pp. 6–9)
+- Rule: evaluate one group at a time, only when the instructor asks; Groups 2–11 pending
+
+### 2026-11-16 — Final Project grading, Phase 1: document inspection (no grading yet)
+
+- Inspected 11 student final-report PDFs in `Final_Project/Project_report/` (Groups 1–11),
+  read-only; source PDFs untouched
+- All 11 open cleanly, digital-born (no scanned PDFs, no OCR needed for body text), no duplicates,
+  no missing pages, no unresolved refs
+- Created (all inside `Final_Project/`): `extracted_text/*.txt` (full text layer, page markers),
+  `extracted_text/figure_ocr/*.txt` (tesseract OCR of raster figures, partial), `page_renders/`
+  (60 dpi figure-page renders + contact sheets), `consolidated/document_inventory.md`,
+  `consolidated/inspection_issues.md`, `consolidated/inspection_raw.json`,
+  `consolidated/inspection_deep.json`, `scripts/inspect_pdfs.py`, `scripts/inspect_deep.py`
+- Open item: figure content (10/11 reports have raster charts/diagrams) must be checked
+  visually during grading; awaiting instructor confirmation before Phase 2 (grading)
 
 ### 2026-10-28 — Replace Week 9 Classification slides with corrected deck
 
@@ -751,7 +892,7 @@ deliberately opting in.
 
 ---
 
-**Last Updated:** 2026-10-28 (Week 9 Classification slides replaced with corrected deck)
+**Last Updated:** 2026-11-18 (Week 11 Prediction slides published)
 **AI Readiness:** 100%
 
 *This document serves as a comprehensive backup context for the Data Mining (IST 4520) course
